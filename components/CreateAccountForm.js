@@ -5,11 +5,15 @@ import HCaptcha from "@hcaptcha/react-hcaptcha"
 import {createAccountSchemaClient} from "../lib/validate"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
-const padded = { marginTop: "1rem", marginBottom: "1rem" }
+const padded = {marginTop: "1rem", marginBottom: "1rem"}
 
-export default function CreateAccountForm({hcaptchaSiteKey, createAccount, onResult}) {
+export default function CreateAccountForm({
+  hcaptchaSiteKey,
+  createAccount,
+  onResult,
+}) {
   const [captchaToken, setCaptchaToken] = useState("")
-  
+
   return (
     <Formik
       initialValues={{
@@ -37,29 +41,32 @@ export default function CreateAccountForm({hcaptchaSiteKey, createAccount, onRes
     >
       {({errors, touched, isSubmitting}) => (
         <Form>
-          <Field 
-            component={CustomInputComponent} 
-            textLabel="Public Key" 
-            name="publicKey" 
-            placeholder="Public Key" />
-            
-          <Field 
-            component={CustomSelectComponent} 
+          <Field
+            component={CustomInputComponent}
+            textLabel="Public Key"
+            name="publicKey"
+            placeholder="Public Key"
+          />
+
+          <Field
+            component={CustomSelectComponent}
             name="signatureAlgorithm"
             textLabel="Signature Algorithm"
             options={[
-              { value: "ECDSA_P256", label: "ECDSA_P256" },
-              { value: "ECDSA_secp256k1", label: "ECDSA_secp256k1" },
-            ]} />
+              {value: "ECDSA_P256", label: "ECDSA_P256"},
+              {value: "ECDSA_secp256k1", label: "ECDSA_secp256k1"},
+            ]}
+          />
 
-          <Field 
-            component={CustomSelectComponent} 
+          <Field
+            component={CustomSelectComponent}
             name="hashAlgorithm"
             textLabel="Hash Algorithm"
             options={[
-              { value: "SHA2_256", label: "SHA2_256" },
-              { value: "SHA3_256", label: "SHA3_256" },
-            ]} />
+              {value: "SHA2_256", label: "SHA2_256"},
+              {value: "SHA3_256", label: "SHA3_256"},
+            ]}
+          />
 
           <div style={padded}>
             <HCaptcha

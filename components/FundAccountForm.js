@@ -5,11 +5,15 @@ import HCaptcha from "@hcaptcha/react-hcaptcha"
 import {fundAccountSchemaClient} from "../lib/validate"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
-const padded = { marginTop: "1rem", marginBottom: "1rem" }
+const padded = {marginTop: "1rem", marginBottom: "1rem"}
 
-export default function FundAccountForm({hcaptchaSiteKey, fundAccount, onResult}) {
+export default function FundAccountForm({
+  hcaptchaSiteKey,
+  fundAccount,
+  onResult,
+}) {
   const [captchaToken, setCaptchaToken] = useState("")
-  
+
   return (
     <Formik
       initialValues={{
@@ -17,37 +21,30 @@ export default function FundAccountForm({hcaptchaSiteKey, fundAccount, onResult}
         token: "FLOW",
       }}
       validationSchema={fundAccountSchemaClient}
-      onSubmit={async (
-        {address, token},
-        {setSubmitting}
-      ) => {
-        const amount = await fundAccount(
-          address,
-          token,
-          captchaToken
-        )
+      onSubmit={async ({address, token}, {setSubmitting}) => {
+        const amount = await fundAccount(address, token, captchaToken)
 
         setSubmitting(false)
         setCaptchaToken("")
 
-        onResult({ address, token, amount })
+        onResult({address, token, amount})
       }}
     >
       {({errors, touched, isSubmitting}) => (
         <Form>
-          <Field 
-            component={CustomInputComponent} 
-            textLabel="Account Address" 
-            name="address" 
-            placeholder="Address" />
+          <Field
+            component={CustomInputComponent}
+            textLabel="Account Address"
+            name="address"
+            placeholder="Address"
+          />
 
-          <Field 
-            component={CustomSelectComponent} 
+          <Field
+            component={CustomSelectComponent}
             name="token"
             textLabel="Token"
-            options={[
-              { value: "FLOW", label: "Testnet FLOW" },
-            ]} />
+            options={[{value: "FLOW", label: "Testnet FLOW"}]}
+          />
 
           <div style={padded}>
             <HCaptcha
