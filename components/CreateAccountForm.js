@@ -43,7 +43,7 @@ export default function CreateAccountForm({
         <Form>
           <Field
             component={CustomInputComponent}
-            textLabel="Public Key"
+            inputLabel="Public Key"
             name="publicKey"
             placeholder="Public Key"
           />
@@ -51,7 +51,7 @@ export default function CreateAccountForm({
           <Field
             component={CustomSelectComponent}
             name="signatureAlgorithm"
-            textLabel="Signature Algorithm"
+            inputLabel="Signature Algorithm"
             options={[
               {value: "ECDSA_P256", label: "ECDSA_P256"},
               {value: "ECDSA_secp256k1", label: "ECDSA_secp256k1"},
@@ -61,7 +61,7 @@ export default function CreateAccountForm({
           <Field
             component={CustomSelectComponent}
             name="hashAlgorithm"
-            textLabel="Hash Algorithm"
+            inputLabel="Hash Algorithm"
             options={[
               {value: "SHA2_256", label: "SHA2_256"},
               {value: "SHA3_256", label: "SHA3_256"},

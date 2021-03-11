@@ -34,7 +34,7 @@ export default function FundAccountForm({
         <Form>
           <Field
             component={CustomInputComponent}
-            textLabel="Account Address"
+            inputLabel="Account Address"
             name="address"
             placeholder="Address"
           />
@@ -42,7 +42,7 @@ export default function FundAccountForm({
           <Field
             component={CustomSelectComponent}
             name="token"
-            textLabel="Token"
+            inputLabel="Token"
             options={[{value: "FLOW", label: "Testnet FLOW"}]}
           />
 

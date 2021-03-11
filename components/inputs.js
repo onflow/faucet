@@ -3,11 +3,12 @@ import {Text, Input, Select} from "@geist-ui/react"
 export const CustomInputComponent = ({
   field,
   form: {touched, errors},
+  inputLabel,
   ...props
 }) => (
   <>
     <Text size="1em" style={{marginBottom: "0.5rem"}} type="secondary">
-      {props.textLabel}
+      {inputLabel}
     </Text>
     <Input width="100%" {...field} {...props} />
     {touched[field.name] && errors[field.name] && (
@@ -25,7 +26,7 @@ export const CustomSelectComponent = ({
 }) => (
   <>
     <Text size="1em" style={{marginBottom: "0.5rem"}} type="secondary">
-      {props.textLabel}
+      {props.inputLabel}
     </Text>
     <Select {...field}>
       {props.options.map(({value, label}) => (
