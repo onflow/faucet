@@ -3,6 +3,9 @@ import {Formik, Form, Field} from "formik"
 import HCaptcha from "@hcaptcha/react-hcaptcha"
 
 import {createAccountSchemaClient} from "../lib/validate"
+import {CustomInputComponent, CustomSelectComponent} from "./inputs"
+
+const padded = { marginTop: "1rem", marginBottom: "1rem" }
 
 export default function CreateAccountForm({hcaptchaSiteKey, createAccount, onResult}) {
   const [captchaToken, setCaptchaToken] = useState("")
@@ -34,25 +37,36 @@ export default function CreateAccountForm({hcaptchaSiteKey, createAccount, onRes
     >
       {({errors, touched, isSubmitting}) => (
         <Form>
-          <div>
-            <Field type="text" name="publicKey" placeholder="Public Key" />
-            {errors.publicKey && touched.publicKey && <div>{errors.publicKey}</div>}
+          <Field 
+            component={CustomInputComponent} 
+            textLabel="Public Key" 
+            name="publicKey" 
+            placeholder="Public Key" />
+            
+          <Field 
+            component={CustomSelectComponent} 
+            name="signatureAlgorithm"
+            textLabel="Signature Algorithm"
+            options={[
+              { value: "ECDSA_P256", label: "ECDSA_P256" },
+              { value: "ECDSA_secp256k1", label: "ECDSA_secp256k1" },
+            ]} />
+
+          <Field 
+            component={CustomSelectComponent} 
+            name="hashAlgorithm"
+            textLabel="Hash Algorithm"
+            options={[
+              { value: "SHA2_256", label: "SHA2_256" },
+              { value: "SHA3_256", label: "SHA3_256" },
+            ]} />
+
+          <div style={padded}>
+            <HCaptcha
+              sitekey={hcaptchaSiteKey}
+              onVerify={(token, _) => setCaptchaToken(token)}
+            />
           </div>
-
-          <Field as="select" name="signatureAlgorithm">
-            <option value="ECDSA_P256">ECDSA_P256</option>
-            <option value="ECDSA_secp256k1">ECDSA_secp256k1</option>
-          </Field>
-
-          <Field as="select" name="hashAlgorithm">
-            <option value="SHA2_256">SHA2_256</option>
-            <option value="SHA3_256">SHA3_256</option>
-          </Field>
-
-          <HCaptcha
-            sitekey={hcaptchaSiteKey}
-            onVerify={(token, _) => setCaptchaToken(token)}
-          />
 
           <button type="submit" disabled={!captchaToken || isSubmitting}>
             Create New Account

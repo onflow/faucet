@@ -3,6 +3,9 @@ import {Formik, Form, Field} from "formik"
 import HCaptcha from "@hcaptcha/react-hcaptcha"
 
 import {fundAccountSchemaClient} from "../lib/validate"
+import {CustomInputComponent, CustomSelectComponent} from "./inputs"
+
+const padded = { marginTop: "1rem", marginBottom: "1rem" }
 
 export default function FundAccountForm({hcaptchaSiteKey, fundAccount, onResult}) {
   const [captchaToken, setCaptchaToken] = useState("")
@@ -32,19 +35,26 @@ export default function FundAccountForm({hcaptchaSiteKey, fundAccount, onResult}
     >
       {({errors, touched, isSubmitting}) => (
         <Form>
-          <div>
-            <Field type="text" name="address" placeholder="Address" />
-            {errors.address && touched.address &&  <div>{errors.address}</div>}
+          <Field 
+            component={CustomInputComponent} 
+            textLabel="Account Address" 
+            name="address" 
+            placeholder="Address" />
+
+          <Field 
+            component={CustomSelectComponent} 
+            name="token"
+            textLabel="Token"
+            options={[
+              { value: "FLOW", label: "Testnet FLOW" },
+            ]} />
+
+          <div style={padded}>
+            <HCaptcha
+              sitekey={hcaptchaSiteKey}
+              onVerify={(token, _) => setCaptchaToken(token)}
+            />
           </div>
-
-          <Field as="select" name="token">
-            <option value="FLOW">FLOW</option>
-          </Field>  
-
-          <HCaptcha
-            sitekey={hcaptchaSiteKey}
-            onVerify={(token, _) => setCaptchaToken(token)}
-          />
 
           <button type="submit" disabled={!captchaToken || isSubmitting}>
             Fund Your Account
