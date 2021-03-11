@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import {Formik, Form, Field} from "formik"
 import HCaptcha from "@hcaptcha/react-hcaptcha"
+import {Loading} from "@geist-ui/react"
 
 import {fundAccountSchemaClient} from "../lib/validate"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
@@ -57,7 +58,7 @@ export default function FundAccountForm({
             Fund Your Account
           </button>
 
-          {isSubmitting && "Submitting..."}
+          {isSubmitting && <Loading>Funding your account</Loading>}
         </Form>
       )}
     </Formik>
