@@ -21,14 +21,16 @@ export const CustomInputComponent = ({
 
 export const CustomSelectComponent = ({
   field,
-  form: {touched, errors},
+  form: {touched, errors, setFieldValue},
   ...props
 }) => (
   <>
     <Text size="1em" style={{marginBottom: "0.5rem"}} type="secondary">
       {props.inputLabel}
     </Text>
-    <Select {...field}>
+    <Select 
+      onChange={option => setFieldValue(field.name, option)}
+      value={field.value}>
       {props.options.map(({value, label}) => (
         <Select.Option key={value} value={value}>
           {label}

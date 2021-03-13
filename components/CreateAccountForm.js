@@ -40,7 +40,7 @@ export default function CreateAccountForm({
         onResult(address)
       }}
     >
-      {({errors, touched, isSubmitting}) => (
+      {({isSubmitting}) => (
         <Form>
           <Field
             component={CustomInputComponent}

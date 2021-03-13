@@ -31,7 +31,7 @@ export default function FundAccountForm({
         onResult({address, token, amount})
       }}
     >
-      {({errors, touched, isSubmitting}) => (
+      {({isSubmitting}) => (
         <Form>
           <Field
             component={CustomInputComponent}
