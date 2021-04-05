@@ -8,3 +8,12 @@ services:
       - POSTGRES_DB=faucet
       - POSTGRES_USER=faucet
       - POSTGRES_PASSWORD=faucet
+  emulator:
+    image: gcr.io/flow-container-registry/emulator:v0.16.1
+    ports:
+      - "8080:8080"
+      - "3569:3569"
+    environment:
+      - FLOW_SERVICEPRIVATEKEY=91a22fbd87392b019fbe332c32695c14cf2ba5b6521476a8540228bdf1987068
+      - FLOW_SERVICEKEYSIGALGO=ECDSA_P256
+      - FLOW_SERVICEKEYHASHALGO=SHA3_256
