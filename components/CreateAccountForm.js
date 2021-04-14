@@ -6,6 +6,8 @@ import {Loading} from "@geist-ui/react"
 import {createAccountSchemaClient} from "../lib/validate"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
+import {useMixpanel} from "../lib/mixpanel"
+
 const padded = {marginTop: "1rem", marginBottom: "1rem"}
 
 export default function CreateAccountForm({
@@ -14,7 +16,7 @@ export default function CreateAccountForm({
   onResult,
 }) {
   const [captchaToken, setCaptchaToken] = useState("")
-
+  const {mixpanel} = useMixpanel()
   return (
     <Formik
       initialValues={{
@@ -38,6 +40,7 @@ export default function CreateAccountForm({
         setCaptchaToken("")
 
         onResult(address)
+        mixpanel.track("Faucet: Create Account", {address})
       }}
     >
       {({isSubmitting}) => (
