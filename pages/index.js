@@ -1,7 +1,7 @@
 import React from "react"
 import Head from "next/head"
 import Image from "next/image"
-import {Page, Text, Card, Link} from "@geist-ui/react"
+import {Page, Text, Card, Link, Dot} from "@geist-ui/react"
 import config from "../lib/config"
 import CreateAccountPanel from "../components/CreateAccountPanel"
 import FundAccountPanel from "../components/FundAccountPanel"
@@ -24,9 +24,9 @@ export default function Home({hcaptchaSiteKey}) {
           </Text>
         </div>
       </Page.Header>
-      <Card type="error">
-        <p>This faucet is currrently unavailable due to an ongoing issue on Flow Testnet.</p>
-        <p><Link href="https://flow-view-source.com/testnet/status" color icon>View the current status.</Link></p>
+      <Card>
+        <Dot type="error">This faucet is currrently unavailable due to an ongoing issue on Flow Testnet.</Dot>
+        <Link href="https://flow-view-source.com/testnet/status" color icon>View the current status.</Link>
       </Card>
       <Text h3>Create Account</Text>
       <CreateAccountPanel hcaptchaSiteKey={hcaptchaSiteKey} />
