@@ -26,8 +26,8 @@ export default function Home({hcaptchaSiteKey}) {
       </Page.Header>
       <Card>
         <Tag type="error" invert>Service Unavailable</Tag>
-        <span>This faucet is currrently unavailable due to an ongoing issue on Flow Testnet.</span>
-        <Link href="https://flow-view-source.com/testnet/status" color icon>View the current status.</Link>
+        <p>This faucet is currrently unavailable due to an ongoing issue on Flow Testnet.</p>
+        <p><Link href="https://flow-view-source.com/testnet/status" color icon>View current Testnet status</Link></p>
       </Card>
       <Text h3>Create Account</Text>
       <CreateAccountPanel hcaptchaSiteKey={hcaptchaSiteKey} />
