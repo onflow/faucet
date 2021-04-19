@@ -34,7 +34,6 @@ export default function FundAccountForm({
       {({isSubmitting}) => (
         <Form>
           <Field
-            disabled={true}
             component={CustomInputComponent}
             inputLabel="Account Address"
             name="address"
@@ -42,7 +41,6 @@ export default function FundAccountForm({
           />
 
           <Field
-            disabled={true}
             component={CustomSelectComponent}
             name="token"
             inputLabel="Token"

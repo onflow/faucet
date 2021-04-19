@@ -43,7 +43,6 @@ export default function CreateAccountForm({
       {({isSubmitting}) => (
         <Form>
           <Field
-            disabled={true}
             component={CustomInputComponent}
             inputLabel="Public Key"
             name="publicKey"
@@ -51,7 +50,6 @@ export default function CreateAccountForm({
           />
 
           <Field
-            disabled={true}
             component={CustomSelectComponent}
             name="signatureAlgorithm"
             inputLabel="Signature Algorithm"
@@ -62,7 +60,6 @@ export default function CreateAccountForm({
           />
 
           <Field
-            disabled={true}
             component={CustomSelectComponent}
             name="hashAlgorithm"
             inputLabel="Hash Algorithm"
