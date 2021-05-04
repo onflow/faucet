@@ -1,6 +1,7 @@
 import React from "react"
 import Head from "next/head"
 import Image from "next/image"
+
 import {Page, Text} from "@geist-ui/react"
 import config from "../lib/config"
 import CreateAccountPanel from "../components/CreateAccountPanel"

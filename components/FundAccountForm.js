@@ -3,6 +3,7 @@ import {Formik, Form, Field} from "formik"
 import HCaptcha from "@hcaptcha/react-hcaptcha"
 import {Loading} from "@geist-ui/react"
 
+import {useMixpanel} from "../lib/mixpanel"
 import {fundAccountSchemaClient} from "../lib/validate"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
@@ -14,7 +15,7 @@ export default function FundAccountForm({
   onResult,
 }) {
   const [captchaToken, setCaptchaToken] = useState("")
-
+  const {mixpanel} = useMixpanel()
   return (
     <Formik
       initialValues={{
@@ -29,6 +30,7 @@ export default function FundAccountForm({
         setCaptchaToken("")
 
         onResult({address, token, amount})
+        mixpanel.track("Faucet: Fund Account", {address, token, amount})
       }}
     >
       {({isSubmitting}) => (
