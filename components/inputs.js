@@ -1,4 +1,4 @@
-import {Text, Input, Select} from "@geist-ui/react"
+import {Input, Select, Text} from "@geist-ui/react"
 
 export const CustomInputComponent = ({
   field,
@@ -31,7 +31,8 @@ export const CustomSelectComponent = ({
     <Select
       disabled={props.disabled}
       onChange={option => setFieldValue(field.name, option)}
-      value={field.value}>
+      value={field.value}
+    >
       {props.options.map(({value, label}) => (
         <Select.Option key={value} value={value}>
           {label}

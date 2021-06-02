@@ -1,9 +1,8 @@
-import React, {useState} from "react"
-import * as fcl from "@onflow/fcl"
 import {Card, Input} from "@geist-ui/react"
-
-import FundAccountForm from "./FundAccountForm"
+import * as fcl from "@onflow/fcl"
+import React, {useState} from "react"
 import {fundAccount} from "../lib/client"
+import FundAccountForm from "./FundAccountForm"
 
 const displayResult = ({address, amount, token}) =>
   `Funded ${fcl.display(address)} with ${amount} ${token}`
@@ -20,13 +19,16 @@ export default function FundAccountPanel({hcaptchaSiteKey}) {
           onResult={result => setResult(result)}
         />
       )}
-      {
-        result && 
+      {result && (
         <Card>
           <h4>Your account has been funded</h4>
-          <Input label="Amount" readOnly initialValue={`${result.amount} ${result.token}`} />
+          <Input
+            label="Amount"
+            readOnly
+            initialValue={`${result.amount} ${result.token}`}
+          />
         </Card>
-      }
+      )}
     </div>
   )
 }
