@@ -38,8 +38,8 @@ docker-compose up -d
 ### Migrate and seed the database
 
 ```sh
-npm run db-seed
 npm run db-migrate-dev
+npm run db-seed
 ```
 
 ### Run the Next.js app
