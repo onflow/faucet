@@ -1,18 +1,17 @@
 import * as fcl from "@onflow/fcl"
-
 import config from "../config"
 import {signWithKey} from "../crypto"
 
 fcl.config().put("accessNode.api", config.accessAPIHost)
 
-export const getAuthorization = keyIndex => {
+export const getAuthorization = (keyIndex: number) => {
   return async (account = {}) => {
     return {
       ...account,
       tempId: "SIGNER",
       addr: fcl.sansPrefix(config.signerAddress),
       keyId: keyIndex,
-      signingFunction: data => ({
+      signingFunction: (data: {message: string}) => ({
         addr: fcl.withPrefix(config.signerAddress),
         keyId: keyIndex,
         signature: signWithKey(

@@ -6,6 +6,12 @@ export async function sendTransaction({
   proposer,
   authorizations,
   payer,
+}: {
+  transaction: string
+  args: unknown[]
+  proposer: unknown
+  authorizations: unknown[]
+  payer: unknown
 }) {
   const response = await fcl.send([
     fcl.transaction(transaction),

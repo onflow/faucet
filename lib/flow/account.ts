@@ -1,7 +1,6 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import {encodeKey} from "@onflow/util-encode-key"
-
 import config from "../config"
 import {sendTransaction} from "./send"
 
@@ -21,7 +20,7 @@ transaction(publicKey: String, flowTokenAmount: UFix64) {
 		self.tokenAdmin = signer
 		  .borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
 		  ?? panic("Signer is not the token admin")
-	
+
 		self.tokenReceiver = account
 		  .getCapability(/public/flowTokenReceiver)!
 		  .borrow<&{FungibleToken.Receiver}>()
@@ -31,19 +30,19 @@ transaction(publicKey: String, flowTokenAmount: UFix64) {
 	execute {
 		let minter <- self.tokenAdmin.createNewMinter(allowedAmount: flowTokenAmount)
 		let mintedVault <- minter.mintTokens(amount: flowTokenAmount)
-	
+
 		self.tokenReceiver.deposit(from: <-mintedVault)
-	
+
 		destroy minter
 	}
 }
 `
 
 export async function createAccount(
-  publicKey,
-  sigAlgo,
-  hashAlgo,
-  authorization
+  publicKey: string,
+  sigAlgo: number,
+  hashAlgo: number,
+  authorization: unknown
 ) {
   const encodedPublicKey = encodeKey(publicKey, sigAlgo, hashAlgo, 1000)
 

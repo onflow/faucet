@@ -1,13 +1,12 @@
-import React from "react"
+import {Page, Text} from "@geist-ui/react"
 import Head from "next/head"
 import Image from "next/image"
-
-import {Page, Text} from "@geist-ui/react"
-import config from "../lib/config"
+import React from "react"
 import CreateAccountPanel from "../components/CreateAccountPanel"
 import FundAccountPanel from "../components/FundAccountPanel"
+import config from "../lib/config"
 
-export default function Home({hcaptchaSiteKey}) {
+export default function Home({hcaptchaSiteKey}: {hcaptchaSiteKey: string}) {
   return (
     <Page>
       <Head>

@@ -3,8 +3,11 @@ import * as fcl from "@onflow/fcl"
 import React, {useState} from "react"
 import {createAccount} from "../lib/client"
 import CreateAccountForm from "./CreateAccountForm"
-
-export default function CreateAccountPanel({hcaptchaSiteKey}) {
+export default function CreateAccountPanel({
+  hcaptchaSiteKey,
+}: {
+  hcaptchaSiteKey: string
+}) {
   const [address, setAddress] = useState("")
 
   return (

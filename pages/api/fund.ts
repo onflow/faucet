@@ -1,12 +1,12 @@
-const {verify} = require("hcaptcha")
 import * as fcl from "@onflow/fcl"
-
+import {verify} from "hcaptcha"
+import {NextApiRequest, NextApiResponse} from "next"
 import config from "../../lib/config"
-import {getAuthorization, fundAccount} from "../../lib/flow"
+import {fundAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
 import {fundAccountSchemaServer} from "../../lib/validate"
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     try {
       await fundAccountSchemaServer.validate(req.body)
@@ -22,7 +22,7 @@ export default async (req, res) => {
     try {
       await verify(config.hcaptchaSecretKey, captchaToken)
     } catch (e) {
-      res.status(400).send()
+      res.status(400).send("")
       return
     }
 
@@ -35,6 +35,6 @@ export default async (req, res) => {
 
     res.status(200).json({token, amount})
   } else {
-    res.status(405).send()
+    res.status(405).send("")
   }
 }

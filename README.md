@@ -35,6 +35,12 @@ cp env.example .env
 docker-compose up -d
 ```
 
+### Install dependencies
+
+```sh
+npm install
+```
+
 ### Migrate and seed the database
 
 ```sh
@@ -46,4 +52,10 @@ npm run db-seed
 
 ```sh
 npm run dev
+```
+
+### Run eslint, typescript checks, tests
+
+```sh
+npm run check
 ```

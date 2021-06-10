@@ -1,10 +1,11 @@
-import React, {useState} from "react"
-import {Formik, Form, Field} from "formik"
-import HCaptcha from "@hcaptcha/react-hcaptcha"
 import {Loading} from "@geist-ui/react"
-
+import HCaptcha from "@hcaptcha/react-hcaptcha"
+import {Field, Form, Formik} from "formik"
+import React, {useState} from "react"
+import {ClientFundAccount} from "../lib/client"
 import {useMixpanel} from "../lib/mixpanel"
 import {fundAccountSchemaClient} from "../lib/validate"
+import {ClientFundAccountResult} from "./FundAccountPanel"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
 const padded = {marginTop: "1rem", marginBottom: "1rem"}
@@ -13,6 +14,10 @@ export default function FundAccountForm({
   hcaptchaSiteKey,
   fundAccount,
   onResult,
+}: {
+  hcaptchaSiteKey: string
+  fundAccount: ClientFundAccount
+  onResult: (result: ClientFundAccountResult) => void
 }) {
   const [captchaToken, setCaptchaToken] = useState("")
   const {mixpanel} = useMixpanel()
@@ -52,7 +57,7 @@ export default function FundAccountForm({
           <div style={padded}>
             <HCaptcha
               sitekey={hcaptchaSiteKey}
-              onVerify={(token, _) => setCaptchaToken(token)}
+              onVerify={(token: string) => setCaptchaToken(token)}
             />
           </div>
 
