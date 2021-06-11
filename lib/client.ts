@@ -11,7 +11,7 @@ export type ClientCreateAccount = (
   captchaToken: string
 ) => Promise<string>
 
-export const createAccount: ClientCreateAccount = async (
+export const clientCreateAccount: ClientCreateAccount = async (
   publicKey,
   sigAlgo,
   hashAlgo,

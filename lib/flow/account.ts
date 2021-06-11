@@ -42,7 +42,7 @@ export async function createAccount(
   publicKey: string,
   sigAlgo: number,
   hashAlgo: number,
-  authorization: unknown
+  authorization: fcl.Authorization
 ) {
   const encodedPublicKey = encodeKey(publicKey, sigAlgo, hashAlgo, 1000)
 

@@ -12,11 +12,11 @@ const padded = {marginTop: "1rem", marginBottom: "1rem"}
 
 export default function CreateAccountForm({
   hcaptchaSiteKey,
-  createAccount,
+  clientCreateAccount,
   onResult,
 }: {
   hcaptchaSiteKey: string
-  createAccount: ClientCreateAccount
+  clientCreateAccount: ClientCreateAccount
   onResult: (result: string) => void
 }) {
   const [captchaToken, setCaptchaToken] = useState("")
@@ -34,7 +34,7 @@ export default function CreateAccountForm({
         {publicKey, hashAlgorithm, signatureAlgorithm},
         {setSubmitting}
       ) => {
-        const address = await createAccount(
+        const address = await clientCreateAccount(
           publicKey,
           signatureAlgorithm,
           hashAlgorithm,

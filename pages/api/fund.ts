@@ -31,6 +31,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const authorization = getAuthorization(keyIndex)
 
+    if (address === null) {
+      res.status(400).json({errors: ["Missing address"]})
+      return
+    }
+
     const amount = await fundAccount(address, token, authorization)
 
     res.status(200).json({token, amount})

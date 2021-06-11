@@ -8,10 +8,10 @@ export async function sendTransaction({
   payer,
 }: {
   transaction: string
-  args: unknown[]
-  proposer: unknown
-  authorizations: unknown[]
-  payer: unknown
+  args: fcl.TransactionArg[]
+  proposer: fcl.Authorization
+  authorizations: fcl.Authorization[]
+  payer: fcl.Authorization
 }) {
   const response = await fcl.send([
     fcl.transaction(transaction),

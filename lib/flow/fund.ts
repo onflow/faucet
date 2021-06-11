@@ -33,16 +33,21 @@ transaction(address: Address, amount: UFix64) {
 }
 `
 
-type Tokens = "FLOW"
+type TokenType = "FLOW"
+type Token = {
+  tx: string
+  amount: string
+}
+type Tokens = Record<TokenType, Token>
 
-const tokens = {
+const tokens: Tokens = {
   FLOW: {tx: txFundAccountFLOW, amount: config.tokenAmountFlow},
 }
 
 export async function fundAccount(
   address: string,
-  token: Tokens,
-  authorization: unknown
+  token: TokenType,
+  authorization: fcl.Authorization
 ) {
   const {tx, amount} = tokens[token]
 
