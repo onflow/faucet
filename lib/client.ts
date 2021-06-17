@@ -1,4 +1,17 @@
-export const createAccount = async (
+export type ClientCreateAccountResult = {
+  address: string
+  token: string
+  amount: string
+}
+
+export type ClientCreateAccount = (
+  publicKey: string,
+  sigAlgo: string,
+  hashAlgo: string,
+  captchaToken: string
+) => Promise<string>
+
+export const clientCreateAccount: ClientCreateAccount = async (
   publicKey,
   sigAlgo,
   hashAlgo,
@@ -16,11 +29,20 @@ export const createAccount = async (
     },
     method: "POST",
   }).then(response => response.json())
-
   return data.address
 }
 
-export const fundAccount = async (address, token, captchaToken) => {
+export type ClientFundAccount = (
+  address: string,
+  token: string,
+  captchaToken: string
+) => Promise<string>
+
+export const fundAccount: ClientFundAccount = async (
+  address,
+  token,
+  captchaToken
+) => {
   const data = await fetch("/api/fund", {
     body: JSON.stringify({
       address: address,

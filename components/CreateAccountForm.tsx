@@ -1,22 +1,27 @@
-import React, {useState} from "react"
-import {Formik, Form, Field} from "formik"
-import HCaptcha from "@hcaptcha/react-hcaptcha"
 import {Loading} from "@geist-ui/react"
-
+import HCaptcha from "@hcaptcha/react-hcaptcha"
+import {Field, Form, Formik} from "formik"
+import React, {useState} from "react"
+import {ClientCreateAccount} from "../lib/client"
+import {HashAlgos, SigAlgos} from "../lib/crypto"
+import {useMixpanel} from "../lib/mixpanel"
 import {createAccountSchemaClient} from "../lib/validate"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
-
-import {useMixpanel} from "../lib/mixpanel"
 
 const padded = {marginTop: "1rem", marginBottom: "1rem"}
 
 export default function CreateAccountForm({
   hcaptchaSiteKey,
-  createAccount,
+  clientCreateAccount,
   onResult,
+}: {
+  hcaptchaSiteKey: string
+  clientCreateAccount: ClientCreateAccount
+  onResult: (result: string) => void
 }) {
   const [captchaToken, setCaptchaToken] = useState("")
   const {mixpanel} = useMixpanel()
+
   return (
     <Formik
       initialValues={{
@@ -29,7 +34,7 @@ export default function CreateAccountForm({
         {publicKey, hashAlgorithm, signatureAlgorithm},
         {setSubmitting}
       ) => {
-        const address = await createAccount(
+        const address = await clientCreateAccount(
           publicKey,
           signatureAlgorithm,
           hashAlgorithm,
@@ -56,26 +61,20 @@ export default function CreateAccountForm({
             component={CustomSelectComponent}
             name="signatureAlgorithm"
             inputLabel="Signature Algorithm"
-            options={[
-              {value: "ECDSA_P256", label: "ECDSA_P256"},
-              {value: "ECDSA_secp256k1", label: "ECDSA_secp256k1"},
-            ]}
+            options={Object.keys(SigAlgos).map(k => ({value: k, label: k}))}
           />
 
           <Field
             component={CustomSelectComponent}
             name="hashAlgorithm"
             inputLabel="Hash Algorithm"
-            options={[
-              {value: "SHA2_256", label: "SHA2_256"},
-              {value: "SHA3_256", label: "SHA3_256"},
-            ]}
+            options={Object.keys(HashAlgos).map(k => ({value: k, label: k}))}
           />
 
           <div style={padded}>
             <HCaptcha
               sitekey={hcaptchaSiteKey}
-              onVerify={(token, _) => setCaptchaToken(token)}
+              onVerify={(token: string) => setCaptchaToken(token)}
             />
           </div>
 

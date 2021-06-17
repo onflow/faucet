@@ -1,27 +1,17 @@
-const {verify} = require("hcaptcha")
-import {
-  ECDSA_P256,
-  ECDSA_secp256k1,
-  SHA2_256,
-  SHA3_256,
-} from "@onflow/util-encode-key"
-
+import {verify} from "hcaptcha"
+import {NextApiRequest, NextApiResponse} from "next"
 import config from "../../lib/config"
-import {getAuthorization, createAccount} from "../../lib/flow"
+import {
+  HashAlgos,
+  HashAlgoTypes,
+  SigAlgos,
+  SigAlgoTypes,
+} from "../../lib/crypto"
+import {createAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
 import {createAccountSchemaServer} from "../../lib/validate"
 
-const sigAlgos = {
-  ECDSA_P256: ECDSA_P256,
-  ECDSA_secp256k1: ECDSA_secp256k1,
-}
-
-const hashAlgos = {
-  SHA2_256: SHA2_256,
-  SHA3_256: SHA3_256,
-}
-
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     try {
       await createAccountSchemaServer.validate(req.body)
@@ -30,15 +20,26 @@ export default async (req, res) => {
       return
     }
 
+    const signatureAlgorithm: SigAlgoTypes = req.body.signatureAlgorithm
+    const hashAlgorithm: HashAlgoTypes = req.body.hashAlgorithm
+
+    if (!Object.keys(SigAlgos).includes(signatureAlgorithm)) {
+      throw "Incorrect singature algorithm"
+    }
+
+    if (!Object.keys(HashAlgos).includes(hashAlgorithm)) {
+      throw "Incorrect hash algorithm"
+    }
+
     const captchaToken = req.body["h-captcha-response"]
     const publicKey = req.body.publicKey
-    const sigAlgo = sigAlgos[req.body.signatureAlgorithm]
-    const hashAlgo = hashAlgos[req.body.hashAlgorithm]
+    const sigAlgo = SigAlgos[signatureAlgorithm]
+    const hashAlgo = HashAlgos[hashAlgorithm]
 
     try {
       await verify(config.hcaptchaSecretKey, captchaToken)
     } catch (e) {
-      res.status(400).send()
+      res.status(400).send("")
       return
     }
 
@@ -56,6 +57,6 @@ export default async (req, res) => {
 
     res.status(200).json({address})
   } else {
-    res.status(405).send()
+    res.status(405).send("")
   }
 }

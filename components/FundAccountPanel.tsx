@@ -1,14 +1,20 @@
 import {Card, Input} from "@geist-ui/react"
-import * as fcl from "@onflow/fcl"
 import React, {useState} from "react"
 import {fundAccount} from "../lib/client"
 import FundAccountForm from "./FundAccountForm"
 
-const displayResult = ({address, amount, token}) =>
-  `Funded ${fcl.display(address)} with ${amount} ${token}`
+export type ClientFundAccountResult = {
+  address: string
+  token: string
+  amount: string
+}
 
-export default function FundAccountPanel({hcaptchaSiteKey}) {
-  const [result, setResult] = useState(null)
+export default function FundAccountPanel({
+  hcaptchaSiteKey,
+}: {
+  hcaptchaSiteKey: string
+}) {
+  const [result, setResult] = useState<ClientFundAccountResult | null>(null)
 
   return (
     <div>

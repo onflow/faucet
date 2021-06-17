@@ -1,11 +1,26 @@
 import {Input, Select, Text} from "@geist-ui/react"
+import {FieldProps} from "formik"
+
+type CustomFieldProps = FieldProps & {
+  inputLabel: string
+  disabled?: boolean
+}
+
+type SelectOption = {
+  label: string
+  value: string
+}
+
+type CustomSelectFieldProps = CustomFieldProps & {
+  options: SelectOption[]
+}
 
 export const CustomInputComponent = ({
   field,
   form: {touched, errors},
   inputLabel,
   ...props
-}) => (
+}: CustomFieldProps) => (
   <>
     <Text size="1em" style={{marginBottom: "0.5rem"}} type="secondary">
       {inputLabel}
@@ -22,18 +37,20 @@ export const CustomInputComponent = ({
 export const CustomSelectComponent = ({
   field,
   form: {touched, errors, setFieldValue},
-  ...props
-}) => (
+  disabled,
+  inputLabel,
+  options,
+}: CustomSelectFieldProps) => (
   <>
     <Text size="1em" style={{marginBottom: "0.5rem"}} type="secondary">
-      {props.inputLabel}
+      {inputLabel}
     </Text>
     <Select
-      disabled={props.disabled}
+      disabled={disabled}
       onChange={option => setFieldValue(field.name, option)}
       value={field.value}
     >
-      {props.options.map(({value, label}) => (
+      {options.map(({value, label}) => (
         <Select.Option key={value} value={value}>
           {label}
         </Select.Option>

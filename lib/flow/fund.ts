@@ -1,6 +1,5 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
-
 import config from "../config"
 import {sendTransaction} from "./send"
 
@@ -16,7 +15,7 @@ transaction(address: Address, amount: UFix64) {
 		self.tokenAdmin = signer
 		  .borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
 		  ?? panic("Signer is not the token admin")
-	
+
 		self.tokenReceiver = getAccount(address)
 		  .getCapability(/public/flowTokenReceiver)!
 		  .borrow<&{FungibleToken.Receiver}>()
@@ -26,19 +25,30 @@ transaction(address: Address, amount: UFix64) {
 	execute {
 		let minter <- self.tokenAdmin.createNewMinter(allowedAmount: amount)
 		let mintedVault <- minter.mintTokens(amount: amount)
-	
+
 		self.tokenReceiver.deposit(from: <-mintedVault)
-	
+
 		destroy minter
 	}
 }
 `
 
-const tokens = {
+type TokenType = "FLOW"
+type Token = {
+  tx: string
+  amount: string
+}
+type Tokens = Record<TokenType, Token>
+
+const tokens: Tokens = {
   FLOW: {tx: txFundAccountFLOW, amount: config.tokenAmountFlow},
 }
 
-export async function fundAccount(address, token, authorization) {
+export async function fundAccount(
+  address: string,
+  token: TokenType,
+  authorization: fcl.Authorization
+) {
   const {tx, amount} = tokens[token]
 
   await sendTransaction({
