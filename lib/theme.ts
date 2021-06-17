@@ -10,14 +10,34 @@ const heading = {
 }
 
 const theme = makeTheme({
-  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  space: [
+    0,
+    "0.25rem",
+    "0.5rem",
+    "1rem",
+    "2rem",
+    "4rem",
+    "8rem",
+    "16rem",
+    "32rem",
+  ],
   fonts: {
     body:
       'Overpass, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     heading: "inherit",
     monospace: "Overpass Mono, monospace",
   },
-  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
+  fontSizes: [
+    "0.75rem",
+    "0.875rem",
+    "1rem",
+    "1.25rem",
+    "1.5rem",
+    "2rem",
+    "3rem",
+    "4rem",
+    "6rem",
+  ],
   fontWeights: {
     body: 400,
     heading: 700,
@@ -113,6 +133,7 @@ const theme = makeTheme({
       fontFamily: "body",
       lineHeight: "body",
       fontWeight: "body",
+      fontSize: 16,
     },
     h1: {
       ...heading,
