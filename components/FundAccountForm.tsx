@@ -1,10 +1,9 @@
-import {Loading} from "@geist-ui/react"
 import HCaptcha from "@hcaptcha/react-hcaptcha"
 import {Field, Form, Formik} from "formik"
-import React, {useState} from "react"
-import {ClientFundAccount} from "../lib/client"
-import {useMixpanel} from "../lib/mixpanel"
-import {fundAccountSchemaClient} from "../lib/validate"
+import {ClientFundAccount} from "lib/client"
+import {useMixpanel} from "lib/mixpanel"
+import {fundAccountSchemaClient} from "lib/validate"
+import {useState} from "react"
 import {ClientFundAccountResult} from "./FundAccountPanel"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
@@ -65,7 +64,7 @@ export default function FundAccountForm({
             Fund Your Account
           </button>
 
-          {isSubmitting && <Loading>Funding your account</Loading>}
+          {isSubmitting && "Funding your account..."}
         </Form>
       )}
     </Formik>

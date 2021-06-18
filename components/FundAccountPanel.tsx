@@ -1,6 +1,6 @@
-import {Card, Input} from "@geist-ui/react"
-import React, {useState} from "react"
-import {fundAccount} from "../lib/client"
+import {fundAccount} from "lib/client"
+import {useState} from "react"
+import {Input, Label} from "theme-ui"
 import FundAccountForm from "./FundAccountForm"
 
 export type ClientFundAccountResult = {
@@ -26,14 +26,11 @@ export default function FundAccountPanel({
         />
       )}
       {result && (
-        <Card>
+        <div>
           <h4>Your account has been funded</h4>
-          <Input
-            label="Amount"
-            readOnly
-            initialValue={`${result.amount} ${result.token}`}
-          />
-        </Card>
+          <Label>Amount</Label>
+          <Input readOnly value={`${result.amount} ${result.token}`} />
+        </div>
       )}
     </div>
   )
