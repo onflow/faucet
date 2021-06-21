@@ -8,7 +8,7 @@ type Props = {
 
 const styles = {
   required: {
-    color: "red",
+    color: "red.200",
     fontWeight: "normal",
   },
 }

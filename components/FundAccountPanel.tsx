@@ -9,18 +9,13 @@ export type ClientFundAccountResult = {
   amount: string
 }
 
-export default function FundAccountPanel({
-  hcaptchaSiteKey,
-}: {
-  hcaptchaSiteKey: string
-}) {
+export default function FundAccountPanel() {
   const [result, setResult] = useState<ClientFundAccountResult | null>(null)
 
   return (
     <div>
       {!result && (
         <FundAccountForm
-          hcaptchaSiteKey={hcaptchaSiteKey}
           fundAccount={fundAccount}
           onResult={result => setResult(result)}
         />

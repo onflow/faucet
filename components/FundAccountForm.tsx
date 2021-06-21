@@ -2,6 +2,7 @@ import HCaptcha from "@hcaptcha/react-hcaptcha"
 import {Field, Form, Formik} from "formik"
 import {ClientFundAccount} from "lib/client"
 import {useMixpanel} from "lib/mixpanel"
+import publicConfig from "lib/publicConfig"
 import {fundAccountSchemaClient} from "lib/validate"
 import {useState} from "react"
 import {ClientFundAccountResult} from "./FundAccountPanel"
@@ -10,16 +11,15 @@ import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 const padded = {marginTop: "1rem", marginBottom: "1rem"}
 
 export default function FundAccountForm({
-  hcaptchaSiteKey,
   fundAccount,
   onResult,
 }: {
-  hcaptchaSiteKey: string
   fundAccount: ClientFundAccount
   onResult: (result: ClientFundAccountResult) => void
 }) {
   const [captchaToken, setCaptchaToken] = useState("")
   const {mixpanel} = useMixpanel()
+
   return (
     <Formik
       initialValues={{
@@ -55,7 +55,7 @@ export default function FundAccountForm({
 
           <div style={padded}>
             <HCaptcha
-              sitekey={hcaptchaSiteKey}
+              sitekey={publicConfig.hcaptchaSiteKey}
               onVerify={(token: string) => setCaptchaToken(token)}
             />
           </div>
