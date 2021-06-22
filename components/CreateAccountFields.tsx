@@ -25,7 +25,7 @@ export default function CreateAccountFields({
   captchaToken: string
   setCaptchaToken: React.Dispatch<React.SetStateAction<string>>
 }) {
-  const {isSubmitting} = useFormikContext()
+  const {isSubmitting, isValid} = useFormikContext()
 
   return (
     <>
@@ -95,12 +95,11 @@ export default function CreateAccountFields({
           type="submit"
           size="lg"
           block
-          disabled={!captchaToken || isSubmitting}
+          disabled={!captchaToken || isSubmitting || !isValid}
         >
           Create Account
         </Button>
       </Box>
-
       <Box mb={4}>
         <Text as="div" variant="small" sx={{textAlign: "center"}}>
           After clicking “Create Account” we will provide consectetur adipiscing
@@ -108,7 +107,6 @@ export default function CreateAccountFields({
           aliqua.
         </Text>
       </Box>
-
       <Box mb={5}>
         <Themed.p sx={{textAlign: "center"}}>
           Already have an account?{" "}

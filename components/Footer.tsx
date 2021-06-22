@@ -12,7 +12,7 @@ export default function Footer() {
       color: "white",
       fontSize: 0,
       height: 100,
-      mt: 6,
+      mt: [4, 5, 6],
     },
   }
 

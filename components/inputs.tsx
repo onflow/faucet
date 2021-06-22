@@ -31,6 +31,15 @@ type CustomSelectFieldProps = CustomFieldProps & {
   required?: boolean
 }
 
+const errorInputStyles = {
+  border: "1px solid",
+  borderColor: "red.200",
+  color: "red.200",
+  outlineColor: "red.200",
+  borderBottomLeftRadius: 0,
+  borderBottomRightRadius: 0,
+}
+
 const FieldError = ({children}: {children: React.ReactNode}) => {
   const style = {
     border: "1px solid",
@@ -52,6 +61,7 @@ export const CustomInputComponent = ({
   form: {touched, errors},
   inputLabel,
   required = false,
+  sx = {},
   ...props
 }: CustomFieldProps) => {
   const ref = useRef<HTMLInputElement>(null)
@@ -61,16 +71,21 @@ export const CustomInputComponent = ({
   )
   // TODO: asserted as InputProps until react-aria issue is fixed: https://github.com/adobe/react-spectrum/issues/1760
   const assertedFieldProps = inputProps as InputProps
+  const showError = touched[field.name] && errors[field.name]
 
   return (
     <>
       <Label {...labelProps} required={required}>
         {inputLabel}
       </Label>
-      <Input {...assertedFieldProps} width="100%" {...field} {...props} />
-      {touched[field.name] && errors[field.name] && (
-        <Text>{errors[field.name]}</Text>
-      )}
+      <Input
+        {...assertedFieldProps}
+        width="100%"
+        {...field}
+        {...props}
+        sx={showError ? {...sx, ...errorInputStyles} : sx}
+      />
+      {showError && <FieldError>{errors[field.name]}</FieldError>}
     </>
   )
 }
@@ -90,14 +105,6 @@ export const CustomTextareaComponent = ({
   )
   // TODO: asserted as TextareaProps until react-aria issue is fixed: https://github.com/adobe/react-spectrum/issues/1760
   const assertedTypedInputProps = inputProps as TextareaProps
-  const errorInputStyles = {
-    border: "1px solid",
-    borderColor: "red.200",
-    color: "red.200",
-    outlineColor: "red.200",
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-  }
   const showError = touched[field.name] && errors[field.name]
 
   return (

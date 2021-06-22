@@ -24,6 +24,7 @@ const Header = ({fund}: {fund?: boolean}) => {
       display: ["none", "none", "inline-flex"],
     },
   }
+
   return (
     <header sx={styles.header}>
       <Link href={paths.root} sx={styles.logo}>
@@ -32,7 +33,7 @@ const Header = ({fund}: {fund?: boolean}) => {
 
       <div>
         <Text sx={styles.buttonDescription}>
-          {fund ? "Don't have an account?" : "Already have an account?"}
+          {fund ? "Already have an account?" : "Don't have an account?"}
         </Text>
         <Button
           href={fund ? paths.fundAccount : paths.root}
