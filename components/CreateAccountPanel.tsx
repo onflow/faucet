@@ -1,3 +1,4 @@
+import Sidebar from "components/Sidebar"
 import {clientCreateAccount} from "lib/client"
 import {Box, Grid} from "theme-ui"
 import CreateAccountForm from "./CreateAccountForm"
@@ -9,7 +10,9 @@ export default function CreateAccountPanel() {
         <Box>
           <CreateAccountForm clientCreateAccount={clientCreateAccount} />
         </Box>
-        <Box>Sidebar</Box>
+        <Box>
+          <Sidebar />
+        </Box>
       </Grid>
     </div>
   )
