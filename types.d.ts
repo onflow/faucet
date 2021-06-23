@@ -25,6 +25,12 @@ declare module "@onflow/fcl" {
     signature: string
   }
 
+  export type Event = {
+    type: string
+    transactionId: string
+    data: {[key: string]: unknown}
+  }
+
   export type Account = {
     kind: "ACCOUNT"
     tempId: string

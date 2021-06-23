@@ -60,7 +60,7 @@ export async function createAccount(
   })
 
   const accountCreatedEvent = result.events.find(
-    event => event.type === accountCreatedEventType
+    (event: fcl.Event) => event.type === accountCreatedEventType
   )
 
   if (!accountCreatedEvent) {
