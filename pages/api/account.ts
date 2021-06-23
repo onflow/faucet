@@ -48,12 +48,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const authorization = getAuthorization(keyIndex)
 
-    const address = await createAccount(
+    const { address, transactionId } = await createAccount(
       publicKey,
       sigAlgo,
       hashAlgo,
       authorization
     )
+
+    console.log("Account created", { address, transactionId })
 
     res.status(200).json({address})
   } else {
