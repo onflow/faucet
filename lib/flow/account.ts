@@ -59,7 +59,7 @@ export async function createAccount(
     proposer: authorization,
   })
 
-  const accountCreatedEvent = result.events.find((event: any) => event.type === accountCreatedEventType)
+  const accountCreatedEvent = result.events.find(event => event.type === accountCreatedEventType)
 
   if (!accountCreatedEvent) {
     throw "Transaction did not emit account creation event"
