@@ -57,6 +57,8 @@ export async function createAccount(
     proposer: authorization,
   })
 
+  console.log(result)
+
   const accountCreatedEvent = result.events[0].data
 
   return accountCreatedEvent.address

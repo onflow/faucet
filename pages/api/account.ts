@@ -55,6 +55,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       authorization
     )
 
+    console.log("Account created", { address })
+
     res.status(200).json({address})
   } else {
     res.status(405).send("")
