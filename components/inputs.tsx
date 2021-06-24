@@ -31,6 +31,10 @@ type CustomSelectFieldProps = CustomFieldProps & {
   required?: boolean
 }
 
+const textFieldInputStyle = {
+  backgroundColor: "white",
+}
+
 const errorInputStyles = {
   border: "1px solid",
   borderColor: "red.200",
@@ -72,6 +76,7 @@ export const CustomInputComponent = ({
   // TODO: asserted as InputProps until react-aria issue is fixed: https://github.com/adobe/react-spectrum/issues/1760
   const assertedFieldProps = inputProps as InputProps
   const showError = touched[field.name] && errors[field.name]
+  const sxStyles = {...textFieldInputStyle, ...sx}
 
   return (
     <>
@@ -83,7 +88,7 @@ export const CustomInputComponent = ({
         width="100%"
         {...field}
         {...props}
-        sx={showError ? {...sx, ...errorInputStyles} : sx}
+        sx={showError ? {...sxStyles, ...errorInputStyles} : sxStyles}
       />
       {showError && <FieldError>{errors[field.name]}</FieldError>}
     </>
@@ -106,6 +111,7 @@ export const CustomTextareaComponent = ({
   // TODO: asserted as TextareaProps until react-aria issue is fixed: https://github.com/adobe/react-spectrum/issues/1760
   const assertedTypedInputProps = inputProps as TextareaProps
   const showError = touched[field.name] && errors[field.name]
+  const sxStyles = {...textFieldInputStyle, ...sx}
 
   return (
     <>
@@ -116,7 +122,7 @@ export const CustomTextareaComponent = ({
         {...assertedTypedInputProps}
         {...field}
         {...props}
-        sx={showError ? {...sx, ...errorInputStyles} : sx}
+        sx={showError ? {...sxStyles, ...errorInputStyles} : sxStyles}
       />
       {showError && <FieldError>{errors[field.name]}</FieldError>}
     </>

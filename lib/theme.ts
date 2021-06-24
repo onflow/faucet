@@ -108,6 +108,7 @@ const theme = makeTheme({
         fontWeight: 700,
       },
       md: {
+        fontSize: 1,
         px: 3,
         py: 11,
         fontWeight: "bold",
