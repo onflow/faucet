@@ -15,6 +15,7 @@ const styles = {
   publicKeyInputField: {
     fontFamily: "monospace",
     fontSize: [1, 2],
+    overflow: "hidden",
   },
 }
 
@@ -25,7 +26,7 @@ export default function CreateAccountFields({
   captchaToken: string
   setCaptchaToken: React.Dispatch<React.SetStateAction<string>>
 }) {
-  const {isSubmitting, isValid} = useFormikContext()
+  const {isSubmitting, isValid, setFieldValue} = useFormikContext()
 
   return (
     <>
@@ -45,6 +46,9 @@ export default function CreateAccountFields({
           name="publicKey"
           placeholder="Your Public Key"
           required
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setFieldValue("publicKey", e.target.value.slice(0, 128))
+          }
           sx={styles.publicKeyInputField}
           spellcheck={false}
           rows="4"
