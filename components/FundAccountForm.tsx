@@ -45,6 +45,7 @@ export default function FundAccountForm() {
                   src={`${publicConfig.network}-faucet-icon.svg`}
                   alt="Test Net Faucet"
                   sx={{mr: 3}}
+                  width={42}
                 />
                 <Themed.h1>Fund Account</Themed.h1>
               </Flex>

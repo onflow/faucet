@@ -65,11 +65,13 @@ export default function FundAccountSubmitted({
                 sx={{alignItems: "center", justifyContent: "space-between"}}
               >
                 <div sx={styles.walletAmount}>
-                  {result.amount.toLocaleString()}
-                  #todo
+                  {`${parseFloat(result.amount).toLocaleString()} ${
+                    result.token
+                  }
+                  tokens`}
                 </div>
                 <Link
-                  href={`https://flowscan.org/account/${result.address}`}
+                  href={`https://flow-view-source.com/testnet/account/${result.address}`}
                   target="_blank"
                   variant="secondary"
                   sx={{fontSize: 1}}
