@@ -2,6 +2,7 @@ import {SSRProvider} from "@react-aria/ssr"
 import theme from "lib/theme"
 import {AppProps} from "next/dist/next-server/lib/router/router"
 import {ThemeProvider} from "theme-ui"
+import "./fonts.css"
 
 function App({Component, pageProps}: AppProps) {
   return (
