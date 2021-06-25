@@ -10,12 +10,13 @@ import {CustomSelectComponent, CustomTextareaComponent} from "./inputs"
 
 const styles = {
   publicKeyInputContainer: {
-    width: [300, 358],
+    width: [300, 358, 358, 451],
   },
   publicKeyInputField: {
     fontFamily: "monospace",
     fontSize: [1, 2],
     overflow: "hidden",
+    letterSpacing: ["inherit", "inherit", "inherit", "0.182rem"],
   },
 }
 
