@@ -48,7 +48,7 @@ export default function CreateAccountForm({
         }}
       >
         {({isSubmitting}) => (
-          <Form>
+          <Form data-test="create-account-form">
             <Box my={3}>
               <Flex>
                 <img

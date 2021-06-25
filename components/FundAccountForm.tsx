@@ -38,7 +38,7 @@ export default function FundAccountForm() {
         }}
       >
         {({isSubmitting}) => (
-          <Form>
+          <Form data-test="fund-account-form">
             <Box my={3}>
               <Flex>
                 <img

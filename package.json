@@ -13,7 +13,8 @@
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "tsc": "./node_modules/typescript/bin/tsc",
-    "check": "eslint . && npm run tsc"
+    "test": "cypress run",
+    "check": "eslint . && npm run tsc && npm run test"
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^0.3.4",
@@ -49,6 +50,8 @@
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
     "babel-eslint": "^10.1.0",
+    "cypress": "^7.6.0",
+    "cypress-iframe": "^1.0.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.1.0",

@@ -1,5 +1,12 @@
 import * as yup from "yup"
 
+export const PUBLIC_KEY_FORMAT_ERROR =
+  "Public key must be a hexadecimal string with no spaces."
+export const PUBLIC_KEY_MISSING_ERROR = "Public key is required."
+export const ADDRESS_FORMAT_ERROR =
+  "Address must be a 16-character hexadecimal string."
+export const ADDRESS_MISSING_ERROR = "Address is required."
+
 const captchaSchemaShape = {
   "h-captcha-response": yup.string().required(),
 }
@@ -7,11 +14,8 @@ const captchaSchemaShape = {
 const createAccountSchemaClientShape = {
   publicKey: yup
     .string()
-    .matches(
-      /^([0-9a-f]{128})$/i,
-      "Public key must be a hexadecimal string with no spaces."
-    )
-    .required("Public key is required."),
+    .matches(/^([0-9a-f]{128})$/i, PUBLIC_KEY_FORMAT_ERROR)
+    .required(PUBLIC_KEY_MISSING_ERROR),
   signatureAlgorithm: yup
     .string()
     .oneOf(["ECDSA_P256", "ECDSA_secp256k1"])
@@ -35,11 +39,8 @@ export const createAccountSchemaServer = yup
 const fundAccountSchemaClientShape = {
   address: yup
     .string()
-    .matches(
-      /^(0x)?([0-9a-f]{16})$/i,
-      "Address must be a 16-character hexadecimal string."
-    )
-    .required("Address is required."),
+    .matches(/^(0x)?([0-9a-f]{16})$/i, ADDRESS_FORMAT_ERROR)
+    .required(ADDRESS_MISSING_ERROR),
   token: yup.string().oneOf(["FLOW"]).required(),
 }
 
