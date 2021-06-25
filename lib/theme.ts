@@ -185,10 +185,19 @@ const theme = makeTheme({
       lineHeight: "body",
       fontWeight: "body",
       fontSize: 16,
-      background: `url(${publicConfig.network}-bg.jpg)`,
-      backgroundPosition: "top center",
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "100%",
+      "> body": {
+        background: `url(${publicConfig.network}-bg.jpg)`,
+        backgroundPosition: "top center",
+        backgroundRepeat: "no-repeat",
+      },
+      "&::before": {
+        position: "absolute",
+        content: '""',
+        height: 395,
+        width: "100%",
+        zIndex: -1,
+        backgroundColor: "#3050f1",
+      },
     },
     h1: {
       ...heading,
