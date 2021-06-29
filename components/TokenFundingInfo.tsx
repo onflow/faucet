@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 
-import {Themed, ThemeUICSSObject} from "theme-ui"
+import {Text, Themed, ThemeUICSSObject} from "theme-ui"
 
 export default function TokenFundingInfo({description}: {description: string}) {
   const style: ThemeUICSSObject = {
@@ -19,7 +19,7 @@ export default function TokenFundingInfo({description}: {description: string}) {
   return (
     <div sx={style}>
       <Themed.h4 sx={{my: 0}}>Receive 1,000 Testnet FLOW tokens</Themed.h4>
-      <div>{description}</div>
+      <Text color="gray.400">{description}</Text>
     </div>
   )
 }

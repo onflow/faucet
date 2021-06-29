@@ -2,6 +2,7 @@
 import * as fcl from "@onflow/fcl"
 import copy from "clipboard-copy"
 import Button from "components/Button"
+import LoadingFeedback from "components/LoadingFeedback"
 import {Field} from "formik"
 import {useRef, useState} from "react"
 import {Box, Themed, ThemeUICSSObject} from "theme-ui"
@@ -19,17 +20,6 @@ const styles: Record<string, ThemeUICSSObject> = {
     fontFamily: "monospace",
     backgroundColor: "white",
   },
-  loading: {
-    my: 5,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    fontSize: 0,
-    color: "gray.300",
-    textTransform: "uppercase",
-  },
   infoBox: {
     p: 4,
     backgroundColor: "pink",
@@ -41,8 +31,8 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
   const timeout = useRef<number | undefined>(undefined)
 
   const copyToClipboard = () => {
-    clearTimeout(timeout.current)
     copy(address)
+    clearTimeout(timeout.current)
     setCopied(true)
     setTimeout(() => setCopied(false), 3000)
   }
@@ -82,13 +72,11 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
             />
           </>
         ) : (
-          <div sx={styles.loading}>
-            <img src="loading.svg" />
-            <br />
+          <LoadingFeedback>
             Your account address is being generated.
             <br />
             This may take a moment.
-          </div>
+          </LoadingFeedback>
         )}
       </Box>
 

@@ -137,6 +137,13 @@ const theme = makeTheme({
         opacity: 0.8,
       },
     },
+    secondary: {
+      color: "secondary",
+      textDecoration: "none",
+      "&:hover": {
+        opacity: 0.8,
+      },
+    },
   },
   text: {
     small: {
