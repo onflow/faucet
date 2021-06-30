@@ -81,7 +81,6 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
           </LoadingFeedback>
         )}
       </Box>
-
       <Box mb={3}>
         <Button
           type="button"
@@ -89,13 +88,12 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
           block
           disabled={address.length === 0}
           onClick={copyToClipboard}
+          data-test="copy-address-button"
         >
           {copied ? "Copied" : "Copy Address"}
         </Button>
       </Box>
-
       <Themed.hr />
-
       <Box mb={5}>
         <div sx={styles.infoBox}>
           <Themed.h3 sx={{my: 0}}>What can I build on Flow?</Themed.h3>

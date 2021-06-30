@@ -1,11 +1,9 @@
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
-  build:
+  static:
+    name: Static checks
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,4 +17,31 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - run: npm run check
+      - run: npm run lint
+      - run: npm run tsc
+
+  test:
+    name: "Tests"
+    runs-on: ubuntu-latest
+    env:
+      PRESERVE_DATA_TEST_ATTRIBUTES: "true"
+      SIGNER_ADDRESS: "0xf8d6e0586b0a20c7"
+      SIGNER_PRIVATE_KEY: "91a22fbd87392b019fbe332c32695c14cf2ba5b6521476a8540228bdf1987068"
+      NEXT_PUBLIC_TEST_NET_URL: "http://localhost:3000"
+      NEXT_PUBLIC_CANARY_NET_URL: "http://localhost:3000"
+      NEXT_PUBLIC_TOKEN_AMOUNT_FLOW: "1000.0"
+
+    strategy:
+      matrix:
+        node-version: [15.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run build
+      - run: npm run start &
+      - run: npm run test

@@ -20,13 +20,14 @@ const Button = ({
   variant = "primary",
   size = "md",
   block = false,
+  disabled,
   href,
   target,
   ...props
 }: Props) => {
   const ref = useRef<HTMLButtonElement>(null)
   const variants = useVariants([
-    `buttons.${props.disabled ? "disabled" : variant}`,
+    `buttons.${disabled ? "disabled" : variant}`,
     `buttons.sizes.${size}`,
   ])
 
@@ -50,14 +51,20 @@ const Button = ({
 
   if (!!href) {
     return (
-      <Link href={href} sx={style} target={target}>
+      <Link href={href} sx={style} target={target} {...props}>
         {props.children}
       </Link>
     )
   }
 
   return (
-    <ThemeUIButton {...props} {...buttonProps} sx={style} ref={ref}>
+    <ThemeUIButton
+      {...props}
+      {...buttonProps}
+      sx={style}
+      ref={ref}
+      disabled={disabled}
+    >
       {props.children}
     </ThemeUIButton>
   )

@@ -5,11 +5,11 @@ const network =
 const testNetUrl = process.env.NEXT_PUBLIC_TEST_NET_URL
 if (!testNetUrl) throw "Missing NEXT_PUBLIC_TEST_NET_URL"
 
-const tokenAmountFlow = process.env.NEXT_PUBLIC_TOKEN_AMOUNT_FLOW
-if (!tokenAmountFlow) throw "Missing NEXT_PUBLIC_TOKEN_AMOUNT_FLOW"
-
 const canaryNetUrl = process.env.NEXT_PUBLIC_CANARY_NET_URL
 if (!canaryNetUrl) throw "Missing NEXT_PUBLIC_CANARY_NET_URL"
+
+const tokenAmountFlow = process.env.NEXT_PUBLIC_TOKEN_AMOUNT_FLOW
+if (!tokenAmountFlow) throw "Missing NEXT_PUBLIC_TOKEN_AMOUNT_FLOW"
 
 export type PublicConfig = {
   network: Networks

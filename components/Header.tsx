@@ -26,7 +26,7 @@ const Header = ({fund}: {fund?: boolean}) => {
   }
 
   return (
-    <header sx={styles.header}>
+    <header sx={styles.header} data-test="header">
       <Link href={paths.root} sx={styles.logo}>
         <img style={{width: "100%"}} src="/flow-faucet-logo.svg" alt="Flow" />
       </Link>
@@ -37,6 +37,7 @@ const Header = ({fund}: {fund?: boolean}) => {
         </Text>
         <Button
           href={fund ? paths.fundAccount : paths.root}
+          data-test={`header-${fund ? "fund" : "create"}-link`}
           variant={publicConfig.network === TEST_NET ? "secondary" : "primary"}
         >
           {fund ? "Fund" : "Create"} Account
