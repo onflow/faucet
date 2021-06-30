@@ -1,6 +1,7 @@
 /** @jsxImportSource theme-ui */
 import Button from "components/Button"
 import Captcha from "components/Captcha"
+import FormErrors from "components/FormErrors"
 import {Field, useFormikContext} from "formik"
 import {paths} from "lib/constants"
 import {HashAlgos, SigAlgos} from "lib/crypto"
@@ -22,9 +23,11 @@ const styles = {
 export default function CreateAccountFields({
   captchaToken,
   setCaptchaToken,
+  errors,
 }: {
   captchaToken: string
   setCaptchaToken: React.Dispatch<React.SetStateAction<string>>
+  errors: string[]
 }) {
   const {isSubmitting, isValid, setFieldValue} = useFormikContext()
 
@@ -101,6 +104,7 @@ export default function CreateAccountFields({
         >
           Create Account
         </Button>
+        {errors.length > 0 && <FormErrors errors={errors} />}
       </Box>
       <Box mb={4}>
         <Text as="div" variant="small" sx={{textAlign: "center"}}>

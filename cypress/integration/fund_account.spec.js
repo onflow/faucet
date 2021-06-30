@@ -1,5 +1,9 @@
-import {paths} from "lib/constants"
-import {ADDRESS_FORMAT_ERROR, ADDRESS_MISSING_ERROR} from "lib/validate"
+import {
+  ADDRESS_FORMAT_ERROR,
+  ADDRESS_MISSING_ERROR,
+  FUND_ACCOUNT_ERROR,
+  paths,
+} from "lib/constants"
 
 const CORRECT_ADDRESS = "0xeb179c27144f783c"
 const SUCCESS_RESPONSE = {token: "FLOW", amount: "1000.0"}
@@ -36,6 +40,19 @@ describe("Fund account", () => {
     )
   })
 
+  it("Shows error on submit failure", () => {
+    cy.intercept("POST", "/api/fund", {
+      errors: [FUND_ACCOUNT_ERROR],
+    })
+
+    addressInput().clear().type(CORRECT_ADDRESS)
+    cy.submitCaptcha()
+    fundAccountButton().click()
+
+    fundAccountForm().should("not.contain", "Account Funded!")
+    fundAccountForm().should("contain", FUND_ACCOUNT_ERROR)
+  })
+
   it("Validates public key presence", () => {
     fundAccountForm().should("not.contain", ADDRESS_MISSING_ERROR)
 
@@ -51,17 +68,18 @@ describe("Fund account", () => {
   })
 
   it("Validates public key format", () => {
-    fundAccountForm().should("not.contain", ADDRESS_FORMAT_ERROR)
+    const error = `${ADDRESS_FORMAT_ERROR} Read Documentation`
+    fundAccountForm().should("not.contain", error)
 
     cy.submitCaptcha()
     fundAccountButton().click()
 
     addressInput().type("incorrect-format")
-    fundAccountForm().should("contain", ADDRESS_FORMAT_ERROR)
+    fundAccountForm().should("contain", error)
 
     addressInput().clear().type(CORRECT_ADDRESS)
 
-    fundAccountForm().should("not.contain", ADDRESS_FORMAT_ERROR)
+    fundAccountForm().should("not.contain", error)
     fundAccountButton().should("be.enabled")
   })
 

@@ -1,6 +1,7 @@
 import "cypress-iframe"
 
 Cypress.Commands.add("submitCaptcha", () => {
+  cy.stubCaptchaSuccess()
   cy.iframe("[data-test=hcaptcha] iframe").find("#checkbox").click()
 })
 

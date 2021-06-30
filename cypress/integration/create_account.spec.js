@@ -1,5 +1,10 @@
-import {paths} from "lib/constants"
-import {PUBLIC_KEY_FORMAT_ERROR, PUBLIC_KEY_MISSING_ERROR} from "lib/validate"
+import {
+  CREATE_ACCOUNT_ERROR,
+  paths,
+  PUBLIC_KEY_FORMAT_ERROR,
+  PUBLIC_KEY_MISSING_ERROR,
+} from "lib/constants"
+
 const CORRECT_PUBLIC_KEY =
   "eb0a7553960b603a2416adc82dbf96ed2125fc20c208210337567826e681073509a4d5c718d122a838836c9fe24388fbe90a2d1cd0fd8f01fa38914494055d18"
 const SUCCESS_RESPONSE = {address: "0xeb179c27144f783c"}
@@ -13,8 +18,8 @@ const copyButton = () => cy.get("[data-test='copy-address-button']")
 
 describe("Create account", () => {
   beforeEach(() => {
-    cy.visit(paths.root)
     cy.stubCaptchaSuccess()
+    cy.visit(paths.root)
   })
 
   it("Creates an account", () => {
@@ -22,8 +27,8 @@ describe("Create account", () => {
 
     createAccountButton().should("be.disabled")
 
-    publicKeyInput().type(CORRECT_PUBLIC_KEY)
     cy.submitCaptcha()
+    publicKeyInput().type(CORRECT_PUBLIC_KEY)
 
     createAccountButton().click()
 
@@ -36,6 +41,19 @@ describe("Create account", () => {
     createAccountForm().should("contain", "Account Address Generated!")
     copyButton().should("be.enabled")
     addressInput().invoke("val").should("contain", SUCCESS_RESPONSE.address)
+  })
+
+  it("Shows error on submit failure", () => {
+    cy.intercept("POST", "/api/account", {
+      errors: [CREATE_ACCOUNT_ERROR],
+    })
+
+    publicKeyInput().type(CORRECT_PUBLIC_KEY)
+    cy.submitCaptcha()
+    createAccountButton().click()
+
+    createAccountForm().should("not.contain", "Account Address Generated!")
+    createAccountForm().should("contain", CREATE_ACCOUNT_ERROR)
   })
 
   it("Validates public key presence", () => {
@@ -53,17 +71,19 @@ describe("Create account", () => {
   })
 
   it("Validates public key format", () => {
-    createAccountForm().should("not.contain", PUBLIC_KEY_FORMAT_ERROR)
+    const error = `${PUBLIC_KEY_FORMAT_ERROR} Read Documentation`
+    createAccountForm().should("not.contain", error)
 
     cy.submitCaptcha()
     createAccountButton().click()
 
     publicKeyInput().type("incorrect-format")
-    createAccountForm().should("contain", PUBLIC_KEY_FORMAT_ERROR)
+    createAccountForm().should("contain", error)
+    createAccountForm().should("contain", "Read Documentation")
 
     publicKeyInput().clear().type(CORRECT_PUBLIC_KEY)
 
-    createAccountForm().should("not.contain", PUBLIC_KEY_FORMAT_ERROR)
+    createAccountForm().should("not.contain", error)
     createAccountButton().should("be.enabled")
   })
 

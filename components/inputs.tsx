@@ -40,7 +40,7 @@ const errorInputStyles = {
   borderBottomRightRadius: 0,
 }
 
-const FieldError = ({children}: {children: React.ReactNode}) => {
+export const FieldError = ({children}: {children: React.ReactNode}) => {
   const style = {
     border: "1px solid",
     borderColor: "red.200",
@@ -51,6 +51,9 @@ const FieldError = ({children}: {children: React.ReactNode}) => {
     marginTop: "-1px",
     px: 4,
     py: 3,
+    "> a": {
+      color: "red.200",
+    },
   }
 
   return <div sx={style}>{children}</div>

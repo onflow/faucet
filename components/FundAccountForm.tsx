@@ -13,6 +13,7 @@ import {ClientFundAccountResult} from "./FundAccountPanel"
 import FundAccountSubmitted from "./FundAccountSubmitted"
 
 export default function FundAccountForm() {
+  const [errors, setErrors] = useState<string[]>([])
   const [captchaToken, setCaptchaToken] = useState("")
   const {mixpanel} = useMixpanel()
   const [result, setResult] = useState<ClientFundAccountResult | undefined>(
@@ -28,13 +29,20 @@ export default function FundAccountForm() {
         }}
         validationSchema={fundAccountSchemaClient}
         onSubmit={async ({address, token}, {setSubmitting}) => {
-          const amount = await fundAccount(address, token, captchaToken)
-
-          setSubmitting(false)
+          setErrors([])
           setCaptchaToken("")
 
-          setResult({address, token, amount})
-          mixpanel.track("Faucet: Fund Account", {address, token, amount})
+          const response = await fundAccount(address, token, captchaToken)
+
+          if (response.errors) {
+            setErrors(response.errors)
+          } else if (response.amount) {
+            const {amount} = response
+            setResult({address, token, amount})
+            mixpanel.track("Faucet: Fund Account", {address, token, amount})
+          }
+
+          setSubmitting(false)
         }}
       >
         {({isSubmitting}) => (
@@ -57,6 +65,7 @@ export default function FundAccountForm() {
               <FundAccountFields
                 captchaToken={captchaToken}
                 setCaptchaToken={setCaptchaToken}
+                errors={errors}
               />
             )}
           </Form>
