@@ -5,10 +5,9 @@ import TokenFundingInfo from "components/TokenFundingInfo"
 import {Form, Formik} from "formik"
 import {fundAccount} from "lib/client"
 import {useMixpanel} from "lib/mixpanel"
-import publicConfig from "lib/publicConfig"
 import {fundAccountSchemaClient} from "lib/validate"
 import {useState} from "react"
-import {Box, Flex, Themed} from "theme-ui"
+import {Box, Themed} from "theme-ui"
 import {ClientFundAccountResult} from "./FundAccountPanel"
 import FundAccountSubmitted from "./FundAccountSubmitted"
 
@@ -47,16 +46,8 @@ export default function FundAccountForm() {
       >
         {({isSubmitting}) => (
           <Form data-test="fund-account-form">
-            <Box my={3}>
-              <Flex>
-                <img
-                  src={`${publicConfig.network}-faucet-icon.svg`}
-                  alt="Test Net Faucet"
-                  sx={{mr: 3}}
-                  width={42}
-                />
-                <Themed.h1>Fund Account</Themed.h1>
-              </Flex>
+            <Box mt={4} mb={3}>
+              <Themed.h1>Fund Account</Themed.h1>
             </Box>
             <TokenFundingInfo description="when you fund your account" />
             {isSubmitting || typeof result !== "undefined" ? (

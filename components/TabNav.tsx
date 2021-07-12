@@ -5,7 +5,7 @@ import {Link, ThemeUICSSObject} from "theme-ui"
 
 export function TabNavLink({
   active,
-  activeColor = "textMedium",
+  activeColor = "black",
   href,
   children,
 }: {
@@ -15,14 +15,18 @@ export function TabNavLink({
   children: React.ReactNode
 }) {
   const style: ThemeUICSSObject = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     fontSize: 3,
-    color: active ? activeColor : "textMedium",
+    color: active ? activeColor : "gray.300",
     borderTop: "2px solid transparent",
     borderBottom: "2px solid",
     borderBottomColor: active ? activeColor : "transparent",
     textDecoration: "none",
-    fontWeight: 700,
-    py: 3,
+    fontWeight: 500,
+    py: 12,
+    mx: 3,
     "&:hover": {
       opacity: 0.8,
     },
@@ -39,8 +43,8 @@ export default function TabNav({children}: {children: React.ReactNode}) {
   const style = {
     display: "flex",
     flex: 1,
-    maxWidth: 515,
-    px: 4,
+    alignItems: "center",
+    justifyContent: "center",
   }
 
   return <div sx={style}>{children}</div>
