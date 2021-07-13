@@ -36,10 +36,10 @@ export default function CreateAccountFields({
       <Box mb={4} mt={4}>
         <Themed.h3 sx={{mb: 0}}>Public Key</Themed.h3>
         <Themed.p>
-          A public key is a cryptographic code that allows users to receive
-          cryptocurrencies into their accounts. The public key and the private
-          key are the tools required to ensure the security of the crypto
-          economy.
+          Your public key must be a 128 character hexadecimal string. You can
+          generate your public/private key pairs through the{" "}
+          <a href="https://docs.onflow.org/flow-cli/generate-keys/">Flow CLI</a>
+          .
         </Themed.p>
       </Box>
       <Box mb={4} sx={styles.publicKeyInputContainer}>
@@ -60,9 +60,9 @@ export default function CreateAccountFields({
       <Box mb={4}>
         <Themed.h3>Signature & Hash Algorithms</Themed.h3>
         <Themed.p>
-          These algorithms are pre-set by default. When should you switch these
-          options? consectetur adipiscing elit. Curabitur quis gravida nunc,
-          luctus sodales erat.
+          Select the signature and hash algorithm used to generate your keys. If
+          you used the CLI to generate them, the defaults of ECDSA_P256 and
+          SHA3_256 should be used.
         </Themed.p>
       </Box>
       <Box mb={4}>
@@ -108,9 +108,8 @@ export default function CreateAccountFields({
       </Box>
       <Box mb={4}>
         <Text as="div" variant="small" sx={{textAlign: "center"}}>
-          After clicking “Create Account” we will provide consectetur adipiscing
-          elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua.
+          After clicking “Create Account”, your public account address will be
+          created, funded with some tokens, and provided to you to copy and use.
         </Text>
       </Box>
       <Box mb={5}>
