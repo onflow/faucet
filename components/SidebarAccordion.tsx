@@ -22,7 +22,7 @@ const accordionData = [
   {
     title: "What is a public key?",
     content:
-      "Your public key on Flow is used to pragmatically generate your public address. This decoupling allows for multiple public keys to be associated with one account, or for a single public key to be used across several accounts.",
+      "Your public key(s) on Flow are used to verify transaction data. On Flow, your public key is not part of a Flow account's address. This decoupling allows for multiple public keys to be associated with one account, or for a single public key to be used across several accounts.",
   },
   {
     title: "Which signature and hash algorithm do I use?",
