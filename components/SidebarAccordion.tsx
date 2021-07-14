@@ -31,7 +31,7 @@ const accordionData = [
   },
   {
     title: "Do I need to use the faucet to build dapps?",
-    content: `If you would like to run your dapp on testnet then you must generate your initial testnet account through this faucet. Subsequent accounts can be created using the initial one via any SDK or the Flow CLI. 
+    content: `If you would like to run your dapp on testnet then you must generate your initial testnet account using the faucet. Subsequent accounts can be created by submitting a transaction, authorized by the initial account, via any SDK or the Flow CLI. 
       \n\nRead more about accounts on Flow here: ${ACCOUNTS_KEYS_DOCS_URL}`,
   },
   {
