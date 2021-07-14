@@ -39,7 +39,7 @@ export default function FundAccountFields({
       <Box mb={3} mt={4}>
         <Themed.h3 sx={{mb: 0}}>Token</Themed.h3>
         <Themed.p>
-          Currently, only the native fungible token on the network is supported
+          Currently, only the native Fungible Token for the selected network is supported.
           through this faucet.
         </Themed.p>
       </Box>
