@@ -1,20 +1,21 @@
 /** @jsxImportSource theme-ui */
-import HCaptcha from "@hcaptcha/react-hcaptcha"
 import Button from "components/Button"
+import Captcha from "components/Captcha"
 import {Field, useFormikContext} from "formik"
 import {paths} from "lib/constants"
 import {HashAlgos, SigAlgos} from "lib/crypto"
-import publicConfig from "lib/publicConfig"
 import {Box, Grid, Link, Text, Themed} from "theme-ui"
 import {CustomSelectComponent, CustomTextareaComponent} from "./inputs"
 
 const styles = {
   publicKeyInputContainer: {
-    width: [300, 358],
+    width: [300, 358, 358, 451],
   },
   publicKeyInputField: {
     fontFamily: "monospace",
     fontSize: [1, 2],
+    overflow: "hidden",
+    letterSpacing: ["inherit", "inherit", "inherit", "0.182rem"],
   },
 }
 
@@ -25,7 +26,7 @@ export default function CreateAccountFields({
   captchaToken: string
   setCaptchaToken: React.Dispatch<React.SetStateAction<string>>
 }) {
-  const {isSubmitting, isValid} = useFormikContext()
+  const {isSubmitting, isValid, setFieldValue} = useFormikContext()
 
   return (
     <>
@@ -45,6 +46,9 @@ export default function CreateAccountFields({
           name="publicKey"
           placeholder="Your Public Key"
           required
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setFieldValue("publicKey", e.target.value.slice(0, 128))
+          }
           sx={styles.publicKeyInputField}
           spellcheck={false}
           rows="4"
@@ -85,10 +89,7 @@ export default function CreateAccountFields({
         </Grid>
       </Box>
       <Box mb={3}>
-        <HCaptcha
-          sitekey={publicConfig.hcaptchaSiteKey}
-          onVerify={(token: string) => setCaptchaToken(token)}
-        />
+        <Captcha onVerify={setCaptchaToken} />
       </Box>
       <Box mb={3}>
         <Button
@@ -96,6 +97,7 @@ export default function CreateAccountFields({
           size="lg"
           block
           disabled={!captchaToken || isSubmitting || !isValid}
+          data-test="create-account-submit-button"
         >
           Create Account
         </Button>
@@ -110,7 +112,11 @@ export default function CreateAccountFields({
       <Box mb={5}>
         <Themed.p sx={{textAlign: "center"}}>
           Already have an account?{" "}
-          <Link href={paths.fundAccount} variant="underline">
+          <Link
+            href={paths.fundAccount}
+            variant="underline"
+            data-test="create-account-fund-link"
+          >
             Fund Account
           </Link>
         </Themed.p>

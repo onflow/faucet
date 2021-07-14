@@ -1,5 +1,6 @@
 /** @jsxImportSource theme-ui */
 import LoadingFeedback from "components/LoadingFeedback"
+import useScrollOnRender from "hooks/useScrollOnRender"
 import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
 import {ClientFundAccountResult} from "./FundAccountPanel"
 
@@ -27,6 +28,8 @@ export default function FundAccountSubmitted({
 }: {
   result?: ClientFundAccountResult
 }) {
+  const {ref: scrollToRef} = useScrollOnRender()
+
   return (
     <>
       <Box mb={4} mt={4}>
@@ -38,7 +41,7 @@ export default function FundAccountSubmitted({
           vulputate.
         </Themed.p>
       </Box>
-      <Box mb={6} sx={styles.resultsContainer}>
+      <Box mb={6} sx={styles.resultsContainer} ref={scrollToRef}>
         {typeof result === "undefined" ? (
           <LoadingFeedback>
             We are funding your account.
@@ -65,11 +68,12 @@ export default function FundAccountSubmitted({
                 sx={{alignItems: "center", justifyContent: "space-between"}}
               >
                 <div sx={styles.walletAmount}>
-                  {result.amount.toLocaleString()}
-                  #todo
+                  {`${parseFloat(result.amount).toLocaleString()} ${
+                    result.token
+                  } tokens`}
                 </div>
                 <Link
-                  href={`https://flowscan.org/account/${result.address}`}
+                  href={`https://flow-view-source.com/testnet/account/${result.address}`}
                   target="_blank"
                   variant="secondary"
                   sx={{fontSize: 1}}

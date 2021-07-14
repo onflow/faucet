@@ -1,5 +1,6 @@
 /** @jsxImportSource theme-ui */
 
+import publicConfig from "lib/publicConfig"
 import {Text, Themed, ThemeUICSSObject} from "theme-ui"
 
 export default function TokenFundingInfo({description}: {description: string}) {
@@ -18,7 +19,10 @@ export default function TokenFundingInfo({description}: {description: string}) {
 
   return (
     <div sx={style}>
-      <Themed.h4 sx={{my: 0}}>Receive 1,000 Testnet FLOW tokens</Themed.h4>
+      <Themed.h4 sx={{my: 0}}>
+        Receive {parseFloat(publicConfig.tokenAmountFlow).toLocaleString()}{" "}
+        Testnet FLOW tokens
+      </Themed.h4>
       <Text color="gray.400">{description}</Text>
     </div>
   )

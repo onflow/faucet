@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
 import useAccordionOption from "hooks/useAccordionOption"
-import {BACKGROUND_IMAGE_RATIO} from "lib/constants"
 import {useState} from "react"
 import {ThemeUICSSObject} from "theme-ui"
 
@@ -124,7 +123,7 @@ const AccordionOption = ({
 export default function SidebarAccordion() {
   const [openIndex, setOpenIndex] = useState<number | undefined>(0)
   const style = {
-    marginTop: [5, 5, `calc((100vw * ${BACKGROUND_IMAGE_RATIO}) - 125px)`],
+    marginTop: [5, 5, 270],
   }
 
   return (

@@ -48,13 +48,14 @@ export default function CreateAccountForm({
         }}
       >
         {({isSubmitting}) => (
-          <Form>
+          <Form data-test="create-account-form">
             <Box my={3}>
               <Flex>
                 <img
                   src={`${publicConfig.network}-faucet-icon.svg`}
                   alt="Test Net Faucet"
                   sx={{mr: 3}}
+                  width={42}
                 />
                 <Themed.h1>Create Account</Themed.h1>
               </Flex>

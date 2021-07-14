@@ -1,9 +1,8 @@
 /** @jsxImportSource theme-ui */
-import HCaptcha from "@hcaptcha/react-hcaptcha"
 import Button from "components/Button"
+import Captcha from "components/Captcha"
 import {Field, useFormikContext} from "formik"
 import {paths} from "lib/constants"
-import publicConfig from "lib/publicConfig"
 import {Box, Link, Text, Themed} from "theme-ui"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
@@ -52,10 +51,7 @@ export default function FundAccountFields({
         />
       </Box>
       <Box mb={3}>
-        <HCaptcha
-          sitekey={publicConfig.hcaptchaSiteKey}
-          onVerify={(token: string) => setCaptchaToken(token)}
-        />
+        <Captcha onVerify={setCaptchaToken} />
       </Box>
       <Box mb={3}>
         <Button
@@ -63,6 +59,7 @@ export default function FundAccountFields({
           size="lg"
           block
           disabled={!captchaToken || isSubmitting || !isValid}
+          data-test="fund-account-submit-button"
         >
           Fund Your Account
         </Button>
@@ -78,7 +75,11 @@ export default function FundAccountFields({
       <Box mb={5}>
         <Themed.p sx={{textAlign: "center"}}>
           Don&apos;t have an account?{" "}
-          <Link href={paths.root} variant="underline">
+          <Link
+            href={paths.root}
+            variant="underline"
+            data-test="fund-account-create-link"
+          >
             Create Account
           </Link>
         </Themed.p>

@@ -38,13 +38,14 @@ export default function FundAccountForm() {
         }}
       >
         {({isSubmitting}) => (
-          <Form>
+          <Form data-test="fund-account-form">
             <Box my={3}>
               <Flex>
                 <img
                   src={`${publicConfig.network}-faucet-icon.svg`}
                   alt="Test Net Faucet"
                   sx={{mr: 3}}
+                  width={42}
                 />
                 <Themed.h1>Fund Account</Themed.h1>
               </Flex>

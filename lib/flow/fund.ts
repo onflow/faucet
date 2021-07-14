@@ -1,5 +1,6 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
+import publicConfig from "lib/publicConfig"
 import config from "../config"
 import {sendTransaction} from "./send"
 
@@ -41,7 +42,7 @@ type Token = {
 type Tokens = Record<TokenType, Token>
 
 const tokens: Tokens = {
-  FLOW: {tx: txFundAccountFLOW, amount: config.tokenAmountFlow},
+  FLOW: {tx: txFundAccountFLOW, amount: publicConfig.tokenAmountFlow},
 }
 
 export async function fundAccount(

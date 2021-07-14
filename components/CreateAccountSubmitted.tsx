@@ -4,6 +4,7 @@ import copy from "clipboard-copy"
 import Button from "components/Button"
 import LoadingFeedback from "components/LoadingFeedback"
 import {Field} from "formik"
+import useScrollOnRender from "hooks/useScrollOnRender"
 import {useRef, useState} from "react"
 import {Box, Themed, ThemeUICSSObject} from "theme-ui"
 import {CustomInputComponent} from "./inputs"
@@ -29,6 +30,7 @@ const styles: Record<string, ThemeUICSSObject> = {
 export default function CreateAccountSubmitted({address}: {address: string}) {
   const [copied, setCopied] = useState(false)
   const timeout = useRef<number | undefined>(undefined)
+  const {ref: scrollToRef} = useScrollOnRender()
 
   const copyToClipboard = () => {
     copy(address)
@@ -47,7 +49,7 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
           funding your account.
         </Themed.p>
       </Box>
-      <Box mb={4} sx={styles.addressContainer}>
+      <Box mb={4} sx={styles.addressContainer} ref={scrollToRef}>
         {address.length > 0 ? (
           <>
             <Box mb={4}>
@@ -79,7 +81,6 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
           </LoadingFeedback>
         )}
       </Box>
-
       <Box mb={3}>
         <Button
           type="button"
@@ -87,13 +88,12 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
           block
           disabled={address.length === 0}
           onClick={copyToClipboard}
+          data-test="copy-address-button"
         >
           {copied ? "Copied" : "Copy Address"}
         </Button>
       </Box>
-
       <Themed.hr />
-
       <Box mb={5}>
         <div sx={styles.infoBox}>
           <Themed.h3 sx={{my: 0}}>What can I build on Flow?</Themed.h3>

@@ -23,9 +23,6 @@ if (!signerAddress) throw "Missing SIGNER_ADDRESS"
 const signerPrivateKey = process.env.SIGNER_PRIVATE_KEY
 if (!signerPrivateKey) throw "Missing SIGNER_PRIVATE_KEY"
 
-const tokenAmountFlow = process.env.TOKEN_AMOUNT_FLOW
-if (!tokenAmountFlow) throw "Missing TOKEN_AMOUNT_FLOW"
-
 type Config = {
   accessAPIHost: string
   hcaptchaSecretKey: string
@@ -33,7 +30,6 @@ type Config = {
   signerPrivateKey: string
   signerSigAlgo: SigAlgoTypes
   signerHashAlgo: HashAlgoTypes
-  tokenAmountFlow: string
   contractFungibleToken: string
   contractFlowToken: string
 }
@@ -47,7 +43,6 @@ const config: Config = {
   signerPrivateKey,
   signerSigAlgo: getDefaultSignerSig(),
   signerHashAlgo: getDefaultSignerHash(),
-  tokenAmountFlow,
   contractFungibleToken:
     process.env.CONTRACT_FUNGIBLE_TOKEN || "0xee82856bf20e2aa6",
   contractFlowToken: process.env.CONTRACT_FLOW_TOKEN || "0x0ae53cb6e3f42a79",
