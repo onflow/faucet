@@ -37,7 +37,7 @@ const accordionData = [
   {
     title: "Do I need to fund my account to use it?",
     content:
-      "No. When your account is created, it is allocated a small amount of tokens to be operational.",
+      "No. When your account is created, it is allocated a small amount of tokens (account minimum balance) so you can use it right away.",
   },
 ]
 
