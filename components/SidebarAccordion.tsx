@@ -27,7 +27,7 @@ const accordionData = [
   {
     title: "Which signature and hash algorithm do I use?",
     content:
-      "We recommend going with the defaults unless your have a specific reason otherwise (potentially compatibility with existing applications, etc.).",
+      "We recommend going with the defaults unless you have a specific reason to do otherwise (eg. compatibility with an existing application).",
   },
   {
     title: "Do I need to use the faucet to build dapps?",
