@@ -10,7 +10,7 @@ import {CustomSelectComponent, CustomTextareaComponent} from "./inputs"
 
 const styles = {
   publicKeyInputContainer: {
-    width: [300, 358, 358, 451],
+    width: [296, 358, 358, 451],
   },
   publicKeyInputField: {
     fontFamily: "monospace",

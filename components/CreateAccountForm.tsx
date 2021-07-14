@@ -6,10 +6,9 @@ import TokenFundingInfo from "components/TokenFundingInfo"
 import {Form, Formik} from "formik"
 import {ClientCreateAccount} from "lib/client"
 import {useMixpanel} from "lib/mixpanel"
-import publicConfig from "lib/publicConfig"
 import {createAccountSchemaClient} from "lib/validate"
 import {useState} from "react"
-import {Box, Flex, Themed} from "theme-ui"
+import {Box, Themed} from "theme-ui"
 
 export default function CreateAccountForm({
   clientCreateAccount,
@@ -57,16 +56,8 @@ export default function CreateAccountForm({
       >
         {({isSubmitting}) => (
           <Form data-test="create-account-form">
-            <Box my={3}>
-              <Flex>
-                <img
-                  src={`${publicConfig.network}-faucet-icon.svg`}
-                  alt="Test Net Faucet"
-                  sx={{mr: 3}}
-                  width={42}
-                />
-                <Themed.h1>Create Account</Themed.h1>
-              </Flex>
+            <Box mt={4} mb={3}>
+              <Themed.h1 sx={{mb: 0}}>Create Account</Themed.h1>
             </Box>
             <TokenFundingInfo description="after your account has been generated!" />
             {isSubmitting || address.length > 0 ? (

@@ -12,6 +12,8 @@ export default function NetworkLinks() {
       justifyContent: "center",
       backgroundColor: "white",
       borderRadius: 4,
+      paddingTop: 1,
+      marginTop: 3,
     },
     children: {
       maxWidth: 450,
@@ -25,15 +27,31 @@ export default function NetworkLinks() {
         <TabNavLink
           href={publicConfig.testNetUrl}
           active={publicConfig.network === TEST_NET}
-          activeColor="secondary"
         >
+          <img
+            src={
+              publicConfig.network === TEST_NET
+                ? "testnet-faucet-icon.svg"
+                : "gray-faucet-icon.svg"
+            }
+            alt="Test Net Faucet"
+            sx={{mr: 2}}
+          />
           Test Net
         </TabNavLink>
         <TabNavLink
           href={publicConfig.canaryNetUrl}
           active={publicConfig.network === CANARY_NET}
-          activeColor="secondary"
         >
+          <img
+            src={
+              publicConfig.network === CANARY_NET
+                ? "canarynet-faucet-icon.svg"
+                : "gray-faucet-icon.svg"
+            }
+            alt="Test Net Faucet"
+            sx={{mr: 2}}
+          />
           Canary Net
         </TabNavLink>
       </TabNav>

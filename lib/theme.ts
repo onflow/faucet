@@ -1,4 +1,5 @@
 import {Theme} from "theme-ui"
+import {TEST_NET} from "./constants"
 import publicConfig from "./publicConfig"
 
 const makeTheme = <T extends Theme>(t: T) => t
@@ -108,14 +109,20 @@ const theme = makeTheme({
         fontWeight: 700,
       },
       md: {
-        px: 3,
-        py: 11,
+        fontSize: 3,
+        px: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
         fontWeight: "bold",
+        letterSpacing: 1,
       },
       lg: {
         px: 4,
-        py: 18,
+        fontSize: 3,
+        paddingTop: 16,
+        paddingBottom: 14,
         fontWeight: "bold",
+        letterSpacing: 1,
       },
     },
   },
@@ -185,18 +192,16 @@ const theme = makeTheme({
       lineHeight: "body",
       fontWeight: "body",
       fontSize: 16,
-      "> body": {
-        background: `url(${publicConfig.network}-bg.jpg)`,
-        backgroundPosition: "top center",
-        backgroundRepeat: "no-repeat",
-      },
       "&::before": {
         position: "absolute",
         content: '""',
         height: 395,
         width: "100%",
         zIndex: -1,
-        backgroundColor: "#3050f1",
+        background:
+          publicConfig.network === TEST_NET
+            ? "linear-gradient(225deg, #3545F5 -32.81%, #75E0E4 104.94%)"
+            : "linear-gradient(216.57deg, #E3D948 36.82%, #FFF66F 102.51%)",
       },
     },
     h1: {

@@ -7,19 +7,19 @@ import {Link, Text, ThemeUICSSObject} from "theme-ui"
 export default function Header({fund}: {fund?: boolean}) {
   const styles: Record<string, ThemeUICSSObject> = {
     header: {
-      height: [80, 120, 188],
+      height: [100, 120, 188],
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
     },
     logo: {
-      width: [125, 175, 250, 350],
+      width: [145, 175, 250, 350],
       transition: "width 0.2s",
       display: "flex",
       alignItems: "center",
     },
     buttonDescription: {
-      color: publicConfig.network === TEST_NET ? "gray.600" : "white",
+      color: publicConfig.network === TEST_NET ? "white" : "black",
       mr: 4,
       display: ["none", "none", "inline-flex"],
     },
@@ -28,7 +28,11 @@ export default function Header({fund}: {fund?: boolean}) {
   return (
     <header sx={styles.header} data-test="header">
       <Link href={paths.root} sx={styles.logo}>
-        <img style={{width: "100%"}} src="/flow-faucet-logo.svg" alt="Flow" />
+        <img
+          style={{width: "100%"}}
+          src={`/flow-faucet-logo-${publicConfig.network}.svg`}
+          alt="Flow"
+        />
       </Link>
 
       <div>
@@ -38,7 +42,7 @@ export default function Header({fund}: {fund?: boolean}) {
         <Button
           href={fund ? paths.fundAccount : paths.root}
           data-test={`header-${fund ? "fund" : "create"}-link`}
-          variant={publicConfig.network === TEST_NET ? "secondary" : "primary"}
+          variant="secondary"
         >
           {fund ? "Fund" : "Create"} Account
         </Button>
