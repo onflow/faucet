@@ -4,7 +4,7 @@ import Captcha from "components/Captcha"
 import FormErrors from "components/FormErrors"
 import {Field, useFormikContext} from "formik"
 import {paths} from "lib/constants"
-import {Box, Link, Text, Themed} from "theme-ui"
+import {Box, Link, Themed} from "theme-ui"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
 export default function FundAccountFields({
