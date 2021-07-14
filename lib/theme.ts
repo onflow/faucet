@@ -1,4 +1,5 @@
 import {Theme} from "theme-ui"
+import publicConfig from "./publicConfig"
 
 const makeTheme = <T extends Theme>(t: T) => t
 
@@ -56,7 +57,12 @@ const theme = makeTheme({
     muted: "#f6f6f6",
     black: "#000000",
     white: "#ffffff",
-    red: "#E45941",
+    canary: "#e2d849",
+    pink: "#FDC4FE",
+    red: {
+      "100": "#FFEEEB",
+      "200": "#E55A3D",
+    },
     gray: {
       "100": "#FBFBFB",
       "200": "#E5E5E5",
@@ -80,21 +86,62 @@ const theme = makeTheme({
       bg: "secondary",
       outlineColor: "gray.300",
     },
+    ghost: {
+      bg: "transparent",
+      border: "1px solid",
+      borderColor: "gray.900",
+      outlineColor: "gray.800",
+    },
     disabled: {
-      bg: "muted",
-      color: "text",
+      cursor: "default",
+      opacity: 0.5,
+      "&:hover": {
+        opacity: 0.5,
+      },
     },
     sizes: {
       sm: {
-        px: 1,
+        px: 4,
+        py: 2,
+        fontSize: 1,
+        color: "text",
+        fontWeight: 700,
       },
       md: {
-        px: 2,
+        px: 3,
+        py: 11,
+        fontWeight: "bold",
       },
       lg: {
         px: 4,
         py: 18,
         fontWeight: "bold",
+      },
+    },
+  },
+  links: {
+    underline: {
+      color: "textMedium",
+      textDecoration: "none",
+      borderBottom: "1px solid",
+      borderColor: "textMedium",
+      "&:hover": {
+        opacity: 0.8,
+      },
+    },
+    white: {
+      color: "white",
+      cursor: "pointer",
+      textDecoration: "none",
+      "&:hover": {
+        opacity: 0.8,
+      },
+    },
+    secondary: {
+      color: "secondary",
+      textDecoration: "none",
+      "&:hover": {
+        opacity: 0.8,
       },
     },
   },
@@ -117,16 +164,20 @@ const theme = makeTheme({
     input: {
       borderColor: "gray.200",
       outlineColor: "gray.300",
+      px: [10, 20],
     },
     textarea: {
       borderColor: "gray.200",
       resize: "none",
       outlineColor: "gray.300",
+      px: [10, 20],
+      py: [2, 15],
     },
   },
-  breakpoints: ["576px", "768px", "1024px", "1280px", "1536px"],
+  breakpoints: ["576px", "768px", "1024px", "1200px"],
   container: {
-    maxWidth: 1280,
+    maxWidth: 1200,
+    px: 3,
   },
   styles: {
     root: {
@@ -134,10 +185,15 @@ const theme = makeTheme({
       lineHeight: "body",
       fontWeight: "body",
       fontSize: 16,
+      background: `url(${publicConfig.network}-bg.jpg)`,
+      backgroundPosition: "top center",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "100%",
     },
     h1: {
       ...heading,
       fontSize: 5,
+      fontWeight: 600,
     },
     h2: {
       ...heading,
@@ -167,7 +223,10 @@ const theme = makeTheme({
       fontSize: 2,
     },
     a: {
-      color: "primary",
+      color: "textMedium",
+      "&:hover": {
+        opacity: 0.8,
+      },
     },
     pre: {
       fontFamily: "monospace",
@@ -198,6 +257,12 @@ const theme = makeTheme({
     },
     small: {
       color: "red",
+    },
+    hr: {
+      border: 0,
+      height: "1px",
+      backgroundColor: "gray.200",
+      my: 4,
     },
   },
 })

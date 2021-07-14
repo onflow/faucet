@@ -1,36 +1,19 @@
-import * as fcl from "@onflow/fcl"
+import Sidebar from "components/Sidebar"
 import {clientCreateAccount} from "lib/client"
-import {useState} from "react"
-import {Box, Grid, Input, Label} from "theme-ui"
+import {Box, Grid} from "theme-ui"
 import CreateAccountForm from "./CreateAccountForm"
-export default function CreateAccountPanel({
-  hcaptchaSiteKey,
-}: {
-  hcaptchaSiteKey: string
-}) {
-  const [address, setAddress] = useState("")
 
+export default function CreateAccountPanel() {
   return (
     <div>
-      {!address && (
-        <Grid gap={[0, 0, 40, 100]} columns={["auto", "auto", "1.3fr 1fr"]}>
-          <Box>
-            <CreateAccountForm
-              hcaptchaSiteKey={hcaptchaSiteKey}
-              clientCreateAccount={clientCreateAccount}
-              onResult={address => setAddress(address)}
-            />
-          </Box>
-          <Box>Sidebar</Box>
-        </Grid>
-      )}
-      {address && (
-        <div>
-          <h4>Your account has been created</h4>
-          <Label>Address</Label>
-          <Input readOnly value={fcl.display(address) || ""} />
-        </div>
-      )}
+      <Grid gap={[0, 0, 40, 100]} columns={["auto", "auto", "1.6fr 1fr"]}>
+        <Box>
+          <CreateAccountForm clientCreateAccount={clientCreateAccount} />
+        </Box>
+        <Box>
+          <Sidebar />
+        </Box>
+      </Grid>
     </div>
   )
 }

@@ -2,14 +2,17 @@
 import {useButton} from "@react-aria/button"
 import useVariants from "hooks/useVariants"
 import {useRef} from "react"
-import {Button as ThemeUIButton} from "theme-ui"
+import {Button as ThemeUIButton, Link, ThemeUICSSObject} from "theme-ui"
 
 type Props = {
-  variant?: "primary" | "secondary"
+  variant?: "primary" | "secondary" | "ghost"
   size?: "sm" | "md" | "lg"
   block?: boolean
   disabled?: boolean
-  type: "submit" | "button" | "reset"
+  type?: "submit" | "button" | "reset"
+  href?: string
+  target?: "_blank"
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void
   children: React.ReactNode
 }
 
@@ -17,6 +20,8 @@ const Button = ({
   variant = "primary",
   size = "md",
   block = false,
+  href,
+  target,
   ...props
 }: Props) => {
   const ref = useRef<HTMLButtonElement>(null)
@@ -26,28 +31,33 @@ const Button = ({
   ])
 
   const {buttonProps} = useButton(props, ref)
+  const style: ThemeUICSSObject = {
+    display: "inline-flex",
+    cursor: "pointer",
+    textTransform: "uppercase",
+    alignItems: "center",
+    justifyContent: "center",
+    width: block ? "100%" : "auto",
+    m: 0,
+    border: 0,
+    borderRadius: 4,
+    textDecoration: "none",
+    "&:hover": {
+      opacity: 0.9,
+    },
+    ...variants,
+  }
+
+  if (!!href) {
+    return (
+      <Link href={href} sx={style} target={target}>
+        {props.children}
+      </Link>
+    )
+  }
 
   return (
-    <ThemeUIButton
-      {...props}
-      {...buttonProps}
-      sx={{
-        display: "flex",
-        cursor: "pointer",
-        textTransform: "uppercase",
-        alignItems: "center",
-        justifyContent: "center",
-        width: block ? "100%" : "auto",
-        m: 0,
-        border: 0,
-        borderRadius: 4,
-        "&:hover": {
-          opacity: 0.9,
-        },
-        ...variants,
-      }}
-      ref={ref}
-    >
+    <ThemeUIButton {...props} {...buttonProps} sx={style} ref={ref}>
       {props.children}
     </ThemeUIButton>
   )

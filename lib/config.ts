@@ -28,7 +28,6 @@ if (!tokenAmountFlow) throw "Missing TOKEN_AMOUNT_FLOW"
 
 type Config = {
   accessAPIHost: string
-  hcaptchaSiteKey: string
   hcaptchaSecretKey: string
   signerAddress: string
   signerPrivateKey: string
@@ -41,8 +40,6 @@ type Config = {
 
 const config: Config = {
   accessAPIHost: process.env.ACCESS_API_HOST || "http://localhost:8080",
-  hcaptchaSiteKey:
-    process.env.HCAPTCHA_SITE_KEY || "10000000-ffff-ffff-ffff-000000000001",
   hcaptchaSecretKey:
     process.env.HCAPTCHA_SECRET_KEY ||
     "0x0000000000000000000000000000000000000000",
