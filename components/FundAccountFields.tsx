@@ -4,7 +4,7 @@ import Captcha from "components/Captcha"
 import FormErrors from "components/FormErrors"
 import {Field, useFormikContext} from "formik"
 import {paths} from "lib/constants"
-import {Box, Link, Text, Themed} from "theme-ui"
+import {Box, Link, Themed} from "theme-ui"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
 export default function FundAccountFields({
@@ -23,10 +23,8 @@ export default function FundAccountFields({
       <Box mb={4} mt={4}>
         <Themed.h3 sx={{mb: 0}}>Fund your FLOW account</Themed.h3>
         <Themed.p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          quis gravida nunc, luctus sodales erat. Ut sit amet lectus tempor elit
-          scelerisque ornare ut non lectus. Etiam ultricies accumsan eros et
-          vulputate.
+          Once you have created an account, you can incrementally add additional
+          funds to it. Your address should be a 16 character hexadecimal string.
         </Themed.p>
       </Box>
       <Field
@@ -41,8 +39,8 @@ export default function FundAccountFields({
       <Box mb={3} mt={4}>
         <Themed.h3 sx={{mb: 0}}>Token</Themed.h3>
         <Themed.p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          quis gravida nunc, luctus sodales erat.
+          Currently, only the native Fungible Token for the selected network is supported.
+          through this faucet.
         </Themed.p>
       </Box>
       <Box mb={4}>
@@ -68,14 +66,6 @@ export default function FundAccountFields({
         </Button>
         {errors.length > 0 && <FormErrors errors={errors} />}
       </Box>
-      <Box mb={4}>
-        <Text as="div" variant="small" sx={{textAlign: "center"}}>
-          After clicking “Fund Account” we will provide consectetur adipiscing
-          elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua.
-        </Text>
-      </Box>
-
       <Box mb={5}>
         <Themed.p sx={{textAlign: "center"}}>
           Don&apos;t have an account?{" "}
