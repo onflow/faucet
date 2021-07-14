@@ -124,7 +124,7 @@ const theme = makeTheme({
       color: "textMedium",
       textDecoration: "none",
       borderBottom: "1px solid",
-      borderColor: "textMedium",
+      borderColor: "inherit",
       "&:hover": {
         opacity: 0.8,
       },

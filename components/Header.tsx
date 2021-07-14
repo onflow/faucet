@@ -4,7 +4,7 @@ import {paths, TEST_NET} from "lib/constants"
 import publicConfig from "lib/publicConfig"
 import {Link, Text, ThemeUICSSObject} from "theme-ui"
 
-const Header = ({fund}: {fund?: boolean}) => {
+export default function Header({fund}: {fund?: boolean}) {
   const styles: Record<string, ThemeUICSSObject> = {
     header: {
       height: [80, 120, 188],
@@ -46,4 +46,3 @@ const Header = ({fund}: {fund?: boolean}) => {
     </header>
   )
 }
-export default Header

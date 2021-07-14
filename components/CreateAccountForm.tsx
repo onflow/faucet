@@ -16,6 +16,7 @@ export default function CreateAccountForm({
 }: {
   clientCreateAccount: ClientCreateAccount
 }) {
+  const [errors, setErrors] = useState<string[]>([])
   const [captchaToken, setCaptchaToken] = useState("")
   const [address, setAddress] = useState("")
   const {mixpanel} = useMixpanel()
@@ -33,18 +34,25 @@ export default function CreateAccountForm({
           {publicKey, hashAlgorithm, signatureAlgorithm},
           {setSubmitting}
         ) => {
-          const address = await clientCreateAccount(
+          setErrors([])
+          setCaptchaToken("")
+
+          const response = await clientCreateAccount(
             publicKey,
             signatureAlgorithm,
             hashAlgorithm,
             captchaToken
           )
 
-          setSubmitting(false)
-          setCaptchaToken("")
+          if (response.errors) {
+            setErrors(response.errors)
+          } else if (response.address) {
+            const {address} = response
+            setAddress(address)
+            mixpanel.track("Faucet: Create Account", {address})
+          }
 
-          setAddress(address)
-          mixpanel.track("Faucet: Create Account", {address})
+          setSubmitting(false)
         }}
       >
         {({isSubmitting}) => (
@@ -67,6 +75,7 @@ export default function CreateAccountForm({
               <CreateAccountFields
                 captchaToken={captchaToken}
                 setCaptchaToken={setCaptchaToken}
+                errors={errors}
               />
             )}
           </Form>

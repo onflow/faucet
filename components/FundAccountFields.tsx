@@ -1,6 +1,7 @@
 /** @jsxImportSource theme-ui */
 import Button from "components/Button"
 import Captcha from "components/Captcha"
+import FormErrors from "components/FormErrors"
 import {Field, useFormikContext} from "formik"
 import {paths} from "lib/constants"
 import {Box, Link, Text, Themed} from "theme-ui"
@@ -9,9 +10,11 @@ import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 export default function FundAccountFields({
   captchaToken,
   setCaptchaToken,
+  errors,
 }: {
   captchaToken: string
   setCaptchaToken: React.Dispatch<React.SetStateAction<string>>
+  errors: string[]
 }) {
   const {isSubmitting, isValid} = useFormikContext()
 
@@ -63,6 +66,7 @@ export default function FundAccountFields({
         >
           Fund Your Account
         </Button>
+        {errors.length > 0 && <FormErrors errors={errors} />}
       </Box>
       <Box mb={4}>
         <Text as="div" variant="small" sx={{textAlign: "center"}}>
