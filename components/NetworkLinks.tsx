@@ -1,9 +1,8 @@
 /** @jsxImportSource theme-ui */
 
 import TabNav, {TabNavLink} from "components/TabNav"
-import {CANARY_NET, TEST_NET} from "lib/constants"
+import {TEST_NET} from "lib/constants"
 import publicConfig from "lib/publicConfig"
-import {Flex} from "theme-ui"
 
 export default function NetworkLinks() {
   const styles = {
@@ -13,8 +12,8 @@ export default function NetworkLinks() {
       justifyContent: "center",
       backgroundColor: "white",
       borderRadius: 4,
-      borderBottom: "1px solid",
-      borderColor: "gray.200",
+      paddingTop: 1,
+      marginTop: 3,
     },
     children: {
       maxWidth: 450,
@@ -28,24 +27,32 @@ export default function NetworkLinks() {
         <TabNavLink
           href={publicConfig.testNetUrl}
           active={publicConfig.network === TEST_NET}
-          activeColor="secondary"
         >
-          <Flex>
-            <img
-              src={`${publicConfig.network}-faucet-icon.svg`}
-              alt="Test Net Faucet"
-              sx={{mr: 2}}
-              width={20}
-            />
-            Testnet
-          </Flex>
+          <img
+            src={
+              publicConfig.network === TEST_NET
+                ? "testnet-faucet-icon.svg"
+                : "gray-faucet-icon.svg"
+            }
+            alt="Testnet Faucet"
+            sx={{mr: 2}}
+          />
+          Testnet
         </TabNavLink>
         {/* <TabNavLink
           href={publicConfig.canaryNetUrl}
           active={publicConfig.network === CANARY_NET}
-          activeColor="secondary"
         >
-          Canary Net
+          <img
+            src={
+              publicConfig.network === CANARY_NET
+                ? "canarynet-faucet-icon.svg"
+                : "gray-faucet-icon.svg"
+            }
+            alt="Canarynet Faucet"
+            sx={{mr: 2}}
+          />
+          Canarynet
         </TabNavLink> */}
       </TabNav>
     </div>
