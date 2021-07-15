@@ -2,6 +2,8 @@
 import useAccordionOption from "hooks/useAccordionOption"
 import {useState} from "react"
 import {ThemeUICSSObject} from "theme-ui"
+import {useMixpanel} from "lib/mixpanel"
+import {Mixpanel} from "mixpanel-browser"
 
 type AccordionOption = {
   title: string
@@ -57,12 +59,14 @@ const AccordionOption = ({
   isOpen,
   onToggle,
   name,
+  mixpanel,
 }: {
   data: AccordionOption
   index: number
   isOpen: boolean
   onToggle: () => void
   name: string
+  mixpanel: Mixpanel
 }) => {
   const {buttonProps, contentProps} = useAccordionOption({
     index,
@@ -104,10 +108,15 @@ const AccordionOption = ({
       mb: 3,
     },
   }
-
   return (
     <div sx={styles.container}>
-      <button {...buttonProps} sx={styles.button}>
+      <button
+        {...buttonProps}
+        sx={styles.button}
+        onClick={() => {
+          mixpanel.track("Faucet: FAQ Clicked", {title: data.title})
+        }}
+      >
         {data.title}
         <img src={`caret-${isOpen ? "up" : "down"}.svg`} />
       </button>
@@ -126,6 +135,8 @@ export default function SidebarAccordion() {
     marginTop: [5, 5, 270],
   }
 
+  const {mixpanel} = useMixpanel()
+
   return (
     <div sx={style}>
       {accordionData.map((data, index) => (
@@ -136,6 +147,7 @@ export default function SidebarAccordion() {
           key={index}
           index={index}
           name="sidebarAccordion"
+          mixpanel={mixpanel}
         />
       ))}
     </div>

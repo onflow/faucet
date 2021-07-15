@@ -3,6 +3,7 @@
 import TabNav, {TabNavLink} from "components/TabNav"
 import {CANARY_NET, TEST_NET} from "lib/constants"
 import publicConfig from "lib/publicConfig"
+import {Flex} from "theme-ui"
 
 export default function NetworkLinks() {
   const styles = {
@@ -12,6 +13,8 @@ export default function NetworkLinks() {
       justifyContent: "center",
       backgroundColor: "white",
       borderRadius: 4,
+      borderBottom: "1px solid",
+      borderColor: "gray.200",
     },
     children: {
       maxWidth: 450,
@@ -27,15 +30,23 @@ export default function NetworkLinks() {
           active={publicConfig.network === TEST_NET}
           activeColor="secondary"
         >
-          Test Net
+          <Flex>
+            <img
+              src={`${publicConfig.network}-faucet-icon.svg`}
+              alt="Test Net Faucet"
+              sx={{mr: 2}}
+              width={20}
+            />
+            Test Net
+          </Flex>
         </TabNavLink>
-        <TabNavLink
+        {/* <TabNavLink
           href={publicConfig.canaryNetUrl}
           active={publicConfig.network === CANARY_NET}
           activeColor="secondary"
         >
           Canary Net
-        </TabNavLink>
+        </TabNavLink> */}
       </TabNav>
     </div>
   )

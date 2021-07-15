@@ -23,7 +23,6 @@ export function TabNavLink({
     textDecoration: "none",
     fontWeight: 700,
     py: 3,
-    mx: 3,
     "&:hover": {
       opacity: 0.8,
     },
@@ -40,10 +39,8 @@ export default function TabNav({children}: {children: React.ReactNode}) {
   const style = {
     display: "flex",
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    borderBottom: "1px solid",
-    borderColor: "gray.200",
+    maxWidth: 515,
+    px: 4,
   }
 
   return <div sx={style}>{children}</div>
