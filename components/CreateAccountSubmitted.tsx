@@ -55,6 +55,18 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
               <Themed.p>
                 Congratulations! Your new Testnet account has been created.
               </Themed.p>
+               <Flex
+                sx={{alignItems: "center", justifyContent: "space-between"}}
+              >
+                <Link
+                  href={`https://flow-view-source.com/testnet/account/${result.address}`}
+                  target="_blank"
+                  variant="secondary"
+                  sx={{fontSize: 1}}
+                >
+                  View Wallet
+                </Link>
+              </Flex>
             </Box>
             <Field
               component={CustomInputComponent}
