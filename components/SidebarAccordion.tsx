@@ -4,6 +4,7 @@ import {useState} from "react"
 import {ThemeUICSSObject} from "theme-ui"
 import {useMixpanel} from "lib/mixpanel"
 import {Mixpanel} from "mixpanel-browser"
+import {ACCOUNTS_KEYS_DOCS_URL, H_CAPTCHA_URL} from "lib/constants"
 
 type AccordionOption = {
   title: string
@@ -12,44 +13,33 @@ type AccordionOption = {
 
 const accordionData = [
   {
-    title: "What is the testnet faucet?",
+    title: "What is a faucet?",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis gravida nunc, luctus sodales erat. Ut sit amet lectus tempor elit scelerisque ornare ut non lectus. Etiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu. Duis lacus felis, luctus ac elit quis, hendrerit interdum leo. Quisque justo arcu, sagittis eu nisi eget, pharetra vulputate eros.\n\nEtiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu.",
-  },
-  {
-    title: "Changing Signature Algorithm",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis gravida nunc, luctus sodales erat. Ut sit amet lectus tempor elit scelerisque ornare ut non lectus. Etiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu. Duis lacus felis, luctus ac elit quis, hendrerit interdum leo. Quisque justo arcu, sagittis eu nisi eget, pharetra vulputate eros.\n Etiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu.",
-  },
-  {
-    title: "Which Hash Algorithm should I use?",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis gravida nunc, luctus sodales erat. Ut sit amet lectus tempor elit scelerisque ornare ut non lectus. Etiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu. Duis lacus felis, luctus ac elit quis, hendrerit interdum leo. Quisque justo arcu, sagittis eu nisi eget, pharetra vulputate eros.\n\nEtiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu.",
+      "A faucet is a way to distribute small amounts of a token to its users for testing and development purposes. This faucet allows you to create an account on the specified network as well as fund small amounts of crypto to any account on these networks.",
   },
   {
     title: "What is hCaptcha?",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis gravida nunc, luctus sodales erat. Ut sit amet lectus tempor elit scelerisque ornare ut non lectus. Etiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu. Duis lacus felis, luctus ac elit quis, hendrerit interdum leo. Quisque justo arcu, sagittis eu nisi eget, pharetra vulputate eros.\n\nEtiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu.",
+    content: `hCaptcha is a service that helps us prevent bots and spam from abusing the faucet. Read more at: ${H_CAPTCHA_URL}`,
   },
   {
     title: "What is a public key?",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis gravida nunc, luctus sodales erat. Ut sit amet lectus tempor elit scelerisque ornare ut non lectus. Etiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu. Duis lacus felis, luctus ac elit quis, hendrerit interdum leo. Quisque justo arcu, sagittis eu nisi eget, pharetra vulputate eros.\n\nEtiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu.",
+      "Your public key(s) on Flow are used to verify transaction data. On Flow, your public key is not part of a Flow account's address. This decoupling allows for multiple public keys to be associated with one account, or for a single public key to be used across several accounts.",
   },
   {
-    title: "Changing Signature Algorithm",
+    title: "Which signature and hash algorithm do I use?",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis gravida nunc, luctus sodales erat. Ut sit amet lectus tempor elit scelerisque ornare ut non lectus. Etiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu. Duis lacus felis, luctus ac elit quis, hendrerit interdum leo. Quisque justo arcu, sagittis eu nisi eget, pharetra vulputate eros.\n\nEtiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu.",
+      "We recommend going with the defaults unless you have a specific reason to do otherwise (eg. compatibility with an existing application).",
   },
   {
-    title: "Which Hash Algorithm should I use?",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis gravida nunc, luctus sodales erat. Ut sit amet lectus tempor elit scelerisque ornare ut non lectus. Etiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu. Duis lacus felis, luctus ac elit quis, hendrerit interdum leo. Quisque justo arcu, sagittis eu nisi eget, pharetra vulputate eros.\n\nEtiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu.",
+    title: "Do I need to use the faucet to build dapps?",
+    content: `If you would like to run your dapp on testnet then you must generate your initial testnet account using the faucet. Subsequent accounts can be created by submitting a transaction, authorized by the initial account, via any SDK or the Flow CLI. 
+      \n\nRead more about accounts on Flow here: ${ACCOUNTS_KEYS_DOCS_URL}`,
   },
   {
-    title: "What is hCaptcha?",
+    title: "Do I need to fund my account to use it?",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis gravida nunc, luctus sodales erat. Ut sit amet lectus tempor elit scelerisque ornare ut non lectus. Etiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu. Duis lacus felis, luctus ac elit quis, hendrerit interdum leo. Quisque justo arcu, sagittis eu nisi eget, pharetra vulputate eros.\n\nEtiam ultricies accumsan eros et vulputate. Curabitur sit amet accumsan arcu.",
+      "No. When your account is created, it is allocated a small amount of tokens (account minimum balance) so you can use it right away.",
   },
 ]
 

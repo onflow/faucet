@@ -6,6 +6,10 @@ export const GENERATE_KEYS_DOCS_URL =
   "https://docs.onflow.org/flow-cli/generate-keys/"
 export const ACCOUNTS_KEYS_DOCS_URL =
   "https://docs.onflow.org/concepts/accounts-and-keys/"
+export const H_CAPTCHA_URL = "https://www.hcaptcha.com/"
+export const FAUCET_GITHUB_URL = "https://www.github.com/onflow/faucet/issues"
+export const DEVELOPER_DOCS_URL = "https://docs.onflow.org"
+export const DISCORD_URL = "https://discord.gg/flow"
 
 export const PUBLIC_KEY_FORMAT_ERROR =
   "Public key must be a hexadecimal string with no spaces."

@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 
-import {paths} from "lib/constants"
+import {DISCORD_URL, DEVELOPER_DOCS_URL} from "lib/constants"
 import {Box, Container, Flex, Link, ThemeUICSSObject} from "theme-ui"
 
 export default function Footer() {
@@ -29,11 +29,11 @@ export default function Footer() {
             {`Copyright © ${new Date().getFullYear()} Dapper Labs LLC. All Rights Reserved`}
           </Box>
           <Box my={1}>
-            <Link variant="white" href={paths.privacy} mr={3}>
-              Privacy Policy
+            <Link variant="white" href={DEVELOPER_DOCS_URL} mr={3}>
+              Flow Developer Documentation
             </Link>
-            <Link variant="white" href={paths.terms}>
-              Terms & Conditions
+            <Link variant="white" href={DISCORD_URL}>
+              Flow Discord Community
             </Link>
           </Box>
         </Flex>
