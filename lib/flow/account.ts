@@ -1,6 +1,7 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import {encodeKey} from "@onflow/util-encode-key"
+import publicConfig from "lib/publicConfig"
 import config from "../config"
 import {sendTransaction} from "./send"
 
@@ -47,12 +48,11 @@ export async function createAccount(
   authorization: fcl.Authorization
 ) {
   const encodedPublicKey = encodeKey(publicKey, sigAlgo, hashAlgo, 1000)
-
   const result = await sendTransaction({
     transaction: txCreateAccount,
     args: [
       fcl.arg(encodedPublicKey, t.String),
-      fcl.arg(config.tokenAmountFlow, t.UFix64),
+      fcl.arg(publicConfig.tokenAmountFlow, t.UFix64),
     ],
     authorizations: [authorization],
     payer: authorization,

@@ -1,12 +1,16 @@
-import {CssBaseline, GeistProvider} from "@geist-ui/react"
+import {SSRProvider} from "@react-aria/ssr"
+import theme from "lib/theme"
 import {AppProps} from "next/dist/next-server/lib/router/router"
+import {ThemeProvider} from "theme-ui"
+import "./fonts.css"
 
 function App({Component, pageProps}: AppProps) {
   return (
-    <GeistProvider>
-      <CssBaseline />
-      <Component {...pageProps} />
-    </GeistProvider>
+    <SSRProvider>
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </SSRProvider>
   )
 }
 

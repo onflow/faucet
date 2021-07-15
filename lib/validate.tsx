@@ -1,3 +1,12 @@
+import {
+  ACCOUNTS_KEYS_DOCS_URL,
+  ADDRESS_FORMAT_ERROR,
+  ADDRESS_MISSING_ERROR,
+  GENERATE_KEYS_DOCS_URL,
+  PUBLIC_KEY_FORMAT_ERROR,
+  PUBLIC_KEY_MISSING_ERROR,
+} from "lib/constants"
+import {Link} from "theme-ui"
 import * as yup from "yup"
 
 const captchaSchemaShape = {
@@ -7,11 +16,15 @@ const captchaSchemaShape = {
 const createAccountSchemaClientShape = {
   publicKey: yup
     .string()
-    .matches(
-      /^([0-9a-f]{128})$/i,
-      "Public key must be a hexadecimal string with no spaces."
-    )
-    .required("Public key is required."),
+    .matches(/^([0-9a-f]{128})$/i, () => (
+      <>
+        {PUBLIC_KEY_FORMAT_ERROR}{" "}
+        <Link href={GENERATE_KEYS_DOCS_URL} target="_blank" variant="underline">
+          Read Documentation
+        </Link>
+      </>
+    ))
+    .required(PUBLIC_KEY_MISSING_ERROR),
   signatureAlgorithm: yup
     .string()
     .oneOf(["ECDSA_P256", "ECDSA_secp256k1"])
@@ -35,11 +48,15 @@ export const createAccountSchemaServer = yup
 const fundAccountSchemaClientShape = {
   address: yup
     .string()
-    .matches(
-      /^(0x)?([0-9a-f]{16})$/i,
-      "Address must be a 16-character hexadecimal string."
-    )
-    .required("Address is required."),
+    .matches(/^(0x)?([0-9a-f]{16})$/i, () => (
+      <>
+        {ADDRESS_FORMAT_ERROR}{" "}
+        <Link href={ACCOUNTS_KEYS_DOCS_URL} target="_blank" variant="underline">
+          Read Documentation
+        </Link>
+      </>
+    ))
+    .required(ADDRESS_MISSING_ERROR),
   token: yup.string().oneOf(["FLOW"]).required(),
 }
 

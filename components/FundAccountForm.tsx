@@ -1,73 +1,67 @@
-import {Loading} from "@geist-ui/react"
-import HCaptcha from "@hcaptcha/react-hcaptcha"
-import {Field, Form, Formik} from "formik"
-import React, {useState} from "react"
-import {ClientFundAccount} from "../lib/client"
-import {useMixpanel} from "../lib/mixpanel"
-import {fundAccountSchemaClient} from "../lib/validate"
+/** @jsxImportSource theme-ui */
+import FormContainer from "components/FormContainer"
+import FundAccountFields from "components/FundAccountFields"
+import TokenFundingInfo from "components/TokenFundingInfo"
+import {Form, Formik} from "formik"
+import {fundAccount} from "lib/client"
+import {useMixpanel} from "lib/mixpanel"
+import {fundAccountSchemaClient} from "lib/validate"
+import {useState} from "react"
+import {Box, Themed} from "theme-ui"
 import {ClientFundAccountResult} from "./FundAccountPanel"
-import {CustomInputComponent, CustomSelectComponent} from "./inputs"
+import FundAccountSubmitted from "./FundAccountSubmitted"
 
-const padded = {marginTop: "1rem", marginBottom: "1rem"}
-
-export default function FundAccountForm({
-  hcaptchaSiteKey,
-  fundAccount,
-  onResult,
-}: {
-  hcaptchaSiteKey: string
-  fundAccount: ClientFundAccount
-  onResult: (result: ClientFundAccountResult) => void
-}) {
+export default function FundAccountForm() {
+  const [errors, setErrors] = useState<string[]>([])
   const [captchaToken, setCaptchaToken] = useState("")
   const {mixpanel} = useMixpanel()
+  const [result, setResult] = useState<ClientFundAccountResult | undefined>(
+    undefined
+  )
+
   return (
-    <Formik
-      initialValues={{
-        address: "",
-        token: "FLOW",
-      }}
-      validationSchema={fundAccountSchemaClient}
-      onSubmit={async ({address, token}, {setSubmitting}) => {
-        const amount = await fundAccount(address, token, captchaToken)
+    <FormContainer>
+      <Formik
+        initialValues={{
+          address: "",
+          token: "FLOW",
+        }}
+        validationSchema={fundAccountSchemaClient}
+        onSubmit={async ({address, token}, {setSubmitting}) => {
+          setErrors([])
+          setCaptchaToken("")
 
-        setSubmitting(false)
-        setCaptchaToken("")
+          const response = await fundAccount(address, token, captchaToken)
 
-        onResult({address, token, amount})
-        mixpanel.track("Faucet: Fund Account", {address, token, amount})
-      }}
-    >
-      {({isSubmitting}) => (
-        <Form>
-          <Field
-            component={CustomInputComponent}
-            inputLabel="Account Address"
-            name="address"
-            placeholder="Address"
-          />
+          if (response.errors) {
+            setErrors(response.errors)
+          } else if (response.amount) {
+            const {amount} = response
+            setResult({address, token, amount})
+            mixpanel.track("Faucet: Fund Account", {address, token, amount})
+          }
 
-          <Field
-            component={CustomSelectComponent}
-            name="token"
-            inputLabel="Token"
-            options={[{value: "FLOW", label: "Testnet FLOW"}]}
-          />
-
-          <div style={padded}>
-            <HCaptcha
-              sitekey={hcaptchaSiteKey}
-              onVerify={(token: string) => setCaptchaToken(token)}
-            />
-          </div>
-
-          <button type="submit" disabled={!captchaToken || isSubmitting}>
-            Fund Your Account
-          </button>
-
-          {isSubmitting && <Loading>Funding your account</Loading>}
-        </Form>
-      )}
-    </Formik>
+          setSubmitting(false)
+        }}
+      >
+        {({isSubmitting}) => (
+          <Form data-test="fund-account-form">
+            <Box mt={4} mb={3}>
+              <Themed.h1>Fund Account</Themed.h1>
+            </Box>
+            <TokenFundingInfo description="when you fund your account" />
+            {isSubmitting || typeof result !== "undefined" ? (
+              <FundAccountSubmitted result={result} />
+            ) : (
+              <FundAccountFields
+                captchaToken={captchaToken}
+                setCaptchaToken={setCaptchaToken}
+                errors={errors}
+              />
+            )}
+          </Form>
+        )}
+      </Formik>
+    </FormContainer>
   )
 }

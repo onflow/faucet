@@ -1,6 +1,5 @@
-import {Card, Input} from "@geist-ui/react"
-import React, {useState} from "react"
-import {fundAccount} from "../lib/client"
+import Sidebar from "components/Sidebar"
+import {Box, Grid} from "theme-ui"
 import FundAccountForm from "./FundAccountForm"
 
 export type ClientFundAccountResult = {
@@ -9,32 +8,21 @@ export type ClientFundAccountResult = {
   amount: string
 }
 
-export default function FundAccountPanel({
-  hcaptchaSiteKey,
-}: {
-  hcaptchaSiteKey: string
-}) {
-  const [result, setResult] = useState<ClientFundAccountResult | null>(null)
-
+export default function FundAccountPanel() {
   return (
     <div>
-      {!result && (
-        <FundAccountForm
-          hcaptchaSiteKey={hcaptchaSiteKey}
-          fundAccount={fundAccount}
-          onResult={result => setResult(result)}
-        />
-      )}
-      {result && (
-        <Card>
-          <h4>Your account has been funded</h4>
-          <Input
-            label="Amount"
-            readOnly
-            initialValue={`${result.amount} ${result.token}`}
-          />
-        </Card>
-      )}
+      <Grid gap={[0, 0, 40, 100]} columns={["auto", "auto", "1.6fr 1fr"]}>
+        <Box>
+          <FundAccountForm />
+        </Box>
+        <Box>
+          <Sidebar />
+        </Box>
+      </Grid>
     </div>
   )
+}
+
+{
+  /* <Input readOnly value={`${result.amount} ${result.token}`} /> */
 }
