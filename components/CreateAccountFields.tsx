@@ -38,7 +38,12 @@ export default function CreateAccountFields({
         <Themed.p>
           Your public key must be a 128 character hexadecimal string. You can
           generate your public/private key pairs using the{" "}
-          <a href="https://docs.onflow.org/flow-cli/generate-keys/">Flow CLI</a>
+          <Link
+            href="https://docs.onflow.org/flow-cli/generate-keys/"
+            target="_blank"
+          >
+            Flow CLI
+          </Link>
           .
         </Themed.p>
       </Box>
