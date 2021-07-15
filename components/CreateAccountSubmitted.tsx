@@ -55,7 +55,10 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
               <Themed.p>
                 Congratulations! Your new Testnet account has been created.
               </Themed.p>
-               <Flex
+            </Box>
+            <Box mb={2}>
+              <Themed.h4>My Tokens</Themed.h4>
+              <Flex
                 sx={{alignItems: "center", justifyContent: "space-between"}}
               >
                 <Link
