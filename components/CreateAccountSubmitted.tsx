@@ -62,7 +62,7 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
                 sx={{alignItems: "center", justifyContent: "space-between"}}
               >
                 <Link
-                  href={`https://flow-view-source.com/testnet/account/${result.address}`}
+                  href={`https://flow-view-source.com/testnet/account/${address}`}
                   target="_blank"
                   variant="secondary"
                   sx={{fontSize: 1}}
