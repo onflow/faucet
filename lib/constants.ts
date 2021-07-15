@@ -23,6 +23,4 @@ export const FUND_ACCOUNT_ERROR = "Account funding has failed"
 export const paths = {
   root: "/",
   fundAccount: "/fund-account",
-  privacy: "/privacy",
-  terms: "/terms",
 }

@@ -1,20 +1,20 @@
 import SidebarAccordion from "components/SidebarAccordion"
 import {FAUCET_GITHUB_URL} from "lib/constants"
-import {Link} from "theme-ui"
+import {Link, Themed} from "theme-ui"
 
 export default function Sidebar() {
   return (
     <div>
       <SidebarAccordion />
-      <p>
+      <Themed.p>
         Notice any problems?{" "}
         <Link
-          sx={{"text-decoration": "none", color: "inherit"}}
+          sx={{textDecoration: "none", color: "inherit"}}
           href={FAUCET_GITHUB_URL}
         >
           Submit an issue.
         </Link>
-      </p>
+      </Themed.p>
     </div>
   )
 }
