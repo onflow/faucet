@@ -31,12 +31,7 @@ export default function FundAccountSubmitted({
     <>
       <Box mb={4} mt={4}>
         <Themed.h3 sx={{mb: 0}}>Funding account</Themed.h3>
-        <Themed.p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          quis gravida nunc, luctus sodales erat. Ut sit amet lectus tempor elit
-          scelerisque ornare ut non lectus. Etiam ultricies accumsan eros et
-          vulputate.
-        </Themed.p>
+        <Themed.p>Great! Your request for FLOW has been submitted.</Themed.p>
       </Box>
       <Box mb={6} sx={styles.resultsContainer}>
         {typeof result === "undefined" ? (
@@ -50,13 +45,8 @@ export default function FundAccountSubmitted({
             <Box mb={4}>
               <Themed.h3 sx={{my: 0}}>Account Funded!</Themed.h3>
               <Themed.p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Curabitur quis gravida nunc, luctus sodales erat. Ut sit amet
-                lectus tempor elit scelerisque ornare ut non lectus.
-              </Themed.p>
-              <Themed.p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Curabitur quis gravida nunc, luctus sod erat.
+                The requested amount has been transfered to your Testnet
+                account!
               </Themed.p>
             </Box>
             <Box mb={2}>
@@ -75,7 +65,7 @@ export default function FundAccountSubmitted({
                   variant="secondary"
                   sx={{fontSize: 1}}
                 >
-                  View Wallet
+                  View Account
                 </Link>
               </Flex>
             </Box>

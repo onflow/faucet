@@ -5,7 +5,7 @@ import Button from "components/Button"
 import LoadingFeedback from "components/LoadingFeedback"
 import {Field} from "formik"
 import {useRef, useState} from "react"
-import {Box, Themed, ThemeUICSSObject} from "theme-ui"
+import {Box, Themed, Flex, Link, ThemeUICSSObject} from "theme-ui"
 import {CustomInputComponent} from "./inputs"
 
 const styles: Record<string, ThemeUICSSObject> = {
@@ -53,14 +53,23 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
             <Box mb={4}>
               <Themed.h3 sx={{my: 0}}>Account Address Generated!</Themed.h3>
               <Themed.p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Curabitur quis gravida nunc, luctus sodales erat. Ut sit amet
-                lectus tempor elit scelerisque ornare ut non lectus.
+                Congratulations! Your new Testnet account has been created.
               </Themed.p>
-              <Themed.p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Curabitur quis gravida nunc, luctus sod erat.
-              </Themed.p>
+            </Box>
+            <Box mb={2}>
+              <Themed.h4>My Tokens</Themed.h4>
+              <Flex
+                sx={{alignItems: "center", justifyContent: "space-between"}}
+              >
+                <Link
+                  href={`https://flow-view-source.com/testnet/account/${address}`}
+                  target="_blank"
+                  variant="secondary"
+                  sx={{fontSize: 1}}
+                >
+                  View Account
+                </Link>
+              </Flex>
             </Box>
             <Field
               component={CustomInputComponent}
