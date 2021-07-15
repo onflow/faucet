@@ -66,7 +66,7 @@ export default function FundAccountSubmitted({
                   variant="secondary"
                   sx={{fontSize: 1}}
                 >
-                  View Wallet
+                  View Account
                 </Link>
               </Flex>
             </Box>
