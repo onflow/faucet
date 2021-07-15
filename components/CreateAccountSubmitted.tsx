@@ -53,13 +53,7 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
             <Box mb={4}>
               <Themed.h3 sx={{my: 0}}>Account Address Generated!</Themed.h3>
               <Themed.p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Curabitur quis gravida nunc, luctus sodales erat. Ut sit amet
-                lectus tempor elit scelerisque ornare ut non lectus.
-              </Themed.p>
-              <Themed.p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Curabitur quis gravida nunc, luctus sod erat.
+                Congratulations! Your new Testnet account has been created.
               </Themed.p>
             </Box>
             <Field
