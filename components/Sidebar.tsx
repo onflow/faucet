@@ -11,6 +11,7 @@ export default function Sidebar() {
         <Link
           sx={{textDecoration: "none", color: "inherit"}}
           href={FAUCET_GITHUB_URL}
+          target="_blank"
         >
           Submit an issue.
         </Link>

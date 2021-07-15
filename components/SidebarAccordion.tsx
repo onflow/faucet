@@ -3,11 +3,11 @@ import useAccordionOption from "hooks/useAccordionOption"
 import {ACCOUNTS_KEYS_DOCS_URL, H_CAPTCHA_URL} from "lib/constants"
 import {useMixpanel} from "lib/mixpanel"
 import {useState} from "react"
-import {ThemeUICSSObject} from "theme-ui"
+import {Link, Themed, ThemeUICSSObject} from "theme-ui"
 
 type AccordionOption = {
   title: string
-  content: string
+  content: string | React.FC
 }
 
 const accordionData = [
@@ -18,7 +18,17 @@ const accordionData = [
   },
   {
     title: "What is hCaptcha?",
-    content: `hCaptcha is a service that helps us prevent bots and spam from abusing the faucet. Read more at: ${H_CAPTCHA_URL}`,
+    content: function hCaptchaFaq() {
+      return (
+        <>
+          <Link href={H_CAPTCHA_URL} target="_blank">
+            hCaptcha
+          </Link>{" "}
+          is a service that helps us prevent bots and spam from abusing the
+          faucet.
+        </>
+      )
+    },
   },
   {
     title: "What is a public key?",
@@ -32,8 +42,23 @@ const accordionData = [
   },
   {
     title: "Do I need to use the faucet to build dapps?",
-    content: `If you would like to run your dapp on testnet then you must generate your initial testnet account using the faucet. Subsequent accounts can be created by submitting a transaction, authorized by the initial account, via any SDK or the Flow CLI.
-      \n\nRead more about accounts on Flow here: ${ACCOUNTS_KEYS_DOCS_URL}`,
+    content: function faucetDappsFaq() {
+      return (
+        <>
+          <Themed.p sx={{mt: 0}}>
+            If you would like to run your dapp on testnet then you must generate
+            your initial testnet account using the faucet. Subsequent accounts
+            can be created by submitting a transaction, authorized by the
+            initial account, via any SDK or the Flow CLI.
+          </Themed.p>
+          Read more about{" "}
+          <Link href={ACCOUNTS_KEYS_DOCS_URL} target="_blank">
+            accounts on Flow
+          </Link>
+          .
+        </>
+      )
+    },
   },
   {
     title: "Do I need to fund my account to use it?",
@@ -112,7 +137,7 @@ const AccordionOption = ({
       </button>
       {isOpen && (
         <div sx={styles.content} {...contentProps}>
-          {data.content}
+          {typeof data.content === "function" ? data.content({}) : data.content}
         </div>
       )}
     </div>
