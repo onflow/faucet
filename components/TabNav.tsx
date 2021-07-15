@@ -44,7 +44,10 @@ export default function TabNav({children}: {children: React.ReactNode}) {
     display: "flex",
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    maxWidth: 515,
+    paddingLeft: 18,
+    paddingRight: 18,
   }
 
   return <div sx={style}>{children}</div>
