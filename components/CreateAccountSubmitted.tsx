@@ -5,7 +5,7 @@ import Button from "components/Button"
 import LoadingFeedback from "components/LoadingFeedback"
 import {Field} from "formik"
 import {useRef, useState} from "react"
-import {Box, Themed, ThemeUICSSObject} from "theme-ui"
+import {Box, Themed, Flex, Link, ThemeUICSSObject} from "theme-ui"
 import {CustomInputComponent} from "./inputs"
 
 const styles: Record<string, ThemeUICSSObject> = {
