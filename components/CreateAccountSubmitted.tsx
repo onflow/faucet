@@ -64,7 +64,7 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
                   variant="secondary"
                   sx={{fontSize: 1}}
                 >
-                  View Wallet
+                  View Account
                 </Link>
               </Flex>
             </Box>
