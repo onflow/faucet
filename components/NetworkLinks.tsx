@@ -37,7 +37,7 @@ export default function NetworkLinks() {
               sx={{mr: 2}}
               width={20}
             />
-            Test Net
+            Testnet
           </Flex>
         </TabNavLink>
         {/* <TabNavLink

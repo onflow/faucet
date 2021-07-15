@@ -3,7 +3,6 @@ import useAccordionOption from "hooks/useAccordionOption"
 import {useState} from "react"
 import {ThemeUICSSObject} from "theme-ui"
 import {useMixpanel} from "lib/mixpanel"
-import {Mixpanel} from "mixpanel-browser"
 import {ACCOUNTS_KEYS_DOCS_URL, H_CAPTCHA_URL} from "lib/constants"
 
 type AccordionOption = {
@@ -49,14 +48,12 @@ const AccordionOption = ({
   isOpen,
   onToggle,
   name,
-  mixpanel,
 }: {
   data: AccordionOption
   index: number
   isOpen: boolean
   onToggle: () => void
   name: string
-  mixpanel: Mixpanel
 }) => {
   const {buttonProps, contentProps} = useAccordionOption({
     index,
@@ -64,6 +61,8 @@ const AccordionOption = ({
     onToggle,
     name,
   })
+
+  const {mixpanel} = useMixpanel()
 
   const styles: Record<string, ThemeUICSSObject> = {
     container: {
@@ -125,8 +124,6 @@ export default function SidebarAccordion() {
     marginTop: [5, 5, 270],
   }
 
-  const {mixpanel} = useMixpanel()
-
   return (
     <div sx={style}>
       {accordionData.map((data, index) => (
@@ -137,7 +134,6 @@ export default function SidebarAccordion() {
           key={index}
           index={index}
           name="sidebarAccordion"
-          mixpanel={mixpanel}
         />
       ))}
     </div>
