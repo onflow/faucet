@@ -48,7 +48,7 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
         <Themed.p>
           We are generating your {NETWORK_DISPLAY_NAME} Address this will only
           take a moment. Please make sure you save your generated address for
-          future use funding your account.
+          future use.
         </Themed.p>
       </Box>
       <Box mb={4} sx={styles.addressContainer}>
