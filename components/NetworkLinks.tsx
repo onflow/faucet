@@ -2,6 +2,7 @@
 
 import TabNav, {TabNavLink} from "components/TabNav"
 import {TEST_NET} from "lib/constants"
+import {NETWORK_DISPLAY_NAME} from "lib/network"
 import publicConfig from "lib/publicConfig"
 
 export default function NetworkLinks() {
@@ -34,7 +35,7 @@ export default function NetworkLinks() {
                 ? "testnet-faucet-icon.svg"
                 : "gray-faucet-icon.svg"
             }
-            alt="Testnet Faucet"
+            alt={`${NETWORK_DISPLAY_NAME} Faucet`}
             sx={{mr: 2}}
           />
           Testnet

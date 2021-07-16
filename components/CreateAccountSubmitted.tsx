@@ -2,10 +2,13 @@
 import * as fcl from "@onflow/fcl"
 import copy from "clipboard-copy"
 import Button from "components/Button"
+import Label from "components/Label"
 import LoadingFeedback from "components/LoadingFeedback"
 import {Field} from "formik"
+import {NETWORK_DISPLAY_NAME} from "lib/network"
+import publicConfig from "lib/publicConfig"
 import {useRef, useState} from "react"
-import {Box, Themed, Flex, Link, ThemeUICSSObject} from "theme-ui"
+import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
 import {CustomInputComponent} from "./inputs"
 
 const styles: Record<string, ThemeUICSSObject> = {
@@ -24,6 +27,7 @@ const styles: Record<string, ThemeUICSSObject> = {
     p: 4,
     backgroundColor: "pink",
   },
+  walletAmount: {fontFamily: "monospace"},
 }
 
 export default function CreateAccountSubmitted({address}: {address: string}) {
@@ -42,9 +46,9 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
       <Box mb={4} mt={4}>
         <Themed.h3 sx={{mb: 0}}>Generating Account Address</Themed.h3>
         <Themed.p>
-          We are generating your Testnet Address this will only take a moment.
-          Please make sure you save your generated address for future use
-          funding your account.
+          We are generating your {NETWORK_DISPLAY_NAME} Address this will only
+          take a moment. Please make sure you save your generated address for
+          future use funding your account.
         </Themed.p>
       </Box>
       <Box mb={4} sx={styles.addressContainer}>
@@ -53,14 +57,30 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
             <Box mb={4}>
               <Themed.h3 sx={{my: 0}}>Account Address Generated!</Themed.h3>
               <Themed.p>
-                Congratulations! Your new Testnet account has been created.
+                Congratulations! Your new {NETWORK_DISPLAY_NAME} account has
+                been created.
               </Themed.p>
             </Box>
-            <Box mb={2}>
-              <Themed.h4>My Tokens</Themed.h4>
+            <Box mb={4}>
+              <Field
+                component={CustomInputComponent}
+                sx={styles.publicAddressInputField}
+                inputLabel="Address"
+                name="address"
+                readOnly
+                value={address.length > 0 ? fcl.display(address) || "" : ""}
+              />
+            </Box>
+            <Box>
+              <Label>Added Amount</Label>
               <Flex
                 sx={{alignItems: "center", justifyContent: "space-between"}}
               >
+                <div sx={styles.walletAmount}>
+                  {`${parseFloat(
+                    publicConfig.tokenAmountFlow
+                  ).toLocaleString()} FLOW tokens`}
+                </div>
                 <Link
                   href={`https://flow-view-source.com/testnet/account/${address}`}
                   target="_blank"
@@ -71,14 +91,6 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
                 </Link>
               </Flex>
             </Box>
-            <Field
-              component={CustomInputComponent}
-              sx={styles.publicAddressInputField}
-              inputLabel="Address"
-              name="address"
-              readOnly
-              value={address.length > 0 ? fcl.display(address) || "" : ""}
-            />
           </>
         ) : (
           <LoadingFeedback>
