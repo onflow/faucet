@@ -4,6 +4,7 @@ import Captcha from "components/Captcha"
 import FormErrors from "components/FormErrors"
 import {Field, useFormikContext} from "formik"
 import {paths} from "lib/constants"
+import {NETWORK_DISPLAY_NAME} from "lib/network"
 import {Box, Link, Themed} from "theme-ui"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
@@ -35,6 +36,7 @@ export default function FundAccountFields({
         autoComplete="off"
         required
         max={128}
+        sx={{fontFamily: "monospace"}}
       />
       <Box mb={3} mt={4}>
         <Themed.h3 sx={{mb: 0}}>Token</Themed.h3>
@@ -48,7 +50,7 @@ export default function FundAccountFields({
           component={CustomSelectComponent}
           name="token"
           inputLabel="Token"
-          options={[{value: "FLOW", label: "Testnet FLOW"}]}
+          options={[{value: "FLOW", label: `${NETWORK_DISPLAY_NAME} FLOW`}]}
         />
       </Box>
       <Box mb={3}>

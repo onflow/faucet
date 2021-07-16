@@ -1,4 +1,5 @@
 /** @jsxImportSource theme-ui */
+import Label from "components/Label"
 import LoadingFeedback from "components/LoadingFeedback"
 import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
 import {ClientFundAccountResult} from "./FundAccountPanel"
@@ -49,8 +50,8 @@ export default function FundAccountSubmitted({
                 account!
               </Themed.p>
             </Box>
-            <Box mb={2}>
-              <Themed.h4>My Tokens</Themed.h4>
+            <Box>
+              <Label>Added Amount</Label>
               <Flex
                 sx={{alignItems: "center", justifyContent: "space-between"}}
               >

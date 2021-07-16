@@ -104,7 +104,7 @@ const theme = makeTheme({
       sm: {
         px: 4,
         py: 2,
-        fontSize: 1,
+        fontSize: 2,
         color: "text",
         fontWeight: 700,
       },

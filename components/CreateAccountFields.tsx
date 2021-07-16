@@ -35,7 +35,7 @@ export default function CreateAccountFields({
     <>
       <Box mb={4} mt={4}>
         <Themed.h3 sx={{mb: 0}}>Public Key</Themed.h3>
-        <Themed.p>
+        <Themed.p sx={{pr: 3}}>
           Your public key must be a 128 character hexadecimal string. You can
           generate your public/private key pairs using the{" "}
           <Link

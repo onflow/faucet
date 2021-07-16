@@ -50,7 +50,6 @@ export default function CreateAccountForm({
             setAddress(address)
             mixpanel.track("Faucet: Create Account", {address})
           }
-
           setSubmitting(false)
         }}
       >
