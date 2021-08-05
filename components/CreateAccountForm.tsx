@@ -52,7 +52,7 @@ export default function CreateAccountForm({
             mixpanel.track("Faucet: Create Account", {address})
 
             try {
-              console.log(`metrics for account ${mixpanel.get_distinct_id()}`)
+            
               await accountCreated(mixpanel.get_distinct_id(), address)
             } catch (err) {
               /* ignore */
