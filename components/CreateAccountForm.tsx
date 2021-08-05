@@ -9,6 +9,7 @@ import {useMixpanel} from "lib/mixpanel"
 import {createAccountSchemaClient} from "lib/validate"
 import {useState} from "react"
 import {Box, Themed} from "theme-ui"
+import {accountCreated} from "../lib/metrics"
 
 export default function CreateAccountForm({
   clientCreateAccount,
@@ -49,6 +50,13 @@ export default function CreateAccountForm({
             const {address} = response
             setAddress(address)
             mixpanel.track("Faucet: Create Account", {address})
+
+            try {
+            
+              await accountCreated(mixpanel.get_distinct_id(), address)
+            } catch (err) {
+              /* ignore */
+            }
           }
           setSubmitting(false)
         }}
