@@ -1,6 +1,7 @@
 # Flow Testnet Faucet
 
 Deployed at: https://testnet-faucet.onflow.org/
+Canary net support coming soon.
 
 ## Usage
 
