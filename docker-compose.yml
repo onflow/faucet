@@ -9,7 +9,7 @@ services:
       - POSTGRES_USER=faucet
       - POSTGRES_PASSWORD=faucet
   emulator:
-    image: gcr.io/flow-container-registry/emulator:0.20.2
+    image: gcr.io/flow-container-registry/emulator:0.23.0
     ports:
       - "8080:8080"
       - "3569:3569"

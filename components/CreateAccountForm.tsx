@@ -52,7 +52,6 @@ export default function CreateAccountForm({
             mixpanel.track("Faucet: Create Account", {address})
 
             try {
-            
               await accountCreated(mixpanel.get_distinct_id(), address)
             } catch (err) {
               /* ignore */

@@ -32,6 +32,7 @@ type Config = {
   signerHashAlgo: HashAlgoTypes
   contractFungibleToken: string
   contractFlowToken: string
+  contractFUSD: string
 }
 
 const config: Config = {
@@ -46,6 +47,7 @@ const config: Config = {
   contractFungibleToken:
     process.env.CONTRACT_FUNGIBLE_TOKEN || "0xee82856bf20e2aa6",
   contractFlowToken: process.env.CONTRACT_FLOW_TOKEN || "0x0ae53cb6e3f42a79",
+  contractFUSD: signerAddress,
 }
 
 export default config

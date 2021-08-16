@@ -8,6 +8,11 @@ import {NETWORK_DISPLAY_NAME} from "lib/network"
 import {Box, Link, Themed} from "theme-ui"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
+export const TOKEN_OPTIONS = [
+  {value: "FLOW", label: `${NETWORK_DISPLAY_NAME} FLOW`},
+  {value: "FUSD", label: `${NETWORK_DISPLAY_NAME} FUSD`},
+]
+
 export default function FundAccountFields({
   captchaToken,
   setCaptchaToken,
@@ -50,7 +55,7 @@ export default function FundAccountFields({
           component={CustomSelectComponent}
           name="token"
           inputLabel="Token"
-          options={[{value: "FLOW", label: `${NETWORK_DISPLAY_NAME} FLOW`}]}
+          options={TOKEN_OPTIONS}
         />
       </Box>
       <Box mb={3}>

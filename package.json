@@ -11,6 +11,7 @@
     "db-migrate-deploy": "prisma migrate deploy --preview-feature",
     "db-seed": "node prisma/seed.mjs",
     "deploy": "npm run build && npm run db-migrate-deploy && npm run db-seed",
+    "dev-deploy-contracts": "flow project deploy --network=emulator --update",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "tsc": "./node_modules/typescript/bin/tsc",

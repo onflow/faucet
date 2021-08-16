@@ -1,3 +1,4 @@
+import {TOKEN_OPTIONS} from "components/FundAccountFields"
 import {
   ACCOUNTS_KEYS_DOCS_URL,
   ADDRESS_FORMAT_ERROR,
@@ -57,7 +58,10 @@ const fundAccountSchemaClientShape = {
       </>
     ))
     .required(ADDRESS_MISSING_ERROR),
-  token: yup.string().oneOf(["FLOW"]).required(),
+  token: yup
+    .string()
+    .oneOf(TOKEN_OPTIONS.map(o => o.value))
+    .required(),
 }
 
 const fundAccountSchemaServerShape = {

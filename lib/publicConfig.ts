@@ -11,11 +11,15 @@ if (!canaryNetUrl) throw "Missing NEXT_PUBLIC_CANARY_NET_URL"
 const tokenAmountFlow = process.env.NEXT_PUBLIC_TOKEN_AMOUNT_FLOW
 if (!tokenAmountFlow) throw "Missing NEXT_PUBLIC_TOKEN_AMOUNT_FLOW"
 
+const tokenAmountFusd = process.env.NEXT_PUBLIC_TOKEN_AMOUNT_FUSD
+if (!tokenAmountFusd) throw "Missing NEXT_PUBLIC_TOKEN_AMOUNT_FUSD"
+
 export type PublicConfig = {
   network: Networks
   testNetUrl: string
   canaryNetUrl: string
   tokenAmountFlow: string
+  tokenAmountFusd: string
   hcaptchaSiteKey: string
 }
 
@@ -24,6 +28,7 @@ const publicConfig: PublicConfig = {
   testNetUrl,
   canaryNetUrl,
   tokenAmountFlow,
+  tokenAmountFusd,
   hcaptchaSiteKey:
     process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY ||
     "10000000-ffff-ffff-ffff-000000000001",
