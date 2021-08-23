@@ -56,6 +56,12 @@ npm run db-seed
 npm run dev-deploy-contracts
 ```
 
+### Run initial transactions
+
+```sh
+npm run initial-transactions
+```
+
 ### Run the Next.js app
 
 ```sh
