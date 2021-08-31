@@ -18,7 +18,7 @@ const signerAddress = process.env.NEXT_PUBLIC_SIGNER_ADDRESS
 if (!signerAddress) throw "Missing NEXT_PUBLIC_SIGNER_ADDRESS"
 
 const walletDiscovery = process.env.NEXT_PUBLIC_WALLET_DISCOVERY
-if (!walletDiscovery) throw "Missing NEXT_PUBLIC_WALLET_DISCOVERY"
+// if (!walletDiscovery) throw "Missing NEXT_PUBLIC_WALLET_DISCOVERY"
 
 export type PublicConfig = {
   network: Networks
@@ -33,7 +33,7 @@ export type PublicConfig = {
   contractFUSD: string
   accessAPIHost: string
   isLocal: boolean
-  walletDiscovery: string
+  walletDiscovery?: string
 }
 
 const publicConfig: PublicConfig = {
