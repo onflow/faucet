@@ -30,6 +30,7 @@ jobs:
       NEXT_PUBLIC_TEST_NET_URL: "http://localhost:3000"
       NEXT_PUBLIC_CANARY_NET_URL: "http://localhost:3000"
       NEXT_PUBLIC_TOKEN_AMOUNT_FLOW: "1000.0"
+      NEXT_PUBLIC_TOKEN_AMOUNT_FUSD: "10.0"
 
     strategy:
       matrix:
