@@ -1,12 +1,12 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import {FLOW_TYPE, FUSD_TYPE} from "lib/constants"
-import {TOKEN_FUNDING_AMOUNTS} from "lib/publicConfig"
+import publicConfig, {TOKEN_FUNDING_AMOUNTS} from "lib/publicConfig"
 import {sendTransaction} from "./send"
 
 const txFundAccountFLOW = `
-import FlowToken from 0xFLOWTOKENADDRESS
-import FungibleToken from 0xFUNGIBLETOKENADDRESS
+import FlowToken from ${publicConfig.contractFlowToken}
+import FungibleToken from ${publicConfig.contractFungibleToken}
 
 transaction(address: Address, amount: UFix64) {
   let tokenAdmin: &FlowToken.Administrator
@@ -35,8 +35,8 @@ transaction(address: Address, amount: UFix64) {
 `
 
 const txFundAccountFUSD = `
-import FUSD from 0xFUSDADDRESS
-import FungibleToken from 0xFUNGIBLETOKENADDRESS
+import FUSD from ${publicConfig.contractFUSD}
+import FungibleToken from ${publicConfig.contractFungibleToken}
 
 transaction(address: Address, amount: UFix64) {
   let tokenMinter: &FUSD.MinterProxy
