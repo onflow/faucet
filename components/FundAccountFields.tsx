@@ -3,14 +3,24 @@ import Button from "components/Button"
 import Captcha from "components/Captcha"
 import FormErrors from "components/FormErrors"
 import {Field, useFormikContext} from "formik"
-import {paths} from "lib/constants"
+import {
+  FLOW_TYPE,
+  FUSD_TYPE,
+  MISSING_FUSD_VAULT_ERROR,
+  paths,
+} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import {Box, Link, Themed} from "theme-ui"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
+const FUSD_VAULT_DOCS_LINK = {
+  url: "https://docs.onflow.org/fusd/#how-do-i-get-an-fusd-enabled-wallet",
+  name: "How do I get an FUSD-enabled wallet?",
+}
+
 export const TOKEN_OPTIONS = [
-  {value: "FLOW", label: `${NETWORK_DISPLAY_NAME} FLOW`},
-  {value: "FUSD", label: `${NETWORK_DISPLAY_NAME} FUSD`},
+  {value: FLOW_TYPE, label: `${NETWORK_DISPLAY_NAME} FLOW`},
+  {value: FUSD_TYPE, label: `${NETWORK_DISPLAY_NAME} FUSD`},
 ]
 
 export default function FundAccountFields({
@@ -45,10 +55,6 @@ export default function FundAccountFields({
       />
       <Box mb={3} mt={4}>
         <Themed.h3 sx={{mb: 0}}>Token</Themed.h3>
-        <Themed.p>
-          Currently, only the native Fungible Token for the selected network is
-          supported. through this faucet.
-        </Themed.p>
       </Box>
       <Box mb={4}>
         <Field
@@ -71,7 +77,16 @@ export default function FundAccountFields({
         >
           Fund Your Account
         </Button>
-        {errors.length > 0 && <FormErrors errors={errors} />}
+        {errors.length > 0 && (
+          <FormErrors
+            errors={errors}
+            link={
+              errors.some(e => e === MISSING_FUSD_VAULT_ERROR)
+                ? FUSD_VAULT_DOCS_LINK
+                : undefined
+            }
+          />
+        )}
       </Box>
       <Box mb={5}>
         <Themed.p sx={{textAlign: "center"}}>

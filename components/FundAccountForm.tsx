@@ -4,6 +4,7 @@ import FundAccountFields from "components/FundAccountFields"
 import TokenFundingInfo from "components/TokenFundingInfo"
 import {Form, Formik} from "formik"
 import {fundAccount} from "lib/client"
+import {FLOW_TYPE, TokenTypes} from "lib/constants"
 import {useMixpanel} from "lib/mixpanel"
 import {fundAccountSchemaClient} from "lib/validate"
 import {useState} from "react"
@@ -24,7 +25,7 @@ export default function FundAccountForm() {
       <Formik
         initialValues={{
           address: "",
-          token: "FLOW",
+          token: FLOW_TYPE,
         }}
         validationSchema={fundAccountSchemaClient}
         onSubmit={async ({address, token}, {setSubmitting}) => {
@@ -44,12 +45,15 @@ export default function FundAccountForm() {
           setSubmitting(false)
         }}
       >
-        {({isSubmitting}) => (
+        {({values, isSubmitting}) => (
           <Form data-test="fund-account-form">
             <Box mt={4} mb={3}>
               <Themed.h1>Fund Account</Themed.h1>
             </Box>
-            <TokenFundingInfo description="when you fund your account" />
+            <TokenFundingInfo
+              description="when you fund your account"
+              token={values.token as TokenTypes}
+            />
             {isSubmitting || typeof result !== "undefined" ? (
               <FundAccountSubmitted result={result} />
             ) : (

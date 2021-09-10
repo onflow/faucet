@@ -1,6 +1,7 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
-import publicConfig from "../publicConfig"
+import {FLOW_TYPE, FUSD_TYPE} from "lib/constants"
+import {TOKEN_FUNDING_AMOUNTS} from "lib/publicConfig"
 import {sendTransaction} from "./send"
 
 const txFundAccountFLOW = `
@@ -66,9 +67,9 @@ type Token = {
 }
 type Tokens = Record<TokenType, Token>
 
-const tokens: Tokens = {
-  FLOW: {tx: txFundAccountFLOW, amount: publicConfig.tokenAmountFlow},
-  FUSD: {tx: txFundAccountFUSD, amount: publicConfig.tokenAmountFusd},
+export const tokens: Tokens = {
+  FLOW: {tx: txFundAccountFLOW, amount: TOKEN_FUNDING_AMOUNTS[FLOW_TYPE]},
+  FUSD: {tx: txFundAccountFUSD, amount: TOKEN_FUNDING_AMOUNTS[FUSD_TYPE]},
 }
 
 export async function fundAccount(

@@ -1,6 +1,7 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import {verify} from "hcaptcha"
+import {FUSD_TYPE, MISSING_FUSD_VAULT_ERROR} from "lib/constants"
 import {NextApiRequest, NextApiResponse} from "next"
 import config from "../../lib/config"
 import {fundAccount, getAuthorization} from "../../lib/flow"
@@ -12,14 +13,17 @@ const scriptCheckFUSDVault = `
   import FungibleToken from 0xFUNGIBLETOKENADDRESS
 
   pub fun main(address: Address): Bool {
-    let account = getAccount(address)
-    let vaultRef = account.getCapability(/public/fusdBalance)
-        .borrow<&FUSD.Vault{FungibleToken.Balance}>()
-    return vaultRef != nil
+    let receiver = getAccount(address)
+      .getCapability<&FUSD.Vault{FungibleToken.Receiver}>(/public/fusdReceiver)
+      .check()
+    let balance = getAccount(address)
+      .getCapability<&FUSD.Vault{FungibleToken.Balance}>(/public/fusdBalance)
+      .check()
+    return receiver && balance
   }
 `
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function fund(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     try {
       await fundAccountSchemaServer.validate(req.body)
@@ -32,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const address = fcl.withPrefix(req.body.address) || ""
     const token = req.body.token
 
-    if (token === "FUSD") {
+    if (token === FUSD_TYPE) {
       try {
         const hasFUSDVault = await fcl
           .send([
@@ -42,9 +46,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           .then(fcl.decode)
 
         if (hasFUSDVault === false) {
-          res
-            .status(400)
-            .json({errors: ["This account does not have an FUSD vault"]})
+          res.status(400).json({errors: [MISSING_FUSD_VAULT_ERROR]})
           return
         }
       } catch {

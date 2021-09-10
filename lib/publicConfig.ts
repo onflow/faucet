@@ -1,4 +1,4 @@
-import {CANARY_NET, Networks, TEST_NET} from "./constants"
+import {CANARY_NET, Networks, TEST_NET, TokenTypes} from "./constants"
 
 const network =
   process.env.NEXT_PUBLIC_NETWORK === CANARY_NET ? CANARY_NET : TEST_NET
@@ -56,6 +56,11 @@ const publicConfig: PublicConfig = {
     process.env.NEXT_PUBLIC_ACCESS_API_HOST || "http://localhost:8080",
   isLocal: process.env.NEXT_PUBLIC_IS_LOCAL === "true" || false,
   walletDiscovery,
+}
+
+export const TOKEN_FUNDING_AMOUNTS: Record<TokenTypes, string> = {
+  FLOW: publicConfig.tokenAmountFlow,
+  FUSD: publicConfig.tokenAmountFusd,
 }
 
 export default publicConfig

@@ -1,10 +1,17 @@
 /** @jsxImportSource theme-ui */
 
+import {TokenTypes} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
-import publicConfig from "lib/publicConfig"
+import {TOKEN_FUNDING_AMOUNTS} from "lib/publicConfig"
 import {Text, Themed, ThemeUICSSObject} from "theme-ui"
 
-export default function TokenFundingInfo({description}: {description: string}) {
+export default function TokenFundingInfo({
+  description,
+  token,
+}: {
+  description: string
+  token: TokenTypes
+}) {
   const style: ThemeUICSSObject = {
     display: "flex",
     flexDirection: "column",
@@ -21,8 +28,8 @@ export default function TokenFundingInfo({description}: {description: string}) {
   return (
     <div sx={style}>
       <Themed.h4 sx={{my: 0}}>
-        Receive {parseFloat(publicConfig.tokenAmountFlow).toLocaleString()}{" "}
-        {NETWORK_DISPLAY_NAME} FLOW tokens
+        Receive {parseFloat(TOKEN_FUNDING_AMOUNTS[token]).toLocaleString()}{" "}
+        {NETWORK_DISPLAY_NAME} {token} tokens
       </Themed.h4>
       <Text color="gray.400">{description}</Text>
     </div>
