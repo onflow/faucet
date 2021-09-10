@@ -2,6 +2,7 @@ import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import {verify} from "hcaptcha"
 import {FUSD_TYPE, MISSING_FUSD_VAULT_ERROR} from "lib/constants"
+import publicConfig from "lib/publicConfig"
 import {NextApiRequest, NextApiResponse} from "next"
 import config from "../../lib/config"
 import {fundAccount, getAuthorization} from "../../lib/flow"
@@ -9,8 +10,8 @@ import {getSignerKeyIndex} from "../../lib/keys"
 import {fundAccountSchemaServer} from "../../lib/validate"
 
 const scriptCheckFUSDVault = `
-  import FUSD from 0xFUSDADDRESS
-  import FungibleToken from 0xFUNGIBLETOKENADDRESS
+  import FUSD from ${publicConfig.contractFUSD}
+  import FungibleToken from ${publicConfig.contractFungibleToken}
 
   pub fun main(address: Address): Bool {
     let receiver = getAccount(address)

@@ -7,8 +7,8 @@ import {sendTransaction} from "./send"
 const accountCreatedEventType = "flow.AccountCreated"
 
 const txCreateAccount = `
-import FlowToken from 0xFLOWTOKENADDRESS
-import FungibleToken from 0xFUNGIBLETOKENADDRESS
+import FlowToken from ${publicConfig.contractFlowToken}
+import FungibleToken from ${publicConfig.contractFungibleToken}
 
 transaction(publicKey: String, flowTokenAmount: UFix64) {
   let tokenAdmin: &FlowToken.Administrator
