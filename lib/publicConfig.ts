@@ -18,6 +18,7 @@ const signerAddress = process.env.NEXT_PUBLIC_SIGNER_ADDRESS
 if (!signerAddress) throw "Missing NEXT_PUBLIC_SIGNER_ADDRESS"
 
 const walletDiscovery = process.env.NEXT_PUBLIC_WALLET_DISCOVERY
+// TODO: Integrate FCL wallets
 // if (!walletDiscovery) throw "Missing NEXT_PUBLIC_WALLET_DISCOVERY"
 
 export type PublicConfig = {
