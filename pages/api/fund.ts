@@ -33,9 +33,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const token = req.body.token
 
     if (token === "FUSD") {
-      let hasFUSDVault = false
       try {
-        hasFUSDVault = await fcl
+        const hasFUSDVault = await fcl
           .send([
             fcl.script(scriptCheckFUSDVault),
             fcl.args([fcl.arg(address, t.Address)]),
