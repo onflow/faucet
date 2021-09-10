@@ -17,6 +17,15 @@ if (!tokenAmountFusd) throw "Missing NEXT_PUBLIC_TOKEN_AMOUNT_FUSD"
 const signerAddress = process.env.NEXT_PUBLIC_SIGNER_ADDRESS
 if (!signerAddress) throw "Missing NEXT_PUBLIC_SIGNER_ADDRESS"
 
+const contractFungibleToken = process.env.NEXT_PUBLIC_CONTRACT_FUNGIBLE_TOKEN
+if (!contractFungibleToken) throw "Missing NEXT_PUBLIC_CONTRACT_FUNGIBLE_TOKEN"
+
+const contractFlowToken = process.env.NEXT_PUBLIC_CONTRACT_FLOW_TOKEN
+if (!contractFlowToken) throw "Missing NEXT_PUBLIC_CONTRACT_FLOW_TOKEN"
+
+const contractFUSD = process.env.NEXT_PUBLIC_CONTRACT_FUSD
+if (!contractFUSD) throw "Missing NEXT_PUBLIC_CONTRACT_FUSD"
+
 const walletDiscovery = process.env.NEXT_PUBLIC_WALLET_DISCOVERY
 // TODO: Integrate FCL wallets
 // if (!walletDiscovery) throw "Missing NEXT_PUBLIC_WALLET_DISCOVERY"
@@ -47,11 +56,9 @@ const publicConfig: PublicConfig = {
     process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY ||
     "10000000-ffff-ffff-ffff-000000000001",
   signerAddress,
-  contractFungibleToken:
-    process.env.NEXT_PUBLIC_CONTRACT_FUNGIBLE_TOKEN || "0xee82856bf20e2aa6",
-  contractFlowToken:
-    process.env.NEXT_PUBLIC_CONTRACT_FLOW_TOKEN || "0x0ae53cb6e3f42a79",
-  contractFUSD: signerAddress,
+  contractFungibleToken,
+  contractFlowToken,
+  contractFUSD,
   accessAPIHost:
     process.env.NEXT_PUBLIC_ACCESS_API_HOST || "http://localhost:8080",
   isLocal: process.env.NEXT_PUBLIC_IS_LOCAL === "true" || false,
