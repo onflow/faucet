@@ -1,15 +1,14 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import {encodeKey} from "@onflow/util-encode-key"
-import publicConfig from "lib/publicConfig"
-import config from "../config"
+import publicConfig from "../publicConfig"
 import {sendTransaction} from "./send"
 
 const accountCreatedEventType = "flow.AccountCreated"
 
 const txCreateAccount = `
-import FlowToken from ${config.contractFlowToken}
-import FungibleToken from ${config.contractFungibleToken}
+import FlowToken from 0xFLOWTOKENADDRESS
+import FungibleToken from 0xFUNGIBLETOKENADDRESS
 
 transaction(publicKey: String, flowTokenAmount: UFix64) {
   let tokenAdmin: &FlowToken.Administrator

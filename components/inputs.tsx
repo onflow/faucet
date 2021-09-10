@@ -136,7 +136,7 @@ export const CustomSelectComponent = ({
 }: CustomSelectFieldProps) => {
   const {labelProps, fieldProps} = useLabel({label: inputLabel})
   return (
-    <>
+    <div data-test="token-select">
       <Label required={required} {...labelProps}>
         {inputLabel}
       </Label>
@@ -157,6 +157,6 @@ export const CustomSelectComponent = ({
       {touched[field.name] && errors[field.name] && (
         <Text>{errors[field.name]}</Text>
       )}
-    </>
+    </div>
   )
 }

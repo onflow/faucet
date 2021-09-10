@@ -16,6 +16,7 @@ export default function FormContainer({children}: {children: React.ReactNode}) {
       borderRadius: 4,
     },
     children: {
+      width: "100%",
       maxWidth: 515,
       px: 4,
     },

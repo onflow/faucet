@@ -20,5 +20,21 @@
     "baseUrl": "./"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "include": ["lib/initalTransactions.ts"],
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "ES2017",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      "strict": true,
+      "lib": ["es2020"],
+      "baseUrl": "./"
+    }
+  }
 }

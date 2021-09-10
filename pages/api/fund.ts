@@ -1,12 +1,29 @@
 import * as fcl from "@onflow/fcl"
+import * as t from "@onflow/types"
 import {verify} from "hcaptcha"
+import {FUSD_TYPE, MISSING_FUSD_VAULT_ERROR} from "lib/constants"
 import {NextApiRequest, NextApiResponse} from "next"
 import config from "../../lib/config"
 import {fundAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
 import {fundAccountSchemaServer} from "../../lib/validate"
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const scriptCheckFUSDVault = `
+  import FUSD from 0xFUSDADDRESS
+  import FungibleToken from 0xFUNGIBLETOKENADDRESS
+
+  pub fun main(address: Address): Bool {
+    let receiver = getAccount(address)
+      .getCapability<&FUSD.Vault{FungibleToken.Receiver}>(/public/fusdReceiver)
+      .check()
+    let balance = getAccount(address)
+      .getCapability<&FUSD.Vault{FungibleToken.Balance}>(/public/fusdBalance)
+      .check()
+    return receiver && balance
+  }
+`
+
+export default async function fund(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     try {
       await fundAccountSchemaServer.validate(req.body)
@@ -16,8 +33,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const captchaToken = req.body["h-captcha-response"]
-    const address = fcl.withPrefix(req.body.address)
+    const address = fcl.withPrefix(req.body.address) || ""
     const token = req.body.token
+
+    if (token === FUSD_TYPE) {
+      try {
+        const hasFUSDVault = await fcl
+          .send([
+            fcl.script(scriptCheckFUSDVault),
+            fcl.args([fcl.arg(address, t.Address)]),
+          ])
+          .then(fcl.decode)
+
+        if (hasFUSDVault === false) {
+          res.status(400).json({errors: [MISSING_FUSD_VAULT_ERROR]})
+          return
+        }
+      } catch {
+        res.status(400).json({errors: ["FUSD vault check failed"]})
+        return
+      }
+    }
 
     try {
       await verify(config.hcaptchaSecretKey, captchaToken)

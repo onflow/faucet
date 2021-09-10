@@ -48,6 +48,20 @@ npm run db-migrate-dev
 npm run db-seed
 ```
 
+### Deploy contracts
+
+⚠️ The `accounts.emulator-account` value in flow.json match the `FLOW_SERVICEPRIVATEKEY` value in `docker-compose.yml`.
+
+```sh
+npm run dev-deploy-contracts
+```
+
+### Run initial transactions to initialize the FUSD minter
+
+```sh
+npm run initial-transactions
+```
+
 ### Run the Next.js app
 
 ```sh

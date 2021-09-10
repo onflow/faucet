@@ -71,18 +71,41 @@ declare module "@onflow/fcl" {
   export function display(address: string): null | string
 
   export function transaction(transaction: string): unknown
+  export function script(script: string): unknown
+  export function decode(): unknown
+  export function authz(): Authorization
   export function arg(encodedPublicKey: string, type: string): TransactionArg
   export function args(args: TransactionArg[]): unknown
   export function authorizations(authorizations: Authorization[]): unknown
   export function proposer(proposer: Authorization): unknown
   export function payer(payer: Authorization): unknown
   export function limit(limit: number): unknown
-  export function send(args: Interaction[]): unknown
+  export function send(args: Interaction[]): Promise
+  export function mutate(args: {
+    cadence: string
+    limit: number
+    proposer: Authorization
+    payer: Authorization
+    authorizations: Authorization[]
+    args?: (
+      arg: (arg: string, t: Record<string, uknown>) => TransactionArg,
+      type: Record<string, uknown>
+    ) => TransactionArg[]
+  }): Promise
   export function tx(
     arg: unknown
   ): {
     onceSealed: () => uknown
   }
+  export function currentUser(): {
+    snapshot: () => Promise<{addr: string}>
+    unauthenticate: () => void
+  }
+}
+
+declare module "*.cdc" {
+  const content: string
+  export default content
 }
 
 declare module "@onflow/util-encode-key"

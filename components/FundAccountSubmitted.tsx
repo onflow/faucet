@@ -32,7 +32,7 @@ export default function FundAccountSubmitted({
     <>
       <Box mb={4} mt={4}>
         <Themed.h3 sx={{mb: 0}}>Funding account</Themed.h3>
-        <Themed.p>Great! Your request for FLOW has been submitted.</Themed.p>
+        <Themed.p>Great! Your request has been submitted.</Themed.p>
       </Box>
       <Box mb={6} sx={styles.resultsContainer}>
         {typeof result === "undefined" ? (
