@@ -104,6 +104,7 @@ const AccordionOption = ({
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
+      textAlign: "left",
       width: "100%",
       background: "none",
       border: 0,
