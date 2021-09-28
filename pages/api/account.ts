@@ -9,7 +9,7 @@ import {
 } from "../../lib/crypto"
 import {createAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
-import {createAccountSchemaServer} from "../../lib/validate"
+import {createAccountSchemaServer, verifyAPIKey} from "../../lib/validate"
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
@@ -31,16 +31,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       throw "Incorrect hash algorithm"
     }
 
+    const apiKey = req.body["api-key"]
     const captchaToken = req.body["h-captcha-response"]
     const publicKey = req.body.publicKey
     const sigAlgo = SigAlgos[signatureAlgorithm]
     const hashAlgo = HashAlgos[hashAlgorithm]
 
-    try {
-      await verify(config.hcaptchaSecretKey, captchaToken)
-    } catch (e) {
-      res.status(400).send("")
-      return
+    if (apiKey) {
+      if (!verifyAPIKey(apiKey, config.apiKeys)) {
+        res.status(400).json({errors: ["Invalid API key"]})
+      }
+    } else {
+      try {
+        await verify(config.hcaptchaSecretKey, captchaToken)
+      } catch (e) {
+        res.status(400).json({errors: ["Invalid captcha token"]})
+        return
+      }
     }
 
     // get key index from DB (LRU proposal key)
