@@ -7,7 +7,7 @@ import {NextApiRequest, NextApiResponse} from "next"
 import config from "../../lib/config"
 import {fundAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
-import {fundAccountSchemaServer} from "../../lib/validate"
+import {fundAccountSchemaServer, verifyAPIKey} from "../../lib/validate"
 
 const scriptCheckFUSDVault = `
   import FUSD from ${publicConfig.contractFUSD}
@@ -33,6 +33,7 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
       return
     }
 
+    const apiKey = req.body["api-key"]
     const captchaToken = req.body["h-captcha-response"]
     const address = fcl.withPrefix(req.body.address) || ""
     const token = req.body.token
@@ -56,11 +57,17 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
       }
     }
 
-    try {
-      await verify(config.hcaptchaSecretKey, captchaToken)
-    } catch (e) {
-      res.status(400).send("")
-      return
+    if (apiKey) {
+      if (!verifyAPIKey(apiKey, config.apiKeys)) {
+        res.status(400).json({errors: ["Invalid API key"]})
+      }
+    } else {
+      try {
+        await verify(config.hcaptchaSecretKey, captchaToken)
+      } catch (e) {
+        res.status(400).json({errors: ["Invalid captcha token"]})
+        return
+      }
     }
 
     // get key index from DB (LRU proposal key)
