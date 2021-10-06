@@ -7,7 +7,8 @@ import {NextApiRequest, NextApiResponse} from "next"
 import config from "../../lib/config"
 import {fundAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
-import {fundAccountSchemaServer, verifyAPIKey} from "../../lib/validate"
+import {fundAccountSchemaServer} from "../../lib/validate"
+import {verifyAPIKey} from "../../lib/common"
 
 const scriptCheckFUSDVault = `
   import FUSD from ${publicConfig.contractFUSD}
@@ -26,14 +27,15 @@ const scriptCheckFUSDVault = `
 
 export default async function fund(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
+    const apiKey = req.headers["authorization"]
+
     try {
-      await fundAccountSchemaServer.validate(req.body)
+      await fundAccountSchemaServer.validate(req.body, {context: {apiKey}})
     } catch (err) {
       res.status(400).json({errors: err.errors})
       return
     }
 
-    const apiKey = req.body["api-key"]
     const captchaToken = req.body["h-captcha-response"]
     const address = fcl.withPrefix(req.body.address) || ""
     const token = req.body.token
@@ -59,7 +61,7 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
 
     if (apiKey) {
       if (!verifyAPIKey(apiKey, config.apiKeys)) {
-        res.status(400).json({errors: ["Invalid API key"]})
+        res.status(401).json({errors: ["Invalid API key"]})
       }
     } else {
       try {

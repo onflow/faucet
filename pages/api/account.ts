@@ -9,12 +9,15 @@ import {
 } from "../../lib/crypto"
 import {createAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
-import {createAccountSchemaServer, verifyAPIKey} from "../../lib/validate"
+import {createAccountSchemaServer} from "../../lib/validate"
+import {verifyAPIKey} from "../../lib/common"
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+    const apiKey = req.headers["authorization"]
+
     try {
-      await createAccountSchemaServer.validate(req.body)
+      await createAccountSchemaServer.validate(req.body, {context: {apiKey}})
     } catch (err) {
       res.status(400).json({errors: err.errors})
       return
@@ -31,7 +34,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       throw "Incorrect hash algorithm"
     }
 
-    const apiKey = req.body["api-key"]
     const captchaToken = req.body["h-captcha-response"]
     const publicKey = req.body.publicKey
     const sigAlgo = SigAlgos[signatureAlgorithm]
@@ -39,7 +41,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (apiKey) {
       if (!verifyAPIKey(apiKey, config.apiKeys)) {
-        res.status(400).json({errors: ["Invalid API key"]})
+        res.status(401).json({errors: ["Invalid API key"]})
       }
     } else {
       try {

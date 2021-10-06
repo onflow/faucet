@@ -10,13 +10,8 @@ import {
 import {Link} from "theme-ui"
 import * as yup from "yup"
 
-const authSchemaShape = {
-  "api-key": yup.string().when("h-captcha-response", {
-    is: (val: string) => !val || val.length === 0,
-    then: yup.string().required(),
-    otherwise: yup.string(),
-  }),
-  "h-captcha-response": yup.string().when("api-key", {
+const captchaSchemaShape = {
+  "h-captcha-response": yup.string().when("$apiKey", {
     is: (val: string) => !val || val.length === 0,
     then: yup.string().required(),
     otherwise: yup.string(),
@@ -44,7 +39,7 @@ const createAccountSchemaClientShape = {
 
 const createAccountSchemaServerShape = {
   ...createAccountSchemaClientShape,
-  ...authSchemaShape,
+  ...captchaSchemaShape,
 }
 
 export const createAccountSchemaClient = yup
@@ -53,7 +48,7 @@ export const createAccountSchemaClient = yup
 
 export const createAccountSchemaServer = yup
   .object()
-  .shape(createAccountSchemaServerShape, [["h-captcha-response", "api-key"]])
+  .shape(createAccountSchemaServerShape)
 
 const fundAccountSchemaClientShape = {
   address: yup
@@ -75,7 +70,7 @@ const fundAccountSchemaClientShape = {
 
 const fundAccountSchemaServerShape = {
   ...fundAccountSchemaClientShape,
-  ...authSchemaShape,
+  ...captchaSchemaShape,
 }
 
 export const fundAccountSchemaClient = yup
@@ -84,23 +79,4 @@ export const fundAccountSchemaClient = yup
 
 export const fundAccountSchemaServer = yup
   .object()
-  .shape(fundAccountSchemaServerShape, [["h-captcha-response", "api-key"]])
-
-export function verifyAPIKey(req: string, keys: string[]): boolean {
-  const len = req.length
-  for (const key of keys) {
-    if (key.length != len) {
-      continue
-    }
-    // Do constant time comparison of the API key for protection
-    // against timing attacks.
-    let err = 0
-    for (let i = 0; i < len; ++i) {
-      err |= req.charCodeAt(i) ^ key.charCodeAt(i)
-    }
-    if (err == 0) {
-      return true
-    }
-  }
-  return false
-}
+  .shape(fundAccountSchemaServerShape)
