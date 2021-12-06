@@ -20,7 +20,10 @@ const getDefaultSignerHash: () => HashAlgoTypes = () => {
 const signerPrivateKey = process.env.SIGNER_PRIVATE_KEY
 if (!signerPrivateKey) throw "Missing SIGNER_PRIVATE_KEY"
 
+const apiKeys = process.env.API_KEYS ? process.env.API_KEYS.split(",") : []
+
 type Config = {
+  apiKeys: string[]
   hcaptchaSecretKey: string
   signerPrivateKey: string
   signerSigAlgo: SigAlgoTypes
@@ -28,6 +31,7 @@ type Config = {
 }
 
 const config: Config = {
+  apiKeys: apiKeys,
   hcaptchaSecretKey:
     process.env.HCAPTCHA_SECRET_KEY ||
     "0x0000000000000000000000000000000000000000",

@@ -11,7 +11,11 @@ import {Link} from "theme-ui"
 import * as yup from "yup"
 
 const captchaSchemaShape = {
-  "h-captcha-response": yup.string().required(),
+  "h-captcha-response": yup.string().when("$apiKey", {
+    is: (val: string) => !val || val.length === 0,
+    then: yup.string().required(),
+    otherwise: yup.string(),
+  }),
 }
 
 const createAccountSchemaClientShape = {

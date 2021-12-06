@@ -8,6 +8,7 @@ import config from "../../lib/config"
 import {fundAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
 import {fundAccountSchemaServer} from "../../lib/validate"
+import {verifyAPIKey} from "../../lib/common"
 
 const scriptCheckFUSDVault = `
   import FUSD from ${publicConfig.contractFUSD}
@@ -26,8 +27,10 @@ const scriptCheckFUSDVault = `
 
 export default async function fund(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
+    const apiKey = req.headers["authorization"]
+
     try {
-      await fundAccountSchemaServer.validate(req.body)
+      await fundAccountSchemaServer.validate(req.body, {context: {apiKey}})
     } catch (err) {
       res.status(400).json({errors: err.errors})
       return
@@ -56,11 +59,17 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
       }
     }
 
-    try {
-      await verify(config.hcaptchaSecretKey, captchaToken)
-    } catch (e) {
-      res.status(400).send("")
-      return
+    if (apiKey) {
+      if (!verifyAPIKey(apiKey, config.apiKeys)) {
+        res.status(401).json({errors: ["Invalid API key"]})
+      }
+    } else {
+      try {
+        await verify(config.hcaptchaSecretKey, captchaToken)
+      } catch (e) {
+        res.status(400).json({errors: ["Invalid captcha token"]})
+        return
+      }
     }
 
     // get key index from DB (LRU proposal key)

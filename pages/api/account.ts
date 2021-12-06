@@ -10,11 +10,14 @@ import {
 import {createAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
 import {createAccountSchemaServer} from "../../lib/validate"
+import {verifyAPIKey} from "../../lib/common"
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
+    const apiKey = req.headers["authorization"]
+
     try {
-      await createAccountSchemaServer.validate(req.body)
+      await createAccountSchemaServer.validate(req.body, {context: {apiKey}})
     } catch (err) {
       res.status(400).json({errors: err.errors})
       return
@@ -36,11 +39,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const sigAlgo = SigAlgos[signatureAlgorithm]
     const hashAlgo = HashAlgos[hashAlgorithm]
 
-    try {
-      await verify(config.hcaptchaSecretKey, captchaToken)
-    } catch (e) {
-      res.status(400).send("")
-      return
+    if (apiKey) {
+      if (!verifyAPIKey(apiKey, config.apiKeys)) {
+        res.status(401).json({errors: ["Invalid API key"]})
+      }
+    } else {
+      try {
+        await verify(config.hcaptchaSecretKey, captchaToken)
+      } catch (e) {
+        res.status(400).json({errors: ["Invalid captcha token"]})
+        return
+      }
     }
 
     // get key index from DB (LRU proposal key)
