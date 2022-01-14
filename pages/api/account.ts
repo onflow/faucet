@@ -57,14 +57,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const authorization = getAuthorization(keyIndex)
 
-    const {address} = await createAccount(
-      publicKey,
-      sigAlgo,
-      hashAlgo,
-      authorization
-    )
-
-    res.status(200).json({address})
+    try {
+      const {address} = await createAccount(
+        publicKey,
+        sigAlgo,
+        hashAlgo,
+        authorization
+      )
+      res.status(200).json({address})
+    } catch (e) {
+      res.status(500).json({errors: [e.message]})
+    }
   } else {
     res.status(405).send("")
   }
