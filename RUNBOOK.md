@@ -39,6 +39,9 @@ The database schema and client are generated automatically by Prisma. The schema
 
 ## Debugging Deployment
 
+### Continuous integration
+CI is provided by **Github Workflows**. The configuration can be found here: https://github.com/onflow/faucet/blob/main/.github/workflows/ci.yml
+
 ### Frontend / API
 Log output from the production application (backend) can be found here: https://vercel.com/onflow/flow-faucet-testnet/9zrQc5wYWMCrSqARcx5p7EDowq3X/functions
 
