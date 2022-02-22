@@ -65,7 +65,7 @@ CI is provided by **Github Workflows**. The configuration can be found here: htt
 
 **Log output:** Error logs can be found in the Google cloud dashboard mentioned above.
 
-## Domain management
+## Domain Management
 
 The Faucet domain (testnet-faucet.onflow.org) is managed by **Terraform**.
 
