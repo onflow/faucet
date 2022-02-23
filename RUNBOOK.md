@@ -14,7 +14,8 @@ https://vercel.com/onflow.
 
 **Database**
 
-Join the "Flow Engineer" Google Group. https://groups.google.com/a/dapperlabs.com/g/flow-dev/members
+Join the "Flow Engineer" Google Group. https://groups.google.com/a/dapperlabs.com/g/flow-dev/members. (Reach out to @Kay-Zee if you have a pending invitation). 
+
 For access to the Faucet database, navigate to Flow GCP SQL instances: https://console.cloud.google.com/sql/instances?project=dl-flow
 
 - The Faucet uses: `flow-db-staging` Postgres instance
@@ -59,11 +60,12 @@ CI is provided by **Github Workflows**. The configuration can be found here: htt
 ### Database
 
 **Firewall Rule**:
-0.0.0.0/0 must be an authorized network in order to allow Vercel to connect (Ref: https://vercel.com/docs/concepts/solutions/databases#allowing-and-blocking-ip-addresses)
+0.0.0.0/0 must be an authorized network in order to allow Vercel to connect
+
 - If this rule is removed, Vercel will not be able to connect.
 - Documentation here: https://vercel.com/docs/concepts/solutions/databases#allowing-and-blocking-ip-addresses
 
-**Log output:** Error logs can be found in the Google cloud dashboard mentioned above.
+**Log output:** Error logs can be found in the Google cloud dashboard for the database, mentioned above.
 
 ## Domain Management
 
