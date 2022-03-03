@@ -1,5 +1,10 @@
 import {CREATE_ACCOUNT_ERROR, FUND_ACCOUNT_ERROR} from "lib/constants"
 
+export type CreateAccountURLParams = {
+  publicKey: string
+  trafficSource: string
+}
+
 export type ClientCreateAccountResult = {
   address: string
   token: string

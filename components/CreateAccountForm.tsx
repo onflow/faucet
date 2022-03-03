@@ -14,8 +14,12 @@ import {accountCreated} from "../lib/metrics"
 
 export default function CreateAccountForm({
   clientCreateAccount,
+  publicKey,
+  trafficSource,
 }: {
-  clientCreateAccount: ClientCreateAccount
+  clientCreateAccount: ClientCreateAccount,
+  publicKey: string,
+  trafficSource: string,
 }) {
   const [errors, setErrors] = useState<string[]>([])
   const [captchaToken, setCaptchaToken] = useState("")
@@ -26,7 +30,7 @@ export default function CreateAccountForm({
     <FormContainer>
       <Formik
         initialValues={{
-          publicKey: "",
+          publicKey,
           signatureAlgorithm: "ECDSA_P256",
           hashAlgorithm: "SHA3_256",
         }}
@@ -50,8 +54,7 @@ export default function CreateAccountForm({
           } else if (response.address) {
             const {address} = response
             setAddress(address)
-            mixpanel.track("Faucet: Create Account", {address})
-
+            mixpanel.track("Faucet: Create Account", {address, trafficSource})
             try {
               await accountCreated(mixpanel.get_distinct_id(), address)
             } catch (err) {
