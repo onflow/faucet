@@ -17,5 +17,6 @@ export default function Home(props: CreateAccountURLParams) {
 Home.getInitialProps = async (context: any) => {
   const key: string = context.query.key || ""
   const source: string = context.query.source || ""
-  return { publicKey: key, trafficSource: source }
+  const sigAlgo: string = context.query["sig-algo"] || "ECDSA_P256"
+  return { publicKey: key, sigAlgo, trafficSource: source }
 }

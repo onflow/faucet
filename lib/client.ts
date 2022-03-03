@@ -3,6 +3,7 @@ import {CREATE_ACCOUNT_ERROR, FUND_ACCOUNT_ERROR} from "lib/constants"
 export type CreateAccountURLParams = {
   publicKey: string
   trafficSource: string
+  sigAlgo: string
 }
 
 export type ClientCreateAccountResult = {

@@ -16,10 +16,12 @@ export default function CreateAccountForm({
   clientCreateAccount,
   publicKey,
   trafficSource,
+  sigAlgo,
 }: {
   clientCreateAccount: ClientCreateAccount,
   publicKey: string,
   trafficSource: string,
+  sigAlgo: string,
 }) {
   const [errors, setErrors] = useState<string[]>([])
   const [captchaToken, setCaptchaToken] = useState("")
@@ -31,7 +33,7 @@ export default function CreateAccountForm({
       <Formik
         initialValues={{
           publicKey,
-          signatureAlgorithm: "ECDSA_P256",
+          signatureAlgorithm: sigAlgo || "ECDSA_P256",
           hashAlgorithm: "SHA3_256",
         }}
         validationSchema={createAccountSchemaClient}
