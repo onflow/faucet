@@ -1,7 +1,7 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
-import {FLOW_TYPE, FUSD_TYPE} from "lib/constants"
-import publicConfig, {TOKEN_FUNDING_AMOUNTS} from "lib/publicConfig"
+import {FLOW_TYPE, FUSD_TYPE} from "../constants"
+import publicConfig, {TOKEN_FUNDING_AMOUNTS} from "../publicConfig"
 import {sendTransaction} from "./send"
 
 const txFundAccountFLOW = `
