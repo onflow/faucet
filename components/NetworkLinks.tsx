@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 
 import TabNav, {TabNavLink} from "components/TabNav"
-import {TEST_NET} from "lib/constants"
+import {TEST_NET, SANDBOX_NET} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import publicConfig from "lib/publicConfig"
 
@@ -40,8 +40,8 @@ export default function NetworkLinks() {
           />
           Testnet
         </TabNavLink>
-        {/* <TabNavLink
-          href={publicConfig.sandboxnetNetUrl}
+        <TabNavLink
+          href={publicConfig.sandboxNetUrl}
           active={publicConfig.network === SANDBOX_NET}
         >
           <img
@@ -54,7 +54,7 @@ export default function NetworkLinks() {
             sx={{mr: 2}}
           />
           Sandboxnet
-        </TabNavLink> */}
+        </TabNavLink>
       </TabNav>
     </div>
   )
