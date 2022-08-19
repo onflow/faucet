@@ -24,7 +24,7 @@
     "@onflow/fcl": "0.0.76",
     "@onflow/types": "0.0.4",
     "@onflow/util-encode-key": "0.0.2",
-    "@prisma/client": "^2.24.1",
+    "@prisma/client": "^4.2.1",
     "@theme-ui/match-media": "^0.9.1",
     "clipboard-copy": "^4.0.1",
     "date-fns": "^2.11.1",
@@ -63,7 +63,7 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.2.1",
-    "prisma": "^2.24.1",
+    "prisma": "^4.2.1",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.2"
   }

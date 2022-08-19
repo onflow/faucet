@@ -41,19 +41,19 @@ export default function NetworkLinks() {
           Testnet
         </TabNavLink>
         {/* <TabNavLink
-          href={publicConfig.canaryNetUrl}
-          active={publicConfig.network === CANARY_NET}
+          href={publicConfig.sandboxnetNetUrl}
+          active={publicConfig.network === SANDBOX_NET}
         >
           <img
             src={
-              publicConfig.network === CANARY_NET
-                ? "canarynet-faucet-icon.svg"
+              publicConfig.network === SANDBOX_NET
+                ? "sandboxnet-faucet-icon.svg"
                 : "gray-faucet-icon.svg"
             }
-            alt="Canarynet Faucet"
+            alt="Sandboxnet Faucet"
             sx={{mr: 2}}
           />
-          Canarynet
+          Sandboxnet
         </TabNavLink> */}
       </TabNav>
     </div>
