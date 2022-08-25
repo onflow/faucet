@@ -5,4 +5,5 @@ interface FlowThemeContextValue extends Omit<ThemeUIContextValue, "theme"> {
   theme: FlowTheme
 }
 
-export const useThemeUI = (themeUIUseThemeUI as unknown) as () => FlowThemeContextValue
+export const useThemeUI =
+  themeUIUseThemeUI as unknown as () => FlowThemeContextValue

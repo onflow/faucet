@@ -43,15 +43,11 @@ declare module "@onflow/fcl" {
     role: AccountRole
   }
 
-  export type Authorization = (
-    account: Partial<Account>
-  ) => Promise<{
+  export type Authorization = (account: Partial<Account>) => Promise<{
     tempId: string
     addr: string
     keyId: number
-    signingFunction: (data: {
-      message: string
-    }) => {
+    signingFunction: (data: {message: string}) => {
       addr: string
       keyId: number
       signature: string
@@ -92,9 +88,7 @@ declare module "@onflow/fcl" {
       type: Record<string, uknown>
     ) => TransactionArg[]
   }): Promise
-  export function tx(
-    arg: unknown
-  ): {
+  export function tx(arg: unknown): {
     onceSealed: () => uknown
   }
   export function currentUser(): {

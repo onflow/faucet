@@ -24,8 +24,7 @@ const theme = makeTheme({
     "32rem",
   ],
   fonts: {
-    body:
-      'Overpass, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+    body: 'Overpass, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     heading: "inherit",
     monospace: "Overpass Mono, monospace",
   },
