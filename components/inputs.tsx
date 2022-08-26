@@ -89,7 +89,9 @@ export const CustomInputComponent = ({
         sx={showError ? {...sx, ...errorInputStyles} : sx}
       />
       {showError && (
-        <FieldError>{errors[field.name]?.toLocaleString()}</FieldError>
+        <FieldError>
+          <>{errors[field.name]}</>
+        </FieldError>
       )}
     </>
   )
@@ -124,7 +126,9 @@ export const CustomTextareaComponent = ({
         sx={showError ? {...sx, ...errorInputStyles} : sx}
       />
       {showError && (
-        <FieldError>{errors[field.name]?.toLocaleString()}</FieldError>
+        <FieldError>
+          <>{errors[field.name]}</>
+        </FieldError>
       )}
     </>
   )
@@ -159,7 +163,9 @@ export const CustomSelectComponent = ({
       </Select>
 
       {touched[field.name] && errors[field.name] && (
-        <Text>{errors[field.name]?.toLocaleString()}</Text>
+        <Text>
+          <>{errors[field.name]}</>
+        </Text>
       )}
     </div>
   )
