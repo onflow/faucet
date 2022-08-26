@@ -2,7 +2,7 @@ import {PrismaClient} from "@prisma/client"
 const prisma = new PrismaClient()
 
 export async function getSignerKeyIndex() {
-  const results = await prisma.$queryRaw`
+  const results: {index: number}[] = await prisma.$queryRaw`
   UPDATE key
   SET last_used_at = current_timestamp
   WHERE index = (

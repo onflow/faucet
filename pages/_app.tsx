@@ -1,7 +1,7 @@
 import {SSRProvider} from "@react-aria/ssr"
 import "lib/fclConfig"
 import theme from "lib/theme"
-import {AppProps} from "next/dist/next-server/lib/router/router"
+import {AppProps} from "next/app"
 import {ThemeProvider} from "theme-ui"
 import "./fonts.css"
 

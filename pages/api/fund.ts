@@ -32,7 +32,8 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
     try {
       await fundAccountSchemaServer.validate(req.body, {context: {apiKey}})
     } catch (err) {
-      res.status(400).json({errors: err.errors})
+      const castedError = err as {error: string}
+      res.status(400).json({errors: castedError.error})
       return
     }
 

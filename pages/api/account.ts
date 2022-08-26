@@ -19,7 +19,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       await createAccountSchemaServer.validate(req.body, {context: {apiKey}})
     } catch (err) {
-      res.status(400).json({errors: err.errors})
+      const castedError = err as {error: string}
+      res.status(400).json({errors: castedError.error})
       return
     }
 
@@ -66,7 +67,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       )
       res.status(200).json({address})
     } catch (e) {
-      res.status(500).json({errors: [e]})
+      const castedError = e as {error: string}
+      res.status(500).json({errors: [castedError.error]})
     }
   } else {
     res.status(405).send("")

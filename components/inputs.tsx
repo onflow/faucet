@@ -88,7 +88,9 @@ export const CustomInputComponent = ({
         {...props}
         sx={showError ? {...sx, ...errorInputStyles} : sx}
       />
-      {showError && <FieldError>{errors[field.name]}</FieldError>}
+      {showError && (
+        <FieldError>{errors[field.name]?.toLocaleString()}</FieldError>
+      )}
     </>
   )
 }
@@ -101,7 +103,7 @@ export const CustomTextareaComponent = ({
   sx = {},
   ...props
 }: CustomFieldProps) => {
-  const ref = useRef<HTMLTextAreaElement>(null)
+  const ref = useRef<HTMLInputElement>(null)
   const {labelProps, inputProps} = useTextField(
     {...field, label: inputLabel},
     ref
@@ -121,7 +123,9 @@ export const CustomTextareaComponent = ({
         {...props}
         sx={showError ? {...sx, ...errorInputStyles} : sx}
       />
-      {showError && <FieldError>{errors[field.name]}</FieldError>}
+      {showError && (
+        <FieldError>{errors[field.name]?.toLocaleString()}</FieldError>
+      )}
     </>
   )
 }
@@ -155,7 +159,7 @@ export const CustomSelectComponent = ({
       </Select>
 
       {touched[field.name] && errors[field.name] && (
-        <Text>{errors[field.name]}</Text>
+        <Text>{errors[field.name]?.toLocaleString()}</Text>
       )}
     </div>
   )
