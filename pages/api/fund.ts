@@ -9,7 +9,7 @@ import {fundAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
 import {fundAccountSchemaServer} from "../../lib/validate"
 import {verifyAPIKey} from "../../lib/common"
-import { ValidationError } from "yup"
+import {ValidationError} from "yup"
 
 const scriptCheckFUSDVault = `
   import FUSD from ${publicConfig.contractFUSD}
@@ -37,7 +37,7 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
         res.status(400).json({errors: err.errors})
         return
       }
-      throw err;
+      throw err
     }
 
     const captchaToken = req.body["h-captcha-response"]

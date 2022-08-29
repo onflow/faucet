@@ -11,7 +11,7 @@ import {createAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
 import {createAccountSchemaServer} from "../../lib/validate"
 import {verifyAPIKey} from "../../lib/common"
-import { ValidationError } from "yup"
+import {ValidationError} from "yup"
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
@@ -24,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(400).json({errors: err.errors})
         return
       }
-      throw err;
+      throw err
     }
 
     const signatureAlgorithm: SigAlgoTypes = req.body.signatureAlgorithm
@@ -62,7 +62,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const authorization = getAuthorization(keyIndex)
 
-
     const {address} = await createAccount(
       publicKey,
       sigAlgo,
@@ -70,7 +69,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       authorization
     )
     res.status(200).json({address})
-
   } else {
     res.status(405).send("")
   }
