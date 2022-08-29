@@ -9,6 +9,7 @@ import {fundAccount, getAuthorization} from "../../lib/flow"
 import {getSignerKeyIndex} from "../../lib/keys"
 import {fundAccountSchemaServer} from "../../lib/validate"
 import {verifyAPIKey} from "../../lib/common"
+import { ValidationError } from "yup"
 
 const scriptCheckFUSDVault = `
   import FUSD from ${publicConfig.contractFUSD}
@@ -32,9 +33,11 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
     try {
       await fundAccountSchemaServer.validate(req.body, {context: {apiKey}})
     } catch (err) {
-      const castedError = err as {error: string}
-      res.status(400).json({errors: castedError.error})
-      return
+      if (err instanceof ValidationError) {
+        res.status(400).json({errors: err.errors})
+        return
+      }
+      throw err;
     }
 
     const captchaToken = req.body["h-captcha-response"]
@@ -63,6 +66,7 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
     if (apiKey) {
       if (!verifyAPIKey(apiKey, config.apiKeys)) {
         res.status(401).json({errors: ["Invalid API key"]})
+        return
       }
     } else {
       try {

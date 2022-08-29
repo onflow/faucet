@@ -1,9 +1,8 @@
 import fcl from "@onflow/fcl"
 import dotenv from "dotenv"
+dotenv.config()
 import fs from "fs"
 import path from "path"
-
-dotenv.config()
 import {getAuthorization} from "./flow/index"
 import {getSignerKeyIndex} from "./keys"
 
