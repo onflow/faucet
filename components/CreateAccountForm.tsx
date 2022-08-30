@@ -18,10 +18,10 @@ export default function CreateAccountForm({
   trafficSource,
   sigAlgo,
 }: {
-  clientCreateAccount: ClientCreateAccount,
-  publicKey: string,
-  trafficSource: string,
-  sigAlgo: string,
+  clientCreateAccount: ClientCreateAccount
+  publicKey: string
+  trafficSource: string
+  sigAlgo: string
 }) {
   const [errors, setErrors] = useState<string[]>([])
   const [captchaToken, setCaptchaToken] = useState("")

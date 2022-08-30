@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 
 import TabNav, {TabNavLink} from "components/TabNav"
-import {TEST_NET} from "lib/constants"
+import {TEST_NET, SANDBOX_NET} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import publicConfig from "lib/publicConfig"
 
@@ -40,21 +40,21 @@ export default function NetworkLinks() {
           />
           Testnet
         </TabNavLink>
-        {/* <TabNavLink
-          href={publicConfig.canaryNetUrl}
-          active={publicConfig.network === CANARY_NET}
+        <TabNavLink
+          href={publicConfig.sandboxNetUrl}
+          active={publicConfig.network === SANDBOX_NET}
         >
           <img
             src={
-              publicConfig.network === CANARY_NET
-                ? "canarynet-faucet-icon.svg"
+              publicConfig.network === SANDBOX_NET
+                ? "sandboxnet-faucet-icon.svg"
                 : "gray-faucet-icon.svg"
             }
-            alt="Canarynet Faucet"
+            alt="Sandboxnet Faucet"
             sx={{mr: 2}}
           />
-          Canarynet
-        </TabNavLink> */}
+          Sandboxnet
+        </TabNavLink>
       </TabNav>
     </div>
   )

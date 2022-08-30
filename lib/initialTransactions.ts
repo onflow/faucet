@@ -1,5 +1,6 @@
 import fcl from "@onflow/fcl"
 import dotenv from "dotenv"
+dotenv.config()
 import fs from "fs"
 import path from "path"
 import {getAuthorization} from "./flow/index"
@@ -14,7 +15,6 @@ const txSetupFUSDMinter = fs.readFileSync(
   "utf8"
 )
 
-dotenv.config()
 const signerAddress = process.env.NEXT_PUBLIC_SIGNER_ADDRESS
 if (!signerAddress) throw "Missing NEXT_PUBLIC_SIGNER_ADDRESS"
 
