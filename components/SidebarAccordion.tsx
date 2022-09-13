@@ -131,7 +131,10 @@ const AccordionOption = ({
         sx={styles.button}
         onClick={() => {
           buttonProps.onClick()
-          mixpanel.track("Faucet: FAQ Clicked", {title: data.title, network: config.network})
+          mixpanel.track("Faucet: FAQ Clicked", {
+            title: data.title,
+            network: config.network,
+          })
         }}
       >
         {data.title}

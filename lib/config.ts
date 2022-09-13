@@ -39,7 +39,7 @@ const config: Config = {
   signerPrivateKey,
   signerSigAlgo: getDefaultSignerSig(),
   signerHashAlgo: getDefaultSignerHash(),
-  network: process.env.NEXT_PUBLIC_NETWORK || ""
+  network: process.env.NEXT_PUBLIC_NETWORK || "",
 }
 
 export default config

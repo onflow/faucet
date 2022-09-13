@@ -40,7 +40,12 @@ export default function FundAccountForm() {
           } else if (response.amount) {
             const {amount} = response
             setResult({address, token, amount})
-            mixpanel.track("Faucet: Fund Account", {address, token, amount, network: config.network})
+            mixpanel.track("Faucet: Fund Account", {
+              address,
+              token,
+              amount,
+              network: config.network,
+            })
           }
 
           setSubmitting(false)

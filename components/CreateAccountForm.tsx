@@ -57,7 +57,11 @@ export default function CreateAccountForm({
           } else if (response.address) {
             const {address} = response
             setAddress(address)
-            mixpanel.track("Faucet: Create Account", {address, trafficSource, network: config.network})
+            mixpanel.track("Faucet: Create Account", {
+              address,
+              trafficSource,
+              network: config.network,
+            })
             try {
               await accountCreated(mixpanel.get_distinct_id(), address)
             } catch (err) {
