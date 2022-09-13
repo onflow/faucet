@@ -4,6 +4,7 @@ import {ACCOUNTS_KEYS_DOCS_URL, H_CAPTCHA_URL} from "lib/constants"
 import {useMixpanel} from "lib/mixpanel"
 import {useState} from "react"
 import {Link, Themed, ThemeUICSSObject} from "theme-ui"
+import config from "../lib/config"
 
 type AccordionOption = {
   title: string
@@ -130,7 +131,7 @@ const AccordionOption = ({
         sx={styles.button}
         onClick={() => {
           buttonProps.onClick()
-          mixpanel.track("Faucet: FAQ Clicked", {title: data.title})
+          mixpanel.track("Faucet: FAQ Clicked", {title: data.title, network: config.network})
         }}
       >
         {data.title}
