@@ -27,7 +27,7 @@ type Config = {
   hcaptchaSecretKey: string
   signerPrivateKey: string
   signerSigAlgo: SigAlgoTypes
-  signerHashAlgo: HashAlgoTypes,
+  signerHashAlgo: HashAlgoTypes
   network: string
 }
 
