@@ -11,7 +11,7 @@ import {useState} from "react"
 import {Box, Themed} from "theme-ui"
 import {ClientFundAccountResult} from "./FundAccountPanel"
 import FundAccountSubmitted from "./FundAccountSubmitted"
-import config from "../lib/config"
+import publicConfig from "../lib/publicConfig"
 
 export default function FundAccountForm() {
   const [errors, setErrors] = useState<string[]>([])
@@ -44,7 +44,7 @@ export default function FundAccountForm() {
               address,
               token,
               amount,
-              network: config.network,
+              network: publicConfig.network,
             })
           }
 

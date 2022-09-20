@@ -28,7 +28,6 @@ type Config = {
   signerPrivateKey: string
   signerSigAlgo: SigAlgoTypes
   signerHashAlgo: HashAlgoTypes
-  network: string
 }
 
 const config: Config = {
@@ -39,7 +38,6 @@ const config: Config = {
   signerPrivateKey,
   signerSigAlgo: getDefaultSignerSig(),
   signerHashAlgo: getDefaultSignerHash(),
-  network: process.env.NEXT_PUBLIC_NETWORK || "",
 }
 
 export default config
