@@ -11,6 +11,7 @@ import {useState} from "react"
 import {Box, Themed} from "theme-ui"
 import {ClientFundAccountResult} from "./FundAccountPanel"
 import FundAccountSubmitted from "./FundAccountSubmitted"
+import config from "../lib/config"
 
 export default function FundAccountForm() {
   const [errors, setErrors] = useState<string[]>([])
@@ -39,7 +40,12 @@ export default function FundAccountForm() {
           } else if (response.amount) {
             const {amount} = response
             setResult({address, token, amount})
-            mixpanel.track("Faucet: Fund Account", {address, token, amount})
+            mixpanel.track("Faucet: Fund Account", {
+              address,
+              token,
+              amount,
+              network: config.network,
+            })
           }
 
           setSubmitting(false)
