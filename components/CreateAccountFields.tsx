@@ -38,10 +38,7 @@ export default function CreateAccountFields({
         <Themed.p sx={{pr: 3}}>
           Your public key must be a 128 character hexadecimal string. You can
           generate your public/private key pairs using the{" "}
-          <Link
-            href={GENERATE_KEYS_DOCS_URL}
-            target="_blank"
-          >
+          <Link href={GENERATE_KEYS_DOCS_URL} target="_blank">
             Flow CLI
           </Link>
           .
