@@ -3,7 +3,7 @@ import Button from "components/Button"
 import Captcha from "components/Captcha"
 import FormErrors from "components/FormErrors"
 import {Field, useFormikContext} from "formik"
-import {paths} from "lib/constants"
+import {GENERATE_KEYS_DOCS_URL, paths} from "lib/constants"
 import {HashAlgos, SigAlgos} from "lib/crypto"
 import {Box, Grid, Link, Text, Themed} from "theme-ui"
 import {CustomSelectComponent, CustomTextareaComponent} from "./inputs"
@@ -38,10 +38,7 @@ export default function CreateAccountFields({
         <Themed.p sx={{pr: 3}}>
           Your public key must be a 128 character hexadecimal string. You can
           generate your public/private key pairs using the{" "}
-          <Link
-            href="https://docs.onflow.org/flow-cli/generate-keys/"
-            target="_blank"
-          >
+          <Link href={GENERATE_KEYS_DOCS_URL} target="_blank">
             Flow CLI
           </Link>
           .

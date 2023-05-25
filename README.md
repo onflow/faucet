@@ -6,7 +6,7 @@ Deployed at: https://testnet-faucet.onflow.org/
 
 ### Create a new account
 
-Use the [Flow CLI](https://docs.onflow.org/flow-cli) to generate a new key pair:
+Use the [Flow CLI](https://developers.flow.com/tooling/flow-cli) to generate a new key pair:
 
 ```sh
 # This command uses ECDSA_P256 and SHA3_256 by default
