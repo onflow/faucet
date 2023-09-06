@@ -7,7 +7,6 @@ import {
 
 const CORRECT_ADDRESS = "0xeb179c27144f783c"
 const FLOW_SUCCESS_RESPONSE = {token: "FLOW", amount: "1000.0"}
-const FUSD_SUCCESS_RESPONSE = {token: "FUSD", amount: "10.0"}
 
 const fundAccountForm = () => cy.get("[data-test='fund-account-form'")
 const addressInput = () => cy.get("input[name='address']")
@@ -37,28 +36,6 @@ describe("Fund account", () => {
       "contain",
       `${parseFloat(FLOW_SUCCESS_RESPONSE.amount).toLocaleString()} ${
         FLOW_SUCCESS_RESPONSE.token
-      } tokens`
-    )
-  })
-
-  it("Funds an account with FUSD tokens", () => {
-    cy.intercept("POST", "/api/fund", {body: FUSD_SUCCESS_RESPONSE, delay: 50})
-
-    fundAccountButton().should("be.disabled")
-
-    addressInput().type(CORRECT_ADDRESS)
-    cy.get('[data-test="token-select"] select').select("FUSD")
-    cy.submitCaptcha()
-
-    fundAccountButton().click()
-
-    fundAccountForm().should("contain", "We are funding your account")
-
-    fundAccountForm().should("contain", "Account Funded!")
-    fundAccountForm().should(
-      "contain",
-      `${parseFloat(FUSD_SUCCESS_RESPONSE.amount).toLocaleString()} ${
-        FUSD_SUCCESS_RESPONSE.token
       } tokens`
     )
   })

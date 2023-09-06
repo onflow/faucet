@@ -1,10 +1,9 @@
 export type Networks = "testnet" | "sandboxnet"
-export type TokenTypes = typeof FLOW_TYPE | typeof FUSD_TYPE
+export type TokenTypes = typeof FLOW_TYPE
 
 export const TEST_NET = "testnet"
 export const SANDBOX_NET = "sandboxnet"
 export const FLOW_TYPE = "FLOW"
-export const FUSD_TYPE = "FUSD"
 export const NETWORK_STATUS_URL = "https://status.onflow.org/"
 export const GENERATE_KEYS_DOCS_URL =
   "https://developers.flow.com/tooling/flow-cli/generate-keys"
@@ -23,8 +22,6 @@ export const ADDRESS_FORMAT_ERROR =
 export const ADDRESS_MISSING_ERROR = "Address is required."
 export const CREATE_ACCOUNT_ERROR = "Account creation has failed"
 export const FUND_ACCOUNT_ERROR = "Account funding has failed"
-export const MISSING_FUSD_VAULT_ERROR =
-  "This account does not have an FUSD vault"
 
 export const paths = {
   root: "/",

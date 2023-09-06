@@ -5,22 +5,14 @@ import FormErrors from "components/FormErrors"
 import {Field, useFormikContext} from "formik"
 import {
   FLOW_TYPE,
-  FUSD_TYPE,
-  MISSING_FUSD_VAULT_ERROR,
   paths,
 } from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import {Box, Link, Themed} from "theme-ui"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
-const FUSD_VAULT_DOCS_LINK = {
-  url: "https://docs.onflow.org/fusd/#how-do-i-get-an-fusd-enabled-wallet",
-  name: "How do I get an FUSD-enabled wallet?",
-}
-
 export const TOKEN_OPTIONS = [
   {value: FLOW_TYPE, label: `${NETWORK_DISPLAY_NAME} FLOW`},
-  {value: FUSD_TYPE, label: `${NETWORK_DISPLAY_NAME} FUSD`},
 ]
 
 export default function FundAccountFields({
@@ -80,11 +72,6 @@ export default function FundAccountFields({
         {errors.length > 0 && (
           <FormErrors
             errors={errors}
-            link={
-              errors.some(e => e === MISSING_FUSD_VAULT_ERROR)
-                ? FUSD_VAULT_DOCS_LINK
-                : undefined
-            }
           />
         )}
       </Box>

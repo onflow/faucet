@@ -12,7 +12,6 @@
     "db-seed": "node prisma/seed.mjs",
     "deploy": "npm run build && npm run db-migrate-deploy && npm run db-seed",
     "dev-deploy-contracts": "flow project deploy --network=emulator --update",
-    "initial-transactions": "ts-node lib/initialTransactions.ts --loader ts-node/esm",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "tsc": "./node_modules/typescript/bin/tsc",
