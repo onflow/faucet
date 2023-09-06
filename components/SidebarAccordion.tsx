@@ -3,7 +3,8 @@ import useAccordionOption from "hooks/useAccordionOption"
 import {ACCOUNTS_KEYS_DOCS_URL, H_CAPTCHA_URL} from "lib/constants"
 import {useMixpanel} from "lib/mixpanel"
 import {useState} from "react"
-import {Link, Themed, ThemeUICSSObject} from "theme-ui"
+import {Link, ThemeUICSSObject} from "theme-ui"
+import {Themed} from "@theme-ui/mdx"
 import publicConfig from "../lib/publicConfig"
 
 type AccordionOption = {

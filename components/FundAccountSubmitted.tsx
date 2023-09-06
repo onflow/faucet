@@ -1,7 +1,8 @@
 /** @jsxImportSource theme-ui */
 import Label from "components/Label"
 import LoadingFeedback from "components/LoadingFeedback"
-import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
+import {Box, Flex, Link, ThemeUICSSObject} from "theme-ui"
+import {Themed} from "@theme-ui/mdx"
 import {ClientFundAccountResult} from "./FundAccountPanel"
 
 const styles: Record<string, ThemeUICSSObject> = {

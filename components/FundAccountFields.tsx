@@ -10,7 +10,8 @@ import {
   paths,
 } from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
-import {Box, Link, Themed} from "theme-ui"
+import {Box, Link} from "theme-ui"
+import {Themed} from "@theme-ui/mdx"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
 const FUSD_VAULT_DOCS_LINK = {

@@ -3,7 +3,8 @@
 import {TokenTypes} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import {TOKEN_FUNDING_AMOUNTS} from "lib/publicConfig"
-import {Text, Themed, ThemeUICSSObject} from "theme-ui"
+import {Text, ThemeUICSSObject} from "theme-ui"
+import {Themed} from "@theme-ui/mdx"
 
 export default function TokenFundingInfo({
   description,

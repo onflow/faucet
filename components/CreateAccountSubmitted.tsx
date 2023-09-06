@@ -8,7 +8,8 @@ import {Field} from "formik"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import publicConfig from "lib/publicConfig"
 import {useRef, useState} from "react"
-import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
+import {Box, Flex, Link, ThemeUICSSObject} from "theme-ui"
+import {Themed} from "@theme-ui/mdx"
 import {CustomInputComponent} from "./inputs"
 
 const styles: Record<string, ThemeUICSSObject> = {

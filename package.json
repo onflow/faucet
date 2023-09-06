@@ -26,6 +26,7 @@
     "@onflow/util-encode-key": "^1.1.0",
     "@prisma/client": "^5.2.0",
     "@theme-ui/match-media": "^0.16.1",
+    "@theme-ui/mdx": "^0.16.1",
     "clipboard-copy": "^4.0.1",
     "date-fns": "^2.30.0",
     "elliptic": "^6.5.4",
