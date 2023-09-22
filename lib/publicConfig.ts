@@ -1,12 +1,8 @@
-import {SANDBOX_NET, Networks, TEST_NET, TokenTypes} from "./constants"
+import {Networks, TEST_NET, TokenTypes} from "./constants"
 
-const network =
-  process.env.NEXT_PUBLIC_NETWORK === SANDBOX_NET ? SANDBOX_NET : TEST_NET
+const network = TEST_NET
 const testNetUrl = process.env.NEXT_PUBLIC_TEST_NET_URL
 if (!testNetUrl) throw "Missing NEXT_PUBLIC_TEST_NET_URL"
-
-const sandboxNetUrl = process.env.NEXT_PUBLIC_SANDBOX_NET_URL
-if (!sandboxNetUrl) throw "Missing NEXT_PUBLIC_SANDBOX_NET_URL"
 
 const tokenAmountFlow = process.env.NEXT_PUBLIC_TOKEN_AMOUNT_FLOW
 if (!tokenAmountFlow) throw "Missing NEXT_PUBLIC_TOKEN_AMOUNT_FLOW"
@@ -33,7 +29,6 @@ const walletDiscovery = process.env.NEXT_PUBLIC_WALLET_DISCOVERY
 export type PublicConfig = {
   network: Networks
   testNetUrl: string
-  sandboxNetUrl: string
   tokenAmountFlow: string
   tokenAmountFusd: string
   hcaptchaSiteKey: string
@@ -49,7 +44,6 @@ export type PublicConfig = {
 const publicConfig: PublicConfig = {
   network,
   testNetUrl,
-  sandboxNetUrl,
   tokenAmountFlow,
   tokenAmountFusd,
   hcaptchaSiteKey:

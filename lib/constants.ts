@@ -1,8 +1,7 @@
-export type Networks = "testnet" | "sandboxnet"
+export type Networks = "testnet"
 export type TokenTypes = typeof FLOW_TYPE | typeof FUSD_TYPE
 
 export const TEST_NET = "testnet"
-export const SANDBOX_NET = "sandboxnet"
 export const FLOW_TYPE = "FLOW"
 export const FUSD_TYPE = "FUSD"
 export const NETWORK_STATUS_URL = "https://status.onflow.org/"
