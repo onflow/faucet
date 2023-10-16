@@ -24,8 +24,16 @@ export const CREATE_ACCOUNT_ERROR = "Account creation has failed"
 export const FUND_ACCOUNT_ERROR = "Account funding has failed"
 export const MISSING_FUSD_VAULT_ERROR =
   "This account does not have an FUSD vault"
+export const INVALID_NETWORK_ADDRESS_ERROR = (network: Networks) =>
+  `This address is invalid for ${network}, please verify that it is correct.`
 
 export const paths = {
   root: "/",
   fundAccount: "/fund-account",
+}
+
+export const ADDRESS_REGEXP = /^(0x)?[0-9a-fA-F]{16}$/
+
+export const NETWORK_CODEWORDS = {
+  testnet: "0x6834ba37b3980209",
 }

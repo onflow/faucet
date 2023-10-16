@@ -1,4 +1,10 @@
-import {CREATE_ACCOUNT_ERROR, FUND_ACCOUNT_ERROR} from "lib/constants"
+import {
+  CREATE_ACCOUNT_ERROR,
+  FUND_ACCOUNT_ERROR,
+  INVALID_NETWORK_ADDRESS_ERROR,
+  Networks,
+} from "lib/constants"
+import {isValidNetworkAddress} from "./network"
 
 export type CreateAccountURLParams = {
   publicKey: string
@@ -49,6 +55,7 @@ export const clientCreateAccount: ClientCreateAccount = async (
 
 export type ClientFundAccount = (
   address: string,
+  network: Networks,
   token: string,
   captchaToken: string
 ) => Promise<{
@@ -58,9 +65,15 @@ export type ClientFundAccount = (
 
 export const fundAccount: ClientFundAccount = async (
   address,
+  network,
   token,
   captchaToken
 ) => {
+  // Validate address
+  if (!isValidNetworkAddress(address, network)) {
+    return {errors: [INVALID_NETWORK_ADDRESS_ERROR(network)]}
+  }
+
   try {
     const response = await fetch("/api/fund", {
       body: JSON.stringify({
