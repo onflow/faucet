@@ -1,7 +1,11 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import {verify} from "hcaptcha"
-import {FUSD_TYPE, MISSING_FUSD_VAULT_ERROR} from "lib/constants"
+import {
+  FUSD_TYPE,
+  INVALID_NETWORK_ADDRESS_ERROR,
+  MISSING_FUSD_VAULT_ERROR,
+} from "lib/constants"
 import publicConfig from "lib/publicConfig"
 import {NextApiRequest, NextApiResponse} from "next"
 import config from "../../lib/config"
@@ -10,6 +14,7 @@ import {getSignerKeyIndex} from "../../lib/keys"
 import {fundAccountSchemaServer} from "../../lib/validate"
 import {verifyAPIKey} from "../../lib/common"
 import {ValidationError} from "yup"
+import {isValidNetworkAddress} from "lib/network"
 
 const scriptCheckFUSDVault = `
   import FUSD from ${publicConfig.contractFUSD}
@@ -43,6 +48,14 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
     const captchaToken = req.body["h-captcha-response"]
     const address = fcl.withPrefix(req.body.address) || ""
     const token = req.body.token
+
+    // Validate address
+    if (!isValidNetworkAddress(address, publicConfig.network)) {
+      res
+        .status(400)
+        .json({errors: [INVALID_NETWORK_ADDRESS_ERROR(publicConfig.network)]})
+      return
+    }
 
     if (token === FUSD_TYPE) {
       try {
