@@ -33,12 +33,7 @@ export default function FundAccountForm() {
           setErrors([])
           setCaptchaToken("")
 
-          const response = await fundAccount(
-            address,
-            publicConfig.network,
-            token,
-            captchaToken
-          )
+          const response = await fundAccount(address, token, captchaToken)
 
           if (response.errors) {
             setErrors(response.errors)

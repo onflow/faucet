@@ -55,7 +55,6 @@ export const clientCreateAccount: ClientCreateAccount = async (
 
 export type ClientFundAccount = (
   address: string,
-  network: Networks,
   token: string,
   captchaToken: string
 ) => Promise<{
@@ -65,15 +64,9 @@ export type ClientFundAccount = (
 
 export const fundAccount: ClientFundAccount = async (
   address,
-  network,
   token,
   captchaToken
 ) => {
-  // Validate address
-  if (!isValidNetworkAddress(address, network)) {
-    return {errors: [INVALID_NETWORK_ADDRESS_ERROR(network)]}
-  }
-
   try {
     const response = await fetch("/api/fund", {
       body: JSON.stringify({
