@@ -25,7 +25,7 @@ export const FUND_ACCOUNT_ERROR = "Account funding has failed"
 export const MISSING_FUSD_VAULT_ERROR =
   "This account does not have an FUSD vault"
 export const INVALID_NETWORK_ADDRESS_ERROR = (network: Networks) =>
-  `This address is invalid for ${network}, please verify that it is correct.`
+  `This address is invalid for ${network}, please verify that it is correct`
 
 export const paths = {
   root: "/",
