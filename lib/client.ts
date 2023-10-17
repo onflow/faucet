@@ -1,10 +1,4 @@
-import {
-  CREATE_ACCOUNT_ERROR,
-  FUND_ACCOUNT_ERROR,
-  INVALID_NETWORK_ADDRESS_ERROR,
-  Networks,
-} from "lib/constants"
-import {isValidNetworkAddress} from "./network"
+import {CREATE_ACCOUNT_ERROR, FUND_ACCOUNT_ERROR} from "lib/constants"
 
 export type CreateAccountURLParams = {
   publicKey: string
