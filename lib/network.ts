@@ -1,6 +1,7 @@
 import capitalize from "./capitalize"
 import {ADDRESS_REGEXP, NETWORK_CODEWORDS} from "./constants"
 import publicConfig from "./publicConfig"
+import * as fcl from "@onflow/fcl"
 
 export const NETWORK_DISPLAY_NAME = capitalize(publicConfig.network)
 
@@ -23,6 +24,7 @@ export function isValidNetworkAddress(
   address: string,
   network: keyof typeof NETWORK_CODEWORDS
 ) {
+  address = fcl.withPrefix(address) || ""
   if (ADDRESS_REGEXP.test(address) === false) return false
 
   let codeword = BigInt(address) ^ BigInt(NETWORK_CODEWORDS[network])
