@@ -4,6 +4,9 @@ const network = TEST_NET
 const testNetUrl = process.env.NEXT_PUBLIC_TEST_NET_URL
 if (!testNetUrl) throw "Missing NEXT_PUBLIC_TEST_NET_URL"
 
+const crescendoNetUrl = process.env.NEXT_PUBLIC_CRESCENDO_NET_URL
+if (!crescendoNetUrl) throw "Missing NEXT_PUBLIC_CRESCENDO_NET_URL"
+
 const tokenAmountFlow = process.env.NEXT_PUBLIC_TOKEN_AMOUNT_FLOW
 if (!tokenAmountFlow) throw "Missing NEXT_PUBLIC_TOKEN_AMOUNT_FLOW"
 
@@ -29,6 +32,7 @@ const walletDiscovery = process.env.NEXT_PUBLIC_WALLET_DISCOVERY
 export type PublicConfig = {
   network: Networks
   testNetUrl: string
+  crescendoNetUrl: string
   tokenAmountFlow: string
   tokenAmountFusd: string
   hcaptchaSiteKey: string
@@ -44,6 +48,7 @@ export type PublicConfig = {
 const publicConfig: PublicConfig = {
   network,
   testNetUrl,
+  crescendoNetUrl,
   tokenAmountFlow,
   tokenAmountFusd,
   hcaptchaSiteKey:

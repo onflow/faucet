@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 
 import TabNav, {TabNavLink} from "components/TabNav"
-import {TEST_NET} from "lib/constants"
+import {TEST_NET, CRESCENDO_NET} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import publicConfig from "lib/publicConfig"
 
@@ -39,6 +39,21 @@ export default function NetworkLinks() {
             sx={{mr: 2}}
           />
           Testnet
+        </TabNavLink>
+        <TabNavLink
+          href={publicConfig.crescendoNetUrl}
+          active={publicConfig.network === CRESCENDO_NET}
+        >
+          <img
+            src={
+              publicConfig.network === CRESCENDO_NET 
+                ? "sandboxnet-faucet-icon.svg"
+                : "gray-faucet-icon.svg"
+            }
+            alt="Crescendonet Faucet"
+            sx={{mr: 2}}
+          />
+          Sandboxnet
         </TabNavLink>
       </TabNav>
     </div>
