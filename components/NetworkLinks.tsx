@@ -53,7 +53,7 @@ export default function NetworkLinks() {
             alt="Crescendo Faucet"
             sx={{mr: 2}}
           />
-          Sandboxnet
+          Crescendo
         </TabNavLink>
       </TabNav>
     </div>
