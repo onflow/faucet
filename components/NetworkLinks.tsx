@@ -47,7 +47,7 @@ export default function NetworkLinks() {
           <img
             src={
               publicConfig.network === CRESCENDO_NET
-                ? "sandboxnet-faucet-icon.svg"
+                ? "crescendo-faucet-icon.svg"
                 : "gray-faucet-icon.svg"
             }
             alt="Crescendo Faucet"
