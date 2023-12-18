@@ -1,8 +1,8 @@
-export type Networks = "testnet" | "crescendoNet"
+export type Networks = "testnet" | "crescendo"
 export type TokenTypes = typeof FLOW_TYPE | typeof FUSD_TYPE
 
 export const TEST_NET = "testnet"
-export const CRESCENDO_NET = "crescendoNet"
+export const CRESCENDO_NET = "crescendo"
 export const FLOW_TYPE = "FLOW"
 export const FUSD_TYPE = "FUSD"
 export const NETWORK_STATUS_URL = "https://status.onflow.org/"

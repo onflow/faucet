@@ -50,7 +50,7 @@ export default function NetworkLinks() {
                 ? "sandboxnet-faucet-icon.svg"
                 : "gray-faucet-icon.svg"
             }
-            alt="Crescendonet Faucet"
+            alt="Crescendo Faucet"
             sx={{mr: 2}}
           />
           Sandboxnet

@@ -4,8 +4,8 @@ const network = TEST_NET
 const testNetUrl = process.env.NEXT_PUBLIC_TEST_NET_URL
 if (!testNetUrl) throw "Missing NEXT_PUBLIC_TEST_NET_URL"
 
-const crescendoNetUrl = process.env.NEXT_PUBLIC_CRESCENDO_NET_URL
-if (!crescendoNetUrl) throw "Missing NEXT_PUBLIC_CRESCENDO_NET_URL"
+const crescendoNetUrl = process.env.NEXT_PUBLIC_CRESCENDO_URL
+if (!crescendoNetUrl) throw "Missing NEXT_PUBLIC_CRESCENDO_URL"
 
 const tokenAmountFlow = process.env.NEXT_PUBLIC_TOKEN_AMOUNT_FLOW
 if (!tokenAmountFlow) throw "Missing NEXT_PUBLIC_TOKEN_AMOUNT_FLOW"
