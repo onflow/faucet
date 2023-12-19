@@ -104,6 +104,7 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(200).json({token, amount})
   } else {
+    console.log("Method not allowed for some reason", req.method)
     res.status(405).send("")
   }
 }
