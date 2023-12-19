@@ -32,7 +32,9 @@ const scriptCheckFUSDVault = `
 `
 
 export default async function fund(req: NextApiRequest, res: NextApiResponse) {
+  console.log("fund with this method", req.method)
   if (req.method === "POST") {
+    console.log("POST fund with this body", req.body)
     const apiKey = req.headers["authorization"]
 
     try {
@@ -104,7 +106,6 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(200).json({token, amount})
   } else {
-    console.log("Method not allowed for some reason", req.method)
     res.status(405).send("")
   }
 }
