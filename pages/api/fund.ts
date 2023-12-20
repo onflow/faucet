@@ -32,9 +32,7 @@ const scriptCheckFUSDVault = `
 `
 
 export default async function fund(req: NextApiRequest, res: NextApiResponse) {
-  console.log("fund with this method", req.method)
   if (req.method === "POST") {
-    console.log("POST fund with this body", req.body)
     const apiKey = req.headers["authorization"]
 
     try {
