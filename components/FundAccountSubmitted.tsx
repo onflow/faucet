@@ -3,6 +3,7 @@ import Label from "components/Label"
 import LoadingFeedback from "components/LoadingFeedback"
 import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
 import {ClientFundAccountResult} from "./FundAccountPanel"
+import publicConfig from "lib/publicConfig"
 
 const styles: Record<string, ThemeUICSSObject> = {
   resultsContainer: {
@@ -46,8 +47,7 @@ export default function FundAccountSubmitted({
             <Box mb={4}>
               <Themed.h3 sx={{my: 0}}>Account Funded!</Themed.h3>
               <Themed.p>
-                The requested amount has been transfered to your Testnet
-                account!
+                {`The requested amount has been transferred to your ${publicConfig.network} account!`}
               </Themed.p>
             </Box>
             <Box>
