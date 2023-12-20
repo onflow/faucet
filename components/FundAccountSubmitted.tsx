@@ -61,7 +61,7 @@ export default function FundAccountSubmitted({
                   } tokens`}
                 </div>
                 <Link
-                  href={`https://flow-view-source.com/${publicConfig.network}/account/${result.address}`}
+                  href={`https://${publicConfig.network}.flowdiver.io/account/${result.address}`}
                   target="_blank"
                   variant="secondary"
                   sx={{fontSize: 1}}
