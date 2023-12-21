@@ -28,6 +28,7 @@ export default function FundAccountForm({address}: {address: string}) {
           address: address,
           token: FLOW_TYPE,
         }}
+        enableReinitialize
         validationSchema={fundAccountSchemaClient}
         onSubmit={async ({address, token}, {setSubmitting}) => {
           setErrors([])
