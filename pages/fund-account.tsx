@@ -6,14 +6,15 @@ import {useRouter} from "next/router"
 
 export default function Fund() {
   const router = useRouter()
-  const {address} = router.query
+  const {isReady, query} = router
+  const {address} = query
   const formattedAddress = Array.isArray(address) ? address[0] : address || ""
 
   return (
     <AppContainer>
       <PageTitle>Fund Account</PageTitle>
       <Header />
-      <FundAccountPanel address={formattedAddress} />
+      {isReady && <FundAccountPanel address={formattedAddress} />}
     </AppContainer>
   )
 }
