@@ -25,7 +25,7 @@ export default function FundAccountForm({address}: {address: string}) {
     <FormContainer>
       <Formik
         initialValues={{
-          address: address,
+          address: "testnet-account-test",
           token: FLOW_TYPE,
         }}
         validationSchema={fundAccountSchemaClient}
