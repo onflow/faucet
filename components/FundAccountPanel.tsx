@@ -8,12 +8,12 @@ export type ClientFundAccountResult = {
   amount: string
 }
 
-export default function FundAccountPanel() {
+export default function FundAccountPanel({address}: {address: string}) {
   return (
     <div>
       <Grid gap={[0, 0, 40, 100]} columns={["auto", "auto", "1.6fr 1fr"]}>
         <Box>
-          <FundAccountForm />
+          <FundAccountForm address={address} />
         </Box>
         <Box>
           <Sidebar />
