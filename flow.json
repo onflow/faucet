@@ -6,6 +6,12 @@
     }
   },
   "contracts": {
+    "Burner": {
+      "source": "./cadence/contracts/Burner.cdc",
+      "aliases": {
+        "emulator": "0xee82856bf20e2aa6"
+      }
+    },
     "FUSD": {
       "source": "./cadence/contracts/FUSD.cdc",
       "aliases": {
@@ -18,12 +24,40 @@
         "emulator": "0xee82856bf20e2aa6",
         "testnet": "0x9a0766d93b6608b7"
       }
+    },
+    "MetadataViews": {
+      "source": "./cadence/contracts/MetadataViews.cdc",
+      "aliases": {
+        "emulator": "f8d6e0586b0a20c7",
+        "testnet": "631e88ae7f1d7c20"
+      }
+    },
+    "NonFungibleToken": {
+      "source": "./cadence/contracts/NonFungibleToken.cdc",
+      "aliases": {
+        "emulator": "f8d6e0586b0a20c7",
+        "testnet": "631e88ae7f1d7c20"
+      }
+    },
+    "ViewResolver": {
+      "source": "./cadence/contracts/ViewResolver.cdc",
+      "aliases": {
+        "emulator": "f8d6e0586b0a20c7",
+        "testnet": "631e88ae7f1d7c20"
+      }
+    },
+    "FungibleTokenMetadataViews": {
+      "source": "./cadence/contracts/FungibleTokenMetadataViews.cdc",
+      "aliases": {
+        "emulator": "f8d6e0586b0a20c7",
+        "testnet": "0xf233dcee88fe0abe"
+      }
     }
   },
   "networks": {
     "emulator": "127.0.0.1:3569",
     "testnet": "access.devnet.nodes.onflow.org:9000",
-    "crescendo": "access.crescendo.nodes.onflow.org:9000" 
+    "crescendo": "access.crescendo.nodes.onflow.org:9000"
   },
   "accounts": {
     "emulator-account": {
@@ -37,7 +71,11 @@
   },
   "deployments": {
     "emulator": {
-      "emulator-account": ["FUSD"]
+      "emulator-account": [
+        "FungibleTokenMetadataViews",
+        "Burner",
+        "FUSD"
+      ]
     }
   }
 }
