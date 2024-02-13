@@ -3,7 +3,7 @@ import MetadataViews from "MetadataViews"
 import FungibleTokenMetadataViews from "FungibleTokenMetadataViews"
 import ViewResolver from "ViewResolver"
 
-access(all) contract FUSD: FungibleToken {
+access(all) contract FUSD {
 
     access(all) entitlement ProxyOwner
 
@@ -75,6 +75,19 @@ access(all) contract FUSD: FungibleToken {
             self.balance = balance
         }
 
+        // TODO: REMOVE BELOW
+        // BEGIN OLD INTERFACE METHODS
+        access(all) view fun getBalance(): UFix64 {
+            return self.balance
+        }
+        access(all) view fun getDefaultStoragePath(): StoragePath? {
+            return /storage/fusdVault
+        }
+        access(all) view fun getDefaultPublicPath(): PublicPath? {
+            return /public/fusdReceiver
+        }
+        // END OLD INTERFACE METHODS
+
         /// Called when a fungible token is burned via the `Burner.burn()` method
         access(contract) fun burnCallback() {
             if self.balance > 0.0 {
@@ -116,7 +129,7 @@ access(all) contract FUSD: FungibleToken {
         // created Vault to the context that called so it can be deposited
         // elsewhere.
         //
-        access(FungibleToken.Withdraw) fun withdraw(amount: UFix64): @{FungibleToken.Vault} {
+        access(FungibleToken.Withdrawable) fun withdraw(amount: UFix64): @{FungibleToken.Vault} {
             self.balance = self.balance - amount
             emit TokensWithdrawn(amount: amount, from: self.owner?.address)
             return <-create Vault(balance: amount)
