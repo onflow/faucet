@@ -58,7 +58,7 @@ access(all) contract FlowEVMPassthrough {
         /// Deposits Flow to encapsulated COA according to Receiver interface
         access(all) fun deposit(from: @{FungibleToken.Vault}) {
             pre {
-                from.getType() == Type<@FlowToken.Vault>(): "Passthrough only supports FlowToken.Vaults"
+                self.isSupportedVaultType(type: from.getType()): "Passthrough only supports FlowToken.Vaults"
             }
             let flowVault <- from as! @FlowToken.Vault
             self.borrowCOA().deposit(from: <-flowVault)
@@ -73,7 +73,7 @@ access(all) contract FlowEVMPassthrough {
         /// Deposits Flow to defined EVM Address using a call to passthrough Solidity contract
         access(all) fun evmTransfer(from: @{FungibleToken.Vault}, to: EVM.EVMAddress, gasLimit: UInt64) {
             pre {
-                from.getType() == Type<@FlowToken.Vault>(): "Passthrough only supports FlowToken.Vaults"
+                self.isSupportedVaultType(type: from.getType()): "Passthrough only supports FlowToken.Vaults"
             }
             let amount = from.getBalance()
             // TODO: Replace with UInt256(EVM.Balance(flow: from.balance).toAttoFlow())
