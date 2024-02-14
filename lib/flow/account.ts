@@ -7,25 +7,36 @@ import {sendTransaction} from "./send"
 const accountCreatedEventType = "flow.AccountCreated"
 
 const txCreateAccount = `
+import CryptoUtils from ${publicConfig.contractFlowToken}
 import FlowToken from ${publicConfig.contractFlowToken}
 import FungibleToken from ${publicConfig.contractFungibleToken}
 
-transaction(publicKey: String, flowTokenAmount: UFix64) {
+transaction(publicKey: String, flowTokenAmount: UFix64, sigAlgorithm: SignatureAlgorithm, hashAlgorithm: HashAlgorithm) {
   let tokenAdmin: &FlowToken.Administrator
   let tokenReceiver: &{FungibleToken.Receiver}
 
-  prepare(signer: AuthAccount) {
+  prepare(signer: auth(BorrowValue) &Account) {
     let account = AuthAccount(payer: signer)
 
-    account.addPublicKey(publicKey.decodeHex())
+    let signatureAlgorithm: UInt8 = CryptoUtils.getSigAlgo(fromRawValue: sigAlgorithm)
+      ?? panic("Invalid SignatureAlgorithm")
+    let hashAlgorithm: UInt8 = CryptoUtils.getHashAlgo(fromRawValue: sigAlgorithm)
+      ?? panic("Invalid HashAlgorithm")
 
-		self.tokenAdmin = signer
-		  .borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
+    let key = PublicKey(
+      publicKey: publicKey.decodeHex(),
+      signatureAlgorithm: signatureAlgorithm
+    )
+    account.keys.add(
+      publicKey: key,
+      hashAlgorithm: hashAlgorithm,
+      weight: 1000.0
+    )
+
+		self.tokenAdmin = signer.storage.borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
 		  ?? panic("Signer is not the token admin")
 
-		self.tokenReceiver = account
-		  .getCapability(/public/flowTokenReceiver)!
-		  .borrow<&{FungibleToken.Receiver}>()
+		self.tokenReceiver = account.capabilities.borrow<&{FungibleToken.Receiver}>(/public/flowTokenReceiver)!
 		  ?? panic("Unable to borrow receiver reference")
 	}
 
@@ -46,12 +57,13 @@ export async function createAccount(
   hashAlgo: number,
   authorization: fcl.Authorization
 ) {
-  const encodedPublicKey = encodeKey(publicKey, sigAlgo, hashAlgo, 1000)
   const result = await sendTransaction({
     transaction: txCreateAccount,
     args: [
-      fcl.arg(encodedPublicKey, t.String),
+      fcl.arg(publicKey, t.String),
       fcl.arg(publicConfig.tokenAmountFlow, t.UFix64),
+      fcl.arg(sigAlgo.toString(), t.UInt8),
+      fcl.arg(hashAlgo.toString(), t.UInt8),
     ],
     authorizations: [authorization],
     payer: authorization,

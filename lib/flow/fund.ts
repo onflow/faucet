@@ -13,14 +13,12 @@ transaction(address: Address, amount: UFix64) {
   let tokenReceiver: &{FungibleToken.Receiver}
 
   prepare(signer: AuthAccount) {
-		self.tokenAdmin = signer
-		  .borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
+    self.tokenAdmin = signer.storage.borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
 		  ?? panic("Signer is not the token admin")
 
-		self.tokenReceiver = getAccount(address)
-		  .getCapability(/public/flowTokenReceiver)!
-		  .borrow<&{FungibleToken.Receiver}>()
-		  ?? panic("Unable to borrow receiver reference")
+    self.tokenReceiver = getAccount(address).capabilities.borrow<&{FungibleToken.Receiver}>(
+        /public/flowTokenReceiver
+      ) ?? panic("Could not borrow receiver reference to the recipient's Vault")
 	}
 
 	execute {
@@ -43,14 +41,12 @@ transaction(address: Address, amount: UFix64) {
   let tokenReceiver: &{FungibleToken.Receiver}
 
   prepare(minterAccount: AuthAccount) {
-      self.tokenMinter = minterAccount
-          .borrow<&FUSD.MinterProxy>(from: FUSD.MinterProxyStoragePath)
+      self.tokenMinter = minterAccount.storage.borrow<&FUSD.MinterProxy>(from: FUSD.MinterProxyStoragePath)
           ?? panic("No minter available")
 
-      self.tokenReceiver = getAccount(address)
-          .getCapability(/public/fusdReceiver)!
-          .borrow<&{FungibleToken.Receiver}>()
-          ?? panic("Unable to borrow receiver reference")
+      self.tokenReceiver = getAccount(address).capabilities.borrow<&{FungibleToken.Receiver}>(
+          /public/fusdReceiver
+        ) ?? panic("Unable to borrow receiver reference")
   }
 
   execute {
