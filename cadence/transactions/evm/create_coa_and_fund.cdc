@@ -23,6 +23,6 @@ transaction(amount: UFix64) {
         account.address().deposit(from: <-self.sentVault)
 
         log(account.balance())
-        self.auth.storage.save<@EVM.BridgedAccount>(<-account, to: StoragePath(identifier: "evm")!)
+        self.auth.storage.save(<-account, to: StoragePath(identifier: "evm")!)
     }
 }
