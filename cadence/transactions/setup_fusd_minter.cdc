@@ -8,18 +8,16 @@
 import FUSD from 0xFUSDADDRESS
 
 transaction {
-    prepare(minter: AuthAccount) {
+    prepare(minter: auth(IssueStorageCapabilityController, SaveValue) &Account) {
 
         let minterProxy <- FUSD.createMinterProxy()
 
-        minter.save(
+        minter.storage.save(
             <- minterProxy,
             to: FUSD.MinterProxyStoragePath,
         )
 
-        minter.link<&FUSD.MinterProxy{FUSD.MinterProxyPublic}>(
-            FUSD.MinterProxyPublicPath,
-            target: FUSD.MinterProxyStoragePath
-        )
+        let minterProxyCap = minter.capabilities.storage.issue<&FUSD.MinterProxy>(FUSD.MinterProxyStoragePath)
+        minter.capabilities.publish(minterProxyCap, at: FUSD.MinterProxyPublicPath)
     }
 }
