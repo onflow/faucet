@@ -1,8 +1,8 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
-import {encodeKey} from "@onflow/util-encode-key"
+import { encodeKey } from "@onflow/util-encode-key"
 import publicConfig from "../publicConfig"
-import {sendTransaction} from "./send"
+import { sendTransaction } from "./send"
 
 const accountCreatedEventType = "flow.AccountCreated"
 
@@ -11,16 +11,16 @@ import CryptoUtils from ${publicConfig.contractFlowToken}
 import FlowToken from ${publicConfig.contractFlowToken}
 import FungibleToken from ${publicConfig.contractFungibleToken}
 
-transaction(publicKey: String, flowTokenAmount: UFix64, sigAlgorithm: SignatureAlgorithm, hashAlgorithm: HashAlgorithm) {
+transaction(publicKey: String, flowTokenAmount: UFix64, sigAlgorithm: UInt8, hashAlgorithm: UInt8) {
   let tokenAdmin: &FlowToken.Administrator
   let tokenReceiver: &{FungibleToken.Receiver}
 
   prepare(signer: auth(BorrowValue) &Account) {
-    let account = AuthAccount(payer: signer)
+    let account = Account(payer: signer)
 
-    let signatureAlgorithm: UInt8 = CryptoUtils.getSigAlgo(fromRawValue: sigAlgorithm)
+    let signatureAlgorithm = CryptoUtils.getSigAlgo(fromRawValue: sigAlgorithm)
       ?? panic("Invalid SignatureAlgorithm")
-    let hashAlgorithm: UInt8 = CryptoUtils.getHashAlgo(fromRawValue: sigAlgorithm)
+    let hashAlgorithm = CryptoUtils.getHashAlgo(fromRawValue: sigAlgorithm)
       ?? panic("Invalid HashAlgorithm")
 
     let key = PublicKey(
@@ -36,7 +36,7 @@ transaction(publicKey: String, flowTokenAmount: UFix64, sigAlgorithm: SignatureA
 		self.tokenAdmin = signer.storage.borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
 		  ?? panic("Signer is not the token admin")
 
-		self.tokenReceiver = account.capabilities.borrow<&{FungibleToken.Receiver}>(/public/flowTokenReceiver)!
+		self.tokenReceiver = account.capabilities.borrow<&{FungibleToken.Receiver}>(/public/flowTokenReceiver)
 		  ?? panic("Unable to borrow receiver reference")
 	}
 
