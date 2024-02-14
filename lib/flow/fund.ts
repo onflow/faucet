@@ -37,12 +37,13 @@ import FUSD from ${publicConfig.contractFUSD}
 import FungibleToken from ${publicConfig.contractFungibleToken}
 
 transaction(address: Address, amount: UFix64) {
-  let tokenMinter: &FUSD.MinterProxy
+  let tokenMinter: auth(FUSD.ProxyOwner) &FUSD.MinterProxy
   let tokenReceiver: &{FungibleToken.Receiver}
 
   prepare(minterAccount: AuthAccount) {
-      self.tokenMinter = minterAccount.storage.borrow<&FUSD.MinterProxy>(from: FUSD.MinterProxyStoragePath)
-          ?? panic("No minter available")
+      self.tokenMinter = minterAccount.storage.borrow<auth(FUSD.ProxyOwner) &FUSD.MinterProxy>(
+          from: FUSD.MinterProxyStoragePath
+        ) ?? panic("No minter available")
 
       self.tokenReceiver = getAccount(address).capabilities.borrow<&{FungibleToken.Receiver}>(
           /public/fusdReceiver
