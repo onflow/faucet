@@ -3,7 +3,7 @@ import useAccordionOption from "hooks/useAccordionOption"
 import {ACCOUNTS_KEYS_DOCS_URL, H_CAPTCHA_URL} from "lib/constants"
 import {useMixpanel} from "lib/mixpanel"
 import {useState} from "react"
-import {Link, ThemeUICSSObject} from "theme-ui"
+import {Box, Button, Link, ThemeUICSSObject} from "theme-ui"
 import {Themed} from "@theme-ui/mdx"
 import publicConfig from "../lib/publicConfig"
 
@@ -126,8 +126,8 @@ const AccordionOption = ({
     },
   }
   return (
-    <div sx={styles.container}>
-      <button
+    <Box sx={styles.container}>
+      <Button
         {...buttonProps}
         sx={styles.button}
         onClick={() => {
@@ -140,13 +140,13 @@ const AccordionOption = ({
       >
         {data.title}
         <img src={`caret-${isOpen ? "up" : "down"}.svg`} />
-      </button>
+      </Button>
       {isOpen && (
-        <div sx={styles.content} {...contentProps}>
+        <Box sx={styles.content} {...contentProps}>
           {typeof data.content === "function" ? data.content({}) : data.content}
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   )
 }
 
@@ -157,7 +157,7 @@ export default function SidebarAccordion() {
   }
 
   return (
-    <div sx={style}>
+    <Box sx={style}>
       {accordionData.map((data, index) => (
         <AccordionOption
           data={data}
@@ -168,6 +168,6 @@ export default function SidebarAccordion() {
           name="sidebarAccordion"
         />
       ))}
-    </div>
+    </Box>
   )
 }

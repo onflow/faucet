@@ -56,11 +56,11 @@ export default function FundAccountSubmitted({
               <Flex
                 sx={{alignItems: "center", justifyContent: "space-between"}}
               >
-                <div sx={styles.walletAmount}>
+                <Box sx={styles.walletAmount}>
                   {`${parseFloat(result.amount).toLocaleString()} ${
                     result.token
                   } tokens`}
-                </div>
+                </Box>
                 <Link
                   href={`https://flow-view-source.com/testnet/account/${result.address}`}
                   target="_blank"

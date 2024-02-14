@@ -1,8 +1,6 @@
-/** @jsxImportSource theme-ui */
-
 import NetworkLinks from "components/NetworkLinks"
 import React from "react"
-import {ThemeUICSSObject} from "theme-ui"
+import {Box, ThemeUICSSObject} from "theme-ui"
 
 export default function FormContainer({children}: {children: React.ReactNode}) {
   const styles: Record<string, ThemeUICSSObject> = {
@@ -22,9 +20,9 @@ export default function FormContainer({children}: {children: React.ReactNode}) {
     },
   }
   return (
-    <div sx={styles.container}>
+    <Box sx={styles.container}>
       <NetworkLinks />
-      <div sx={styles.children}>{children}</div>
-    </div>
+      <Box sx={styles.children}>{children}</Box>
+    </Box>
   )
 }

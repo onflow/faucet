@@ -1,5 +1,4 @@
-/** @jsxImportSource theme-ui */
-import {ThemeUICSSObject} from "theme-ui"
+import {Box, ThemeUICSSObject} from "theme-ui"
 
 const styles: Record<string, ThemeUICSSObject> = {
   loading: {
@@ -21,10 +20,10 @@ export default function LoadingFeedback({
   children?: React.ReactNode
 }) {
   return (
-    <div sx={styles.loading}>
+    <Box sx={styles.loading}>
       <img src="loading.svg" />
       <br />
       {children}
-    </div>
+    </Box>
   )
 }

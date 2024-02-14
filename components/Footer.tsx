@@ -1,5 +1,3 @@
-/** @jsxImportSource theme-ui */
-
 import {TANOOKI_LABS_URL} from "lib/constants"
 import {Box, Container, Flex, Link, ThemeUICSSObject} from "theme-ui"
 
@@ -31,7 +29,7 @@ export default function Footer() {
   }
 
   return (
-    <div sx={styles.footer}>
+    <Box sx={styles.footer}>
       <Container>
         <Flex sx={styles.innerContainer}>
           <Flex mr={[0, "auto"]} mb={[2, 0]}>
@@ -61,6 +59,6 @@ export default function Footer() {
           </Flex>
         </Flex>
       </Container>
-    </div>
+    </Box>
   )
 }

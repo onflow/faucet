@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import * as fcl from "@onflow/fcl"
 import copy from "clipboard-copy"
 import Button from "components/Button"
@@ -77,11 +76,11 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
               <Flex
                 sx={{alignItems: "center", justifyContent: "space-between"}}
               >
-                <div sx={styles.walletAmount}>
+                <Box sx={styles.walletAmount}>
                   {`${parseFloat(
                     publicConfig.tokenAmountFlow
                   ).toLocaleString()} FLOW tokens`}
-                </div>
+                </Box>
                 <Link
                   href={`https://flow-view-source.com/testnet/account/${address}`}
                   target="_blank"
@@ -115,7 +114,7 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
       </Box>
       <Themed.hr />
       <Box mb={5}>
-        <div sx={styles.infoBox}>
+        <Box sx={styles.infoBox}>
           <Themed.h3 sx={{my: 0}}>What can I build on Flow?</Themed.h3>
           <Themed.p>
             Flow is designed for high-throughput, low-latency consumer
@@ -132,7 +131,7 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
           >
             Join the Flow alpha community
           </Button>
-        </div>
+        </Box>
       </Box>
     </>
   )

@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import CreateAccountFields from "components/CreateAccountFields"
 import CreateAccountSubmitted from "components/CreateAccountSubmitted"
 import FormContainer from "components/FormContainer"

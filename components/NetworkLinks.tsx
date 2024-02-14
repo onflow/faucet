@@ -1,9 +1,8 @@
-/** @jsxImportSource theme-ui */
-
 import TabNav, {TabNavLink} from "components/TabNav"
 import {TEST_NET, SANDBOX_NET} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import publicConfig from "lib/publicConfig"
+import {Box, Image} from "theme-ui"
 
 export default function NetworkLinks() {
   const styles = {
@@ -23,13 +22,13 @@ export default function NetworkLinks() {
   }
 
   return (
-    <div sx={styles.container}>
+    <Box sx={styles.container}>
       <TabNav>
         <TabNavLink
           href={publicConfig.testNetUrl}
           active={publicConfig.network === TEST_NET}
         >
-          <img
+          <Image
             src={
               publicConfig.network === TEST_NET
                 ? "testnet-faucet-icon.svg"
@@ -44,7 +43,7 @@ export default function NetworkLinks() {
           href={publicConfig.sandboxNetUrl}
           active={publicConfig.network === SANDBOX_NET}
         >
-          <img
+          <Image
             src={
               publicConfig.network === SANDBOX_NET
                 ? "sandboxnet-faucet-icon.svg"
@@ -56,6 +55,6 @@ export default function NetworkLinks() {
           Sandboxnet
         </TabNavLink>
       </TabNav>
-    </div>
+    </Box>
   )
 }

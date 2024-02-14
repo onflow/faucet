@@ -60,6 +60,7 @@
     "cypress-iframe": "^1.0.1",
     "dotenv": "^16.3.1",
     "eslint": "^8.48.0",
+    "eslint-config-next": "^13.4.19",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
