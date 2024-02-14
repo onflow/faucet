@@ -1,4 +1,4 @@
-import {Networks, TokenTypes} from "./constants"
+import { Networks, TokenTypes } from "./constants"
 
 const network = process.env.NEXT_PUBLIC_NETWORK as Networks | undefined
 if (!network) throw "Missing NEXT_PUBLIC_NETWORK"
@@ -26,6 +26,15 @@ if (!contractFlowToken) throw "Missing NEXT_PUBLIC_CONTRACT_FLOW_TOKEN"
 
 const contractFUSD = process.env.NEXT_PUBLIC_CONTRACT_FUSD
 if (!contractFUSD) throw "Missing NEXT_PUBLIC_CONTRACT_FUSD"
+
+const contractEVM = process.env.NEXT_PUBLIC_CONTRACT_EVM
+if (!contractEVM) throw "Missing NEXT_PUBLIC_CONTRACT_EVM"
+
+const contractCryptoUtils = process.env.NEXT_PUBLIC_CONTRACT_CRYPTO_UTILS
+if (!contractCryptoUtils) throw "Missing NEXT_PUBLIC_CONTRACT_CRYPTO_UTILS"
+
+const contractFlowEVMPassthrough = process.env.NEXT_PUBLIC_CONTRACT_FLOW_EVM_PASSTHROUGH
+if (!contractFlowEVMPassthrough) throw "Missing NEXT_PUBLIC_CONTRACT_FLOW_EVM_PASSTHROUGH"
 
 const walletDiscovery = process.env.NEXT_PUBLIC_WALLET_DISCOVERY
 // TODO: Integrate FCL wallets
