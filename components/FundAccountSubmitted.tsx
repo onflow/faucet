@@ -1,7 +1,8 @@
 /** @jsxImportSource theme-ui */
 import Label from "components/Label"
 import LoadingFeedback from "components/LoadingFeedback"
-import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
+import {Box, Flex, Link, ThemeUICSSObject} from "theme-ui"
+import {Themed} from "@theme-ui/mdx"
 import {ClientFundAccountResult} from "./FundAccountPanel"
 import publicConfig from "lib/publicConfig"
 
@@ -55,11 +56,11 @@ export default function FundAccountSubmitted({
               <Flex
                 sx={{alignItems: "center", justifyContent: "space-between"}}
               >
-                <div sx={styles.walletAmount}>
+                <Box sx={styles.walletAmount}>
                   {`${parseFloat(result.amount).toLocaleString()} ${
                     result.token
                   } tokens`}
-                </div>
+                </Box>
                 <Link
                   href={`https://${publicConfig.network}.flowdiver.io/account/${result.address}`}
                   target="_blank"

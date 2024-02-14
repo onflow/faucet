@@ -51,5 +51,7 @@
       ],
       "baseUrl": "./"
     }
-  }
+  },
+  "jsx": "react-jsx",
+  "jsxImportSource": "theme-ui"
 }
