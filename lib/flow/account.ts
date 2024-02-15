@@ -7,7 +7,6 @@ import { sendTransaction } from "./send"
 const accountCreatedEventType = "flow.AccountCreated"
 
 const txCreateAccount = `
-import CryptoUtils from ${publicConfig.contractFlowToken}
 import FlowToken from ${publicConfig.contractFlowToken}
 import FungibleToken from ${publicConfig.contractFungibleToken}
 
@@ -18,9 +17,9 @@ transaction(publicKey: String, flowTokenAmount: UFix64, sigAlgorithm: UInt8, has
   prepare(signer: auth(BorrowValue) &Account) {
     let account = Account(payer: signer)
 
-    let signatureAlgorithm = CryptoUtils.getSigAlgo(fromRawValue: sigAlgorithm)
+    let signatureAlgorithm = SignatureAlgorithm(sigAlgorithm)
       ?? panic("Invalid SignatureAlgorithm")
-    let hashAlgorithm = CryptoUtils.getHashAlgo(fromRawValue: sigAlgorithm)
+    let hashAlgorithm = HashAlgorithm(hashAlgorithm)
       ?? panic("Invalid HashAlgorithm")
 
     let key = PublicKey(

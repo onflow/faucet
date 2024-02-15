@@ -3,7 +3,8 @@ import "FlowToken"
 
 import "EVM"
 
-/// Creates a COA and saves it in the signer's Flow account & passing the given value of Flow into FlowEVM
+/// Creates a COA and saves it in the signer's Flow account (if one doesn't already exist at the expected path) and
+/// transfers the given value of Flow into FlowEVM, funding with the signer's Flow Vault.
 ///
 transaction(amount: UFix64) {
     let sentVault: @FlowToken.Vault
@@ -15,12 +16,11 @@ transaction(amount: UFix64) {
             ) ?? panic("Could not borrow reference to the owner's Vault!")
 
         self.sentVault <- vaultRef.withdraw(amount: amount) as! @FlowToken.Vault
-        if signer.storage.borrow<&EVM.BridgedAccount>(from: /storage/EVM) != nil {
+        if signer.storage.borrow<&EVM.BridgedAccount>(from: /storage/evm) == nil {
             signer.storage.save(<-EVM.createBridgedAccount(), to: /storage/evm)
         }
-        self.coa = signer.storage.borrow<&EVM.BridgedAccount>(from: /storage/EVM)
+        self.coa = signer.storage.borrow<&EVM.BridgedAccount>(from: /storage/evm)
             ?? panic("Could not borrow reference to the signer's COA!")
-
     }
 
     execute {

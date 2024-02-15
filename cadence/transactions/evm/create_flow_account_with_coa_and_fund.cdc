@@ -3,10 +3,9 @@ import "FlowToken"
 
 import "EVM"
 
-import "CryptoUtils"
-
-/// Creates a Flow account with a COA and saves it in the created account. The provided amount is then deposited into
-/// the Flow account at the ratio provided and the remaining amount is deposited into the newly created COA.
+/// Creates a Flow account with a COA and saves it in the created account. The provided amount is then minted,
+/// deposited into the Flow account at the specified ratio and the remaining amount is deposited into the newly
+/// created COA.
 ///
 transaction(
     publicKey: String,
@@ -22,10 +21,12 @@ transaction(
     prepare(signer: auth(Storage) &Account) {
         self.newAccount = Account(payer: signer)
 
-        let signatureAlgorithm = CryptoUtils.getSigAlgo(fromRawValue: sigAlgorithm)
+        let signatureAlgorithm = SignatureAlgorithm(sigAlgorithm)
             ?? panic("Invalid SignatureAlgorithm")
-        let hashAlgorithm = CryptoUtils.getHashAlgo(fromRawValue: sigAlgorithm)
+        log(signatureAlgorithm)
+        let hashAlgorithm = HashAlgorithm(hashAlgorithm)
             ?? panic("Invalid HashAlgorithm")
+        log(hashAlgorithm)
 
         let key = PublicKey(
                 publicKey: publicKey.decodeHex(),

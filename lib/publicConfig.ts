@@ -30,9 +30,6 @@ if (!contractFUSD) throw "Missing NEXT_PUBLIC_CONTRACT_FUSD"
 const contractEVM = process.env.NEXT_PUBLIC_CONTRACT_EVM
 if (!contractEVM) throw "Missing NEXT_PUBLIC_CONTRACT_EVM"
 
-const contractCryptoUtils = process.env.NEXT_PUBLIC_CONTRACT_CRYPTO_UTILS
-if (!contractCryptoUtils) throw "Missing NEXT_PUBLIC_CONTRACT_CRYPTO_UTILS"
-
 const walletDiscovery = process.env.NEXT_PUBLIC_WALLET_DISCOVERY
 // TODO: Integrate FCL wallets
 // if (!walletDiscovery) throw "Missing NEXT_PUBLIC_WALLET_DISCOVERY"
