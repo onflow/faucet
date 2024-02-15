@@ -1,7 +1,7 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import publicConfig from "../publicConfig"
-import { sendTransaction } from "./send"
+import {sendTransaction} from "./send"
 
 const accountCreatedEventType = "flow.AccountCreated"
 
@@ -50,37 +50,37 @@ transaction(publicKey: String, flowTokenAmount: UFix64, sigAlgorithm: UInt8, has
 `
 
 export async function createAccount(
-	publicKey: string,
-	sigAlgo: number,
-	hashAlgo: number,
-	authorization: fcl.Authorization
+  publicKey: string,
+  sigAlgo: number,
+  hashAlgo: number,
+  authorization: fcl.Authorization
 ) {
-	const result = await sendTransaction({
-		transaction: txCreateAccount,
-		args: [
-			fcl.arg(publicKey, t.String),
-			fcl.arg(publicConfig.tokenAmountFlow, t.UFix64),
-			fcl.arg(sigAlgo.toString(), t.UInt8),
-			fcl.arg(hashAlgo.toString(), t.UInt8),
-		],
-		authorizations: [authorization],
-		payer: authorization,
-		proposer: authorization,
-	})
+  const result = await sendTransaction({
+    transaction: txCreateAccount,
+    args: [
+      fcl.arg(publicKey, t.String),
+      fcl.arg(publicConfig.tokenAmountFlow, t.UFix64),
+      fcl.arg(sigAlgo.toString(), t.UInt8),
+      fcl.arg(hashAlgo.toString(), t.UInt8),
+    ],
+    authorizations: [authorization],
+    payer: authorization,
+    proposer: authorization,
+  })
 
-	const accountCreatedEvent = result.events.find(
-		(event: fcl.Event) => event.type === accountCreatedEventType
-	)
+  const accountCreatedEvent = result.events.find(
+    (event: fcl.Event) => event.type === accountCreatedEventType
+  )
 
-	if (!accountCreatedEvent) {
-		throw "Transaction did not emit account creation event"
-	}
+  if (!accountCreatedEvent) {
+    throw "Transaction did not emit account creation event"
+  }
 
-	const address = accountCreatedEvent.data.address
-	const transactionId = accountCreatedEvent.transactionId
+  const address = accountCreatedEvent.data.address
+  const transactionId = accountCreatedEvent.transactionId
 
-	return {
-		address,
-		transactionId,
-	}
+  return {
+    address,
+    transactionId,
+  }
 }

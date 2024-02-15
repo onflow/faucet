@@ -59,30 +59,30 @@ transaction(address: Address, amount: UFix64) {
 
 type TokenType = "FLOW" | "FUSD"
 type Token = {
-	tx: string
-	amount: string
+  tx: string
+  amount: string
 }
 type Tokens = Record<TokenType, Token>
 
 export const tokens: Tokens = {
-	FLOW: {tx: txFundAccountFLOW, amount: TOKEN_FUNDING_AMOUNTS[FLOW_TYPE]},
-	FUSD: {tx: txFundAccountFUSD, amount: TOKEN_FUNDING_AMOUNTS[FUSD_TYPE]},
+  FLOW: {tx: txFundAccountFLOW, amount: TOKEN_FUNDING_AMOUNTS[FLOW_TYPE]},
+  FUSD: {tx: txFundAccountFUSD, amount: TOKEN_FUNDING_AMOUNTS[FUSD_TYPE]},
 }
 
 export async function fundAccount(
-	address: string,
-	token: TokenType,
-	authorization: fcl.Authorization
+  address: string,
+  token: TokenType,
+  authorization: fcl.Authorization
 ) {
-	const {tx, amount} = tokens[token]
+  const {tx, amount} = tokens[token]
 
-	await sendTransaction({
-		transaction: tx,
-		args: [fcl.arg(address, t.Address), fcl.arg(amount, t.UFix64)],
-		authorizations: [authorization],
-		payer: authorization,
-		proposer: authorization,
-	})
+  await sendTransaction({
+    transaction: tx,
+    args: [fcl.arg(address, t.Address), fcl.arg(amount, t.UFix64)],
+    authorizations: [authorization],
+    payer: authorization,
+    proposer: authorization,
+  })
 
-	return amount
+  return amount
 }
