@@ -45,6 +45,7 @@ export type PublicConfig = {
   contractFungibleToken: string
   contractFlowToken: string
   contractFUSD: string
+  contractEVM: string
   accessAPIHost: string
   isLocal: boolean
   walletDiscovery?: string
@@ -63,6 +64,7 @@ const publicConfig: PublicConfig = {
   contractFungibleToken,
   contractFlowToken,
   contractFUSD,
+  contractEVM,
   accessAPIHost:
     process.env.NEXT_PUBLIC_ACCESS_API_HOST || "http://localhost:8080",
   isLocal: process.env.NEXT_PUBLIC_IS_LOCAL === "true" || false,
