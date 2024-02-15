@@ -1,4 +1,4 @@
-import { Networks, TokenTypes } from "./constants"
+import {Networks, TokenTypes} from "./constants"
 
 const network = process.env.NEXT_PUBLIC_NETWORK as Networks | undefined
 if (!network) throw "Missing NEXT_PUBLIC_NETWORK"

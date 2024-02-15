@@ -1,6 +1,5 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
-import { encodeKey } from "@onflow/util-encode-key"
 import publicConfig from "../publicConfig"
 import { sendTransaction } from "./send"
 
@@ -11,32 +10,32 @@ import FlowToken from ${publicConfig.contractFlowToken}
 import FungibleToken from ${publicConfig.contractFungibleToken}
 
 transaction(publicKey: String, flowTokenAmount: UFix64, sigAlgorithm: UInt8, hashAlgorithm: UInt8) {
-  let tokenAdmin: &FlowToken.Administrator
-  let tokenReceiver: &{FungibleToken.Receiver}
+	let tokenAdmin: &FlowToken.Administrator
+	let tokenReceiver: &{FungibleToken.Receiver}
 
-  prepare(signer: auth(BorrowValue) &Account) {
-    let account = Account(payer: signer)
+	prepare(signer: auth(BorrowValue) &Account) {
+		let account = Account(payer: signer)
 
-    let signatureAlgorithm = SignatureAlgorithm(sigAlgorithm)
-      ?? panic("Invalid SignatureAlgorithm")
-    let hashAlgorithm = HashAlgorithm(hashAlgorithm)
-      ?? panic("Invalid HashAlgorithm")
+		let signatureAlgorithm = SignatureAlgorithm(sigAlgorithm)
+			?? panic("Invalid SignatureAlgorithm")
+		let hashAlgorithm = HashAlgorithm(hashAlgorithm)
+			?? panic("Invalid HashAlgorithm")
 
-    let key = PublicKey(
-      publicKey: publicKey.decodeHex(),
-      signatureAlgorithm: signatureAlgorithm
-    )
-    account.keys.add(
-      publicKey: key,
-      hashAlgorithm: hashAlgorithm,
-      weight: 1000.0
-    )
+		let key = PublicKey(
+			publicKey: publicKey.decodeHex(),
+			signatureAlgorithm: signatureAlgorithm
+		)
+		account.keys.add(
+			publicKey: key,
+			hashAlgorithm: hashAlgorithm,
+			weight: 1000.0
+		)
 
 		self.tokenAdmin = signer.storage.borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
-		  ?? panic("Signer is not the token admin")
+			?? panic("Signer is not the token admin")
 
 		self.tokenReceiver = account.capabilities.borrow<&{FungibleToken.Receiver}>(/public/flowTokenReceiver)
-		  ?? panic("Unable to borrow receiver reference")
+			?? panic("Unable to borrow receiver reference")
 	}
 
 	execute {
@@ -51,37 +50,37 @@ transaction(publicKey: String, flowTokenAmount: UFix64, sigAlgorithm: UInt8, has
 `
 
 export async function createAccount(
-  publicKey: string,
-  sigAlgo: number,
-  hashAlgo: number,
-  authorization: fcl.Authorization
+	publicKey: string,
+	sigAlgo: number,
+	hashAlgo: number,
+	authorization: fcl.Authorization
 ) {
-  const result = await sendTransaction({
-    transaction: txCreateAccount,
-    args: [
-      fcl.arg(publicKey, t.String),
-      fcl.arg(publicConfig.tokenAmountFlow, t.UFix64),
-      fcl.arg(sigAlgo.toString(), t.UInt8),
-      fcl.arg(hashAlgo.toString(), t.UInt8),
-    ],
-    authorizations: [authorization],
-    payer: authorization,
-    proposer: authorization,
-  })
+	const result = await sendTransaction({
+		transaction: txCreateAccount,
+		args: [
+			fcl.arg(publicKey, t.String),
+			fcl.arg(publicConfig.tokenAmountFlow, t.UFix64),
+			fcl.arg(sigAlgo.toString(), t.UInt8),
+			fcl.arg(hashAlgo.toString(), t.UInt8),
+		],
+		authorizations: [authorization],
+		payer: authorization,
+		proposer: authorization,
+	})
 
-  const accountCreatedEvent = result.events.find(
-    (event: fcl.Event) => event.type === accountCreatedEventType
-  )
+	const accountCreatedEvent = result.events.find(
+		(event: fcl.Event) => event.type === accountCreatedEventType
+	)
 
-  if (!accountCreatedEvent) {
-    throw "Transaction did not emit account creation event"
-  }
+	if (!accountCreatedEvent) {
+		throw "Transaction did not emit account creation event"
+	}
 
-  const address = accountCreatedEvent.data.address
-  const transactionId = accountCreatedEvent.transactionId
+	const address = accountCreatedEvent.data.address
+	const transactionId = accountCreatedEvent.transactionId
 
-  return {
-    address,
-    transactionId,
-  }
+	return {
+		address,
+		transactionId,
+	}
 }
