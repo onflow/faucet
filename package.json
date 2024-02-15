@@ -11,7 +11,7 @@
     "db-migrate-deploy": "prisma migrate deploy --preview-feature",
     "db-seed": "node prisma/seed.mjs",
     "deploy": "npm run build && npm run db-migrate-deploy && npm run db-seed",
-    "dev-deploy-contracts": "flow evm create-account 1000.0 && flow project deploy --network=emulator --update",
+    "dev-deploy-contracts": "flow project deploy --network=emulator --update",
     "initial-transactions": "ts-node lib/initialTransactions.ts --loader ts-node/esm",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
