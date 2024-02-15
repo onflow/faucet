@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^0.3.4",
-    "@onflow/fcl": "^1.2.0",
+    "@onflow/fcl": "^1.9.0",
     "@onflow/types": "0.0.4",
     "@onflow/util-encode-key": "^1.0.2",
     "@prisma/client": "^4.2.1",
