@@ -66,7 +66,7 @@ const publicConfig: PublicConfig = {
   contractFUSD,
   contractEVM,
   accessAPIHost:
-    process.env.NEXT_PUBLIC_ACCESS_API_HOST || "http://localhost:8080",
+    process.env.NEXT_PUBLIC_ACCESS_API_HOST || "http://localhost:8888",
   isLocal: process.env.NEXT_PUBLIC_IS_LOCAL === "true" || false,
   walletDiscovery,
 }
