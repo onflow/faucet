@@ -8,15 +8,12 @@ import "EVM"
 transaction(to: EVM.EVMAddress, amount: UFix64, gasLimit: UInt64) {
 
     let tokenAdmin: &FlowToken.Administrator
-    let tokenReceiver: &{FungibleToken.Receiver}
     let coa: &EVM.BridgedAccount
 
     prepare(signer: auth(Storage) &Account) {
         self.tokenAdmin = signer.storage.borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
             ?? panic("Signer is not the token admin")
 
-        self.tokenReceiver = signer.capabilities.borrow<&{FungibleToken.Receiver}>(/public/flowTokenReceiver)
-            ?? panic("Unable to borrow receiver reference")
         if signer.storage.borrow<&EVM.BridgedAccount>(from: /storage/evm) == nil {
             signer.storage.save(<-EVM.createBridgedAccount(), to: /storage/evm)
         }
