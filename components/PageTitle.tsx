@@ -3,7 +3,7 @@ import publicConfig from "lib/publicConfig"
 import Head from "next/head"
 
 export const BASE_HTML_TITLE = `Flow ${
-  publicConfig.network === TEST_NET ? "Testnet" : "Sandboxnet"
+  publicConfig.network === TEST_NET ? "Testnet" : "Crescendo"
 } Faucet`
 
 export default function PageTitle({children}: {children?: string}) {

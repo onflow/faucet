@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [15.x]
+        node-version: [20.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -28,14 +28,15 @@ jobs:
       NEXT_PUBLIC_SIGNER_ADDRESS: "0xf8d6e0586b0a20c7"
       SIGNER_PRIVATE_KEY: "91a22fbd87392b019fbe332c32695c14cf2ba5b6521476a8540228bdf1987068"
       NEXT_PUBLIC_TEST_NET_URL: "http://localhost:3000"
-      NEXT_PUBLIC_SANDBOX_NET_URL: "http://localhost:3000"
+      NEXT_PUBLIC_CRESCENDO_URL: "http://localhost:3000"
       NEXT_PUBLIC_TOKEN_AMOUNT_FLOW: "1000.0"
       NEXT_PUBLIC_CONTRACT_FUNGIBLE_TOKEN: "0xee82856bf20e2aa6"
       NEXT_PUBLIC_CONTRACT_FLOW_TOKEN: "0x0ae53cb6e3f42a79"
+      NEXT_PUBLIC_NETWORK: "testnet"
 
     strategy:
       matrix:
-        node-version: [15.x]
+        node-version: [20.x]
 
     steps:
       - uses: actions/checkout@v2
