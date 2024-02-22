@@ -35,7 +35,7 @@ export default function Footer() {
       <Container>
         <Flex sx={styles.innerContainer}>
           <Flex mr={[0, "auto"]} mb={[2, 0]}>
-            {`Copyright © ${new Date().getFullYear()} Dapper Labs LLC.`}
+            {`Copyright © ${new Date().getFullYear()} Flow Foundation.`}
           </Flex>
           <Flex sx={styles.right}>
             <Box>
