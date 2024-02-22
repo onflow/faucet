@@ -110,11 +110,11 @@ export const tokens: Tokens = {
   FUSD: {tx: txFundAccountFUSD, amount: TOKEN_FUNDING_AMOUNTS[FUSD_TYPE]},
 }
 
-function getAddressType(address: string = ''): 'FLOW' | 'FLOWEVM' {
+function getAddressType(address: string): "FLOW" | "FLOWEVM" {
   if (address.length > 16) {
-    return 'FLOWEVM'
+    return "FLOWEVM"
   } else {
-    return 'FLOW'
+    return "FLOW"
   }
 }
 
@@ -123,7 +123,6 @@ export async function fundAccount(
   token: TokenType,
   authorization: fcl.Authorization
 ) {
-
   const addressType = getAddressType(address)
 
   console.log("Address Type", addressType)
