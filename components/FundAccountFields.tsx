@@ -6,7 +6,7 @@ import {Field, useFormikContext} from "formik"
 import {FLOW_TYPE, paths} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import {Box, Link, Themed} from "theme-ui"
-import {CustomInputComponent, CustomSelectComponent} from "./inputs"
+import {CustomInputComponent} from "./inputs"
 
 export const TOKEN_OPTIONS = [
   {value: FLOW_TYPE, label: `${NETWORK_DISPLAY_NAME} FLOW`},
@@ -42,18 +42,18 @@ export default function FundAccountFields({
         max={128}
         sx={{fontFamily: "monospace"}}
       />
+      {/*<Box mb={3} mt={4}>*/}
+      {/*  <Themed.h3 sx={{mb: 0}}>Token</Themed.h3>*/}
+      {/*</Box>*/}
+      {/*<Box mb={4}>*/}
+      {/*  <Field*/}
+      {/*    component={CustomSelectComponent}*/}
+      {/*    name="token"*/}
+      {/*    inputLabel="Token"*/}
+      {/*    options={TOKEN_OPTIONS}*/}
+      {/*  />*/}
+      {/*</Box>*/}
       <Box mb={3} mt={4}>
-        <Themed.h3 sx={{mb: 0}}>Token</Themed.h3>
-      </Box>
-      <Box mb={4}>
-        <Field
-          component={CustomSelectComponent}
-          name="token"
-          inputLabel="Token"
-          options={TOKEN_OPTIONS}
-        />
-      </Box>
-      <Box mb={3}>
         <Captcha onVerify={setCaptchaToken} />
       </Box>
       <Box mb={3}>
