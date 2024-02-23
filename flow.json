@@ -12,14 +12,6 @@
 				"emulator": "f8d6e0586b0a20c7"
 			}
 		},
-		"FUSD": {
-			"source": "./cadence/contracts/FUSD.cdc",
-			"aliases": {
-				"crescendo": "e223d8a629e49c68",
-				"emulator": "0ae53cb6e3f42a79",
-				"testnet": "e223d8a629e49c68"
-			}
-		},
 		"FlowToken": {
 			"source": "./cadence/contracts/FlowToken.cdc",
 			"aliases": {
@@ -96,8 +88,7 @@
 		"emulator": {
 			"emulator-account": [
 				"FungibleTokenMetadataViews",
-				"Burner",
-				"FUSD"
+				"Burner"
 			]
 		}
 	}
