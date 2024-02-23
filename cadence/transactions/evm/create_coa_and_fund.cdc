@@ -8,18 +8,18 @@ import "EVM"
 ///
 transaction(amount: UFix64) {
     let sentVault: @FlowToken.Vault
-    let coa: &EVM.BridgedAccount
+    let coa: &EVM.CadenceOwnedAccount
 
     prepare(signer: auth(Storage) &Account) {
-        let vaultRef = signer.storage.borrow<auth(FungibleToken.Withdrawable) &FlowToken.Vault>(
+        let vaultRef = signer.storage.borrow<auth(FungibleToken.Withdraw) &FlowToken.Vault>(
                 from: /storage/flowTokenVault
             ) ?? panic("Could not borrow reference to the owner's Vault!")
 
         self.sentVault <- vaultRef.withdraw(amount: amount) as! @FlowToken.Vault
-        if signer.storage.borrow<&EVM.BridgedAccount>(from: /storage/evm) == nil {
-            signer.storage.save(<-EVM.createBridgedAccount(), to: /storage/evm)
+        if signer.storage.borrow<&EVM.CadenceOwnedAccount>(from: /storage/evm) == nil {
+            signer.storage.save(<-EVM.createCadenceOwnedAccount(), to: /storage/evm)
         }
-        self.coa = signer.storage.borrow<&EVM.BridgedAccount>(from: /storage/evm)
+        self.coa = signer.storage.borrow<&EVM.CadenceOwnedAccount>(from: /storage/evm)
             ?? panic("Could not borrow reference to the signer's COA!")
     }
 
