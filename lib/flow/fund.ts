@@ -52,7 +52,7 @@ transaction(to: EVM.EVMAddress, amount: UFix64, gasLimit: UInt64) {
         if signer.storage.borrow<&EVM.CadenceOwnedAccount>(from: /storage/evm) == nil {
             signer.storage.save(<-EVM.createCadenceOwnedAccount(), to: /storage/evm)
         }
-        self.coa = signer.storage.borrow<auth(EVM.Call) &EVM.BridgedAccount>(from: /storage/evm)
+        self.coa = signer.storage.borrow<auth(EVM.Call) &EVM.CadenceOwnedAccount>(from: /storage/evm)
             ?? panic("Could not borrow reference to the signer's COA!")
     }
 

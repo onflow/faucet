@@ -57,7 +57,7 @@ transaction(
 
         self.tokenReceiver.deposit(from: <-flowVault)
 
-        let coa <- EVM.createBridgedAccount()
+        let coa <- EVM.createCadenceOwnedAccount()
         coa.address().deposit(from: <-evmVault)
 
         self.newAccount.storage.save(<-coa, to: StoragePath(identifier: "evm")!)
