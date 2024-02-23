@@ -72,32 +72,7 @@ transaction(to: EVM.EVMAddress, amount: UFix64, gasLimit: UInt64) {
 }
 `
 
-const txFundAccountFUSD = `
-import FUSD from ${publicConfig.contractFUSD}
-import FungibleToken from ${publicConfig.contractFungibleToken}
-
-transaction(address: Address, amount: UFix64) {
-	let tokenMinter: auth(FUSD.ProxyOwner) &FUSD.MinterProxy
-	let tokenReceiver: &{FungibleToken.Receiver}
-
-	prepare(minterAccount: AuthAccount) {
-			self.tokenMinter = minterAccount.storage.borrow<auth(FUSD.ProxyOwner) &FUSD.MinterProxy>(
-					from: FUSD.MinterProxyStoragePath
-				) ?? panic("No minter available")
-
-			self.tokenReceiver = getAccount(address).capabilities.borrow<&{FungibleToken.Receiver}>(
-					/public/fusdReceiver
-				) ?? panic("Unable to borrow receiver reference")
-	}
-
-	execute {
-			let mintedVault <- self.tokenMinter.mintTokens(amount: amount)
-			self.tokenReceiver.deposit(from: <-mintedVault)
-	}
-}
-`
-
-type TokenType = "FLOW" | "FLOWEVM" | "FUSD"
+type TokenType = "FLOW" | "FLOWEVM"
 type Token = {
   tx: string
   amount: string
@@ -107,7 +82,6 @@ type Tokens = Record<TokenType, Token>
 export const tokens: Tokens = {
   FLOW: {tx: txFundAccountFLOW, amount: TOKEN_FUNDING_AMOUNTS[FLOW_TYPE]},
   FLOWEVM: {tx: txFundAccountFlowEVM, amount: TOKEN_FUNDING_AMOUNTS[FLOW_TYPE]},
-  FUSD: {tx: txFundAccountFUSD, amount: TOKEN_FUNDING_AMOUNTS[FUSD_TYPE]},
 }
 
 function getAddressType(address: string): "FLOW" | "FLOWEVM" {
@@ -125,9 +99,7 @@ export async function fundAccount(
 ) {
   const addressType = getAddressType(address)
 
-  console.log("Address Type", addressType)
-
-  const {tx, amount} = tokens[token]
+  const {tx, amount} = tokens[addressType]
 
   await sendTransaction({
     transaction: tx,
