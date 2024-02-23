@@ -19,7 +19,7 @@ export const PUBLIC_KEY_FORMAT_ERROR =
   "Public key must be a hexadecimal string with no spaces."
 export const PUBLIC_KEY_MISSING_ERROR = "Public key is required."
 export const ADDRESS_FORMAT_ERROR =
-  "Address must be a 16-character hexadecimal string."
+  "Address must be a 16-character Cadence address or 42-character Ethereum address."
 export const ADDRESS_MISSING_ERROR = "Address is required."
 export const CREATE_ACCOUNT_ERROR = "Account creation has failed"
 export const FUND_ACCOUNT_ERROR = "Account funding has failed"
@@ -33,9 +33,9 @@ export const paths = {
   fundAccount: "/fund-account",
 }
 
-export const ADDRESS_REGEXP = /^(0x)?[0-9a-fA-F]{16}$/
+export const ADDRESS_REGEXP = /^(0x)?([0-9a-fA-F]{16}|[0-9a-fA-F]{40})$/
 
 export const NETWORK_CODEWORDS = {
   testnet: "0x6834ba37b3980209",
-  crescendo: "0x6834ba37b3980209",
+  crescendo: "0x5211829E88528817",
 }
