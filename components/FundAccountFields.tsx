@@ -3,24 +3,13 @@ import Button from "components/Button"
 import Captcha from "components/Captcha"
 import FormErrors from "components/FormErrors"
 import {Field, useFormikContext} from "formik"
-import {
-  FLOW_TYPE,
-  FUSD_TYPE,
-  MISSING_FUSD_VAULT_ERROR,
-  paths,
-} from "lib/constants"
+import {FLOW_TYPE, paths} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import {Box, Link, Themed} from "theme-ui"
 import {CustomInputComponent, CustomSelectComponent} from "./inputs"
 
-const FUSD_VAULT_DOCS_LINK = {
-  url: "https://docs.onflow.org/fusd/#how-do-i-get-an-fusd-enabled-wallet",
-  name: "How do I get an FUSD-enabled wallet?",
-}
-
 export const TOKEN_OPTIONS = [
   {value: FLOW_TYPE, label: `${NETWORK_DISPLAY_NAME} FLOW`},
-  {value: FUSD_TYPE, label: `${NETWORK_DISPLAY_NAME} FUSD`},
 ]
 
 export default function FundAccountFields({
@@ -77,16 +66,7 @@ export default function FundAccountFields({
         >
           Fund Your Account
         </Button>
-        {errors.length > 0 && (
-          <FormErrors
-            errors={errors}
-            link={
-              errors.some(e => e === MISSING_FUSD_VAULT_ERROR)
-                ? FUSD_VAULT_DOCS_LINK
-                : undefined
-            }
-          />
-        )}
+        {errors.length > 0 && <FormErrors errors={errors} />}
       </Box>
       <Box mb={5}>
         <Themed.p sx={{textAlign: "center"}}>
