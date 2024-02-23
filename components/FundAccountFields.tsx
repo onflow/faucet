@@ -6,7 +6,7 @@ import {Field, useFormikContext} from "formik"
 import {FLOW_TYPE, paths} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import {Box, Link, Themed} from "theme-ui"
-import {CustomInputComponent, CustomSelectComponent} from "./inputs"
+import {CustomInputComponent} from "./inputs"
 
 export const TOKEN_OPTIONS = [
   {value: FLOW_TYPE, label: `${NETWORK_DISPLAY_NAME} FLOW`},
