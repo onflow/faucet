@@ -43,16 +43,16 @@ import EVM from ${publicConfig.contractEVM}
 transaction(to: EVM.EVMAddress, amount: UFix64, gasLimit: UInt64) {
 
     let tokenAdmin: &FlowToken.Administrator
-    let coa: &EVM.BridgedAccount
+    let coa: auth(EVM.Call) &EVM.CadenceOwnedAccount
 
     prepare(signer: auth(Storage) &Account) {
         self.tokenAdmin = signer.storage.borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
             ?? panic("Signer is not the token admin")
 
-        if signer.storage.borrow<&EVM.BridgedAccount>(from: /storage/evm) == nil {
-            signer.storage.save(<-EVM.createBridgedAccount(), to: /storage/evm)
+        if signer.storage.borrow<&EVM.CadenceOwnedAccount>(from: /storage/evm) == nil {
+            signer.storage.save(<-EVM.createCadenceOwnedAccount(), to: /storage/evm)
         }
-        self.coa = signer.storage.borrow<&EVM.BridgedAccount>(from: /storage/evm)
+        self.coa = signer.storage.borrow<auth(EVM.Call) &EVM.BridgedAccount>(from: /storage/evm)
             ?? panic("Could not borrow reference to the signer's COA!")
     }
 
