@@ -22,5 +22,7 @@ export async function sendTransaction({
     fcl.limit(9999),
   ])
 
+  console.error("RESPONSE: ", response)
+
   return fcl.tx(response).onceSealed()
 }

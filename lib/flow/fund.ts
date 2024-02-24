@@ -126,12 +126,16 @@ export async function fundAccount(
     })
   } else {
     await sendTransaction({
-      transaction: tx,
-      args: [fcl.arg(address, t.Address), fcl.arg(amount, t.UFix64)],
+      transaction: `transaction {
+prepare(acct: &Account) {}
+execute {}
+}`,
+      args: [],
       authorizations: [authorization],
       payer: authorization,
       proposer: authorization,
     })
   }
-  return amount
+  // return amount
+  return 0
 }
