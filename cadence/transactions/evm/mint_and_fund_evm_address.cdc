@@ -31,7 +31,7 @@ transaction(to: EVM.EVMAddress, amount: UFix64, gasLimit: UInt64) {
             to: to,
             data: [],
             gasLimit: gasLimit,
-            value: EVM.Balance(flow: amount),
+            value: EVM.Balance(attoflow: 0).setFLOW(flow: amount),
         )
     }
 }
