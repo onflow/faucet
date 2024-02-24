@@ -63,6 +63,7 @@
 	},
 	"networks": {
 		"crescendo": "access.crescendo.nodes.onflow.org:9000",
+		"previewnet": "access.previewnet.nodes.onflow.org:9000",
 		"emulator": "127.0.0.1:3569",
 		"testnet": "access.devnet.nodes.onflow.org:9000"
 	},
