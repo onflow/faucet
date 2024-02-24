@@ -85,10 +85,10 @@ export const tokens: Tokens = {
 }
 
 function getAddressType(address: string): "FLOW" | "FLOWEVM" {
-  if (address.length > 16) {
-    return "FLOWEVM"
-  } else {
+  if (address.length <= 18) {
     return "FLOW"
+  } else {
+    return "FLOWEVM"
   }
 }
 
