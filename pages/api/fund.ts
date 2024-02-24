@@ -49,8 +49,8 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
     const address = fcl.withPrefix(req.body.address) || ""
     const token = req.body.token
 
-    // Validate address
-    if (!isValidNetworkAddress(address, publicConfig.network)) {
+    // Validate Flow address
+    if (address.length <= 18 && !isValidNetworkAddress(address, publicConfig.network)) {
       res
         .status(400)
         .json({errors: [INVALID_NETWORK_ADDRESS_ERROR(publicConfig.network)]})
