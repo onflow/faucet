@@ -12,7 +12,7 @@ transaction(address: Address, amount: UFix64) {
 	let tokenAdmin: &FlowToken.Administrator
 	let tokenReceiver: &{FungibleToken.Receiver}
 
-	prepare(signer: AuthAccount) {
+	prepare(signer: auth(BorrowValue) &Account) {
 		self.tokenAdmin = signer.storage.borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
 			?? panic("Signer is not the token admin")
 
@@ -101,13 +101,37 @@ export async function fundAccount(
 
   const {tx, amount} = tokens[addressType]
 
-  await sendTransaction({
-    transaction: tx,
-    args: [fcl.arg(address, t.Address), fcl.arg(amount, t.UFix64)],
-    authorizations: [authorization],
-    payer: authorization,
-    proposer: authorization,
-  })
+  if (addressType === "FLOWEVM") {
+    const addressBytes = Array.from(Buffer.from(address, "hex")).map(b =>
+      b.toString()
+    )
 
+    await sendTransaction({
+      transaction: tx,
+      args: [
+        fcl.arg(
+          {
+            fields: [{name: "bytes", value: addressBytes}],
+          },
+          t.Struct(`A.${publicConfig.contractEVM}.EVM.EVMAddress`, [
+            {value: t.Array(t.UInt8)},
+          ])
+        ),
+        fcl.arg(amount, t.UFix64),
+        fcl.arg("60000", t.UInt64),
+      ],
+      authorizations: [authorization],
+      payer: authorization,
+      proposer: authorization,
+    })
+  } else {
+    await sendTransaction({
+      transaction: tx,
+      args: [fcl.arg(address, t.Address), fcl.arg(amount, t.UFix64)],
+      authorizations: [authorization],
+      payer: authorization,
+      proposer: authorization,
+    })
+  }
   return amount
 }
