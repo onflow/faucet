@@ -1,8 +1,8 @@
-export type Networks = "testnet" | "crescendo"
+export type Networks = "testnet" | "previewnet"
 export type TokenTypes = typeof FLOW_TYPE | typeof FUSD_TYPE
 
 export const TEST_NET = "testnet"
-export const CRESCENDO_NET = "crescendo"
+export const PREVIEW_NET = "previewnet"
 export const FLOW_TYPE = "FLOW"
 export const FUSD_TYPE = "FUSD"
 export const NETWORK_STATUS_URL = "https://status.onflow.org/"
@@ -37,5 +37,5 @@ export const ADDRESS_REGEXP = /^(0x)?([0-9a-fA-F]{16}|[0-9a-fA-F]{40})$/
 
 export const NETWORK_CODEWORDS = {
   testnet: "0x6834ba37b3980209",
-  crescendo: "0x5211829E88528817",
+  previewnet: "0x5211829E88528817",
 }
