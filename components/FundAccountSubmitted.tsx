@@ -60,7 +60,7 @@ export default function FundAccountSubmitted({
                     result.token
                   } tokens`}
                 </div>
-                {publicConfig.network !== "testnet" ? (
+                {publicConfig.network === "testnet" ? (
                   <Link
                     href={`https://${publicConfig.network}.flowdiver.io/account/${result.address}`}
                     target="_blank"
