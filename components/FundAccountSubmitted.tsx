@@ -8,6 +8,7 @@ import {useEffect, useState} from "react"
 import {sendScript} from "../lib/flow/send"
 import fcl from "@onflow/fcl"
 import t from "@onflow/types"
+import {getAddressType} from "../lib/common"
 
 const styles: Record<string, ThemeUICSSObject> = {
   resultsContainer: {
@@ -70,9 +71,16 @@ access(all) fun main(account: Address): UFix64 {
     const fetchBalance = async (addr: string) => {
       try {
         setIsFetchingBalance(true)
+
+        const addressArgType =
+          publicConfig.network === "previewnet" &&
+          getAddressType(result.address) === "FLOW"
+            ? t.Address
+            : t.String
+
         const balance = await sendScript({
           script: balanceScript,
-          args: [fcl.arg(addr, t.Address)],
+          args: [fcl.arg(addr, addressArgType)],
         })
         setBalance(balance)
       } catch (error) {

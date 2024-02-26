@@ -3,6 +3,7 @@ import * as t from "@onflow/types"
 import {FLOW_TYPE} from "../constants"
 import publicConfig, {TOKEN_FUNDING_AMOUNTS} from "../publicConfig"
 import {sendTransaction} from "./send"
+import {getAddressType} from "../common"
 
 const txFundAccountFLOW = `
 import FlowToken from ${publicConfig.contractFlowToken}
@@ -86,15 +87,6 @@ export const tokens: Tokens = {
   FLOW: {tx: txFundAccountFLOW, amount: TOKEN_FUNDING_AMOUNTS[FLOW_TYPE]},
   FLOWEVM: {tx: txFundAccountFlowEVM, amount: TOKEN_FUNDING_AMOUNTS[FLOW_TYPE]},
 }
-
-function getAddressType(address: string): "FLOW" | "FLOWEVM" {
-  if (address.length <= 18) {
-    return "FLOW"
-  } else {
-    return "FLOWEVM"
-  }
-}
-
 export async function fundAccount(
   address: string,
   token: TokenType,
