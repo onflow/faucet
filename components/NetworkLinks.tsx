@@ -47,7 +47,7 @@ export default function NetworkLinks() {
           <img
             src={
               publicConfig.network === PREVIEW_NET
-                ? "crescendo-faucet-icon.svg"
+                ? "previewnet-faucet-icon.svg"
                 : "gray-faucet-icon.svg"
             }
             alt={`${NETWORK_DISPLAY_NAME} Faucet`}
