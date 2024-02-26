@@ -72,15 +72,28 @@ access(all) fun main(account: Address): UFix64 {
       try {
         setIsFetchingBalance(true)
 
+        const addressType = getAddressType(result.address)
+        let addressArg
+
         const addressArgType =
-          publicConfig.network === "testnet" ||
-          getAddressType(result.address) === "FLOW"
+          publicConfig.network === "testnet" || addressType === "FLOW"
             ? t.Address
             : t.String
 
+        if (addressType === "FLOWEVM") {
+          const withoutPrefix = fcl.sansPrefix(result.address)
+          if (!withoutPrefix) {
+            throw new Error("Invalid address")
+          }
+
+          addressArg = withoutPrefix
+        } else {
+          addressArg = addr
+        }
+
         const balance = await sendScript({
           script: balanceScript,
-          args: [fcl.arg(addr, addressArgType)],
+          args: [fcl.arg(addressArg, addressArgType)],
         })
         setBalance(balance)
       } catch (error) {
