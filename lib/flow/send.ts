@@ -26,14 +26,11 @@ export async function sendTransaction({
 }
 
 export async function sendScript({
-                                        script,
-                                        args,
-                                      }: {
+  script,
+  args,
+}: {
   script: string
   args: fcl.TransactionArg[]
 }) {
-  return await fcl.send([
-    fcl.script(script),
-    fcl.args(args),
-  ])
+  return await fcl.send([fcl.script(script), fcl.args(args)])
 }

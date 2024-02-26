@@ -4,10 +4,10 @@ import LoadingFeedback from "components/LoadingFeedback"
 import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
 import {ClientFundAccountResult} from "./FundAccountPanel"
 import publicConfig from "lib/publicConfig"
-import {useEffect, useState} from "react";
-import {sendScript, sendTransaction} from "../lib/flow/send";
-import fcl from "@onflow/fcl";
-import t from "@onflow/types";
+import {useEffect, useState} from "react"
+import {sendScript} from "../lib/flow/send"
+import fcl from "@onflow/fcl"
+import t from "@onflow/types"
 
 const styles: Record<string, ThemeUICSSObject> = {
   resultsContainer: {
@@ -34,10 +34,11 @@ export default function FundAccountSubmitted({
   result?: ClientFundAccountResult
 }) {
   const [isFetchingBalance, setIsFetchingBalance] = useState(false)
-  const [balance, setBalance] = useState('')
+  const [balance, setBalance] = useState("")
 
-  const balanceScript = publicConfig.network === 'testnet' ?
-      `import EVM from ${publicConfig.contractEVM}
+  const balanceScript =
+    publicConfig.network === "testnet"
+      ? `import EVM from ${publicConfig.contractEVM}
 
       /// Returns the Flow balance of a given EVM address in FlowEVM
       ///
@@ -50,8 +51,8 @@ export default function FundAccountSubmitted({
           bytes[15], bytes[16], bytes[17], bytes[18], bytes[19]
         ]
         return EVM.EVMAddress(bytes: addressBytes).balance().inFLOW()
-      }`:
-      `import FungibleToken from ${publicConfig.contractFungibleToken}
+      }`
+      : `import FungibleToken from ${publicConfig.contractFungibleToken}
 import FlowToken from ${publicConfig.contractFlowToken}
 
 access(all) fun main(account: Address): UFix64 {
@@ -68,22 +69,21 @@ access(all) fun main(account: Address): UFix64 {
 
     const fetchBalance = async (addr: string) => {
       try {
-        setIsFetchingBalance(true);
+        setIsFetchingBalance(true)
         const balance = await sendScript({
           script: balanceScript,
           args: [fcl.arg(addr, t.Address)],
-        });
-        console.log("Balance:", balance);
+        })
         setBalance(balance)
       } catch (error) {
-        console.error("Failed to fetch balance:", error);
+        setBalance("error")
       } finally {
-        setIsFetchingBalance(false);
+        setIsFetchingBalance(false)
       }
-    };
+    }
 
     fetchBalance(result.address)
-  }, [result])
+  }, [result, balanceScript])
 
   return (
     <>
@@ -126,14 +126,14 @@ access(all) fun main(account: Address): UFix64 {
                     View Account
                   </Link>
                 ) : (
-                    <>
-                      <label>Balance</label>
-                      {isFetchingBalance ? (
-                          <div>Fetching...</div>
-                      ) : (
-                          <div>{balance}</div>
-                      )}
-                    </>
+                  <>
+                    <label>Balance</label>
+                    {isFetchingBalance ? (
+                      <div>Fetching...</div>
+                    ) : (
+                      <div>{balance}</div>
+                    )}
+                  </>
                 )}
               </Flex>
             </Box>
