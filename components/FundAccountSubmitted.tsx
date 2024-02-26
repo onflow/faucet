@@ -37,7 +37,7 @@ export default function FundAccountSubmitted({
   const [balance, setBalance] = useState("")
 
   const balanceScript =
-    publicConfig.network === "testnet"
+    publicConfig.network === "previewnet"
       ? `import EVM from ${publicConfig.contractEVM}
 
       /// Returns the Flow balance of a given EVM address in FlowEVM
