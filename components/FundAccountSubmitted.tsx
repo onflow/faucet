@@ -6,8 +6,8 @@ import {ClientFundAccountResult} from "./FundAccountPanel"
 import publicConfig from "lib/publicConfig"
 import {useEffect, useState} from "react"
 import {sendScript} from "../lib/flow/send"
-import fcl from "@onflow/fcl"
-import t from "@onflow/types"
+import * as fcl from "@onflow/fcl"
+import * as t from "@onflow/types"
 import {getAddressType} from "../lib/common"
 
 const styles: Record<string, ThemeUICSSObject> = {
