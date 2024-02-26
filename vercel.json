@@ -1,6 +1,6 @@
 {
     "functions": {
-        "api/fund.ts": {
+        "pages/api/fund.ts": {
             "maxDuration": 30
         }
     }
