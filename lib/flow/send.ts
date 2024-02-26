@@ -24,3 +24,16 @@ export async function sendTransaction({
 
   return fcl.tx(response).onceSealed()
 }
+
+export async function sendScript({
+                                        script,
+                                        args,
+                                      }: {
+  script: string
+  args: fcl.TransactionArg[]
+}) {
+  return await fcl.send([
+    fcl.script(script),
+    fcl.args(args),
+  ])
+}

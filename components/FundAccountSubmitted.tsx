@@ -4,6 +4,10 @@ import LoadingFeedback from "components/LoadingFeedback"
 import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
 import {ClientFundAccountResult} from "./FundAccountPanel"
 import publicConfig from "lib/publicConfig"
+import {useEffect, useState} from "react";
+import {sendScript, sendTransaction} from "../lib/flow/send";
+import fcl from "@onflow/fcl";
+import t from "@onflow/types";
 
 const styles: Record<string, ThemeUICSSObject> = {
   resultsContainer: {
@@ -29,6 +33,58 @@ export default function FundAccountSubmitted({
 }: {
   result?: ClientFundAccountResult
 }) {
+  const [isFetchingBalance, setIsFetchingBalance] = useState(false)
+  const [balance, setBalance] = useState('')
+
+  const balanceScript = publicConfig.network === 'testnet' ?
+      `import EVM from ${publicConfig.contractEVM}
+
+      /// Returns the Flow balance of a given EVM address in FlowEVM
+      ///
+      access(all) fun main(address: String): UFix64 {
+        let bytes = address.decodeHex()
+        let addressBytes: [UInt8; 20] = [
+          bytes[0], bytes[1], bytes[2], bytes[3], bytes[4],
+          bytes[5], bytes[6], bytes[7], bytes[8], bytes[9],
+          bytes[10], bytes[11], bytes[12], bytes[13], bytes[14],
+          bytes[15], bytes[16], bytes[17], bytes[18], bytes[19]
+        ]
+        return EVM.EVMAddress(bytes: addressBytes).balance().inFLOW()
+      }`:
+      `import FungibleToken from ${publicConfig.contractFungibleToken}
+import FlowToken from ${publicConfig.contractFlowToken}
+
+access(all) fun main(account: Address): UFix64 {
+
+    let vaultRef = getAccount(account)
+        .capabilities.borrow<&{FungibleToken.Balance}>(/public/flowTokenBalance)
+        ?? panic("Could not borrow Balance reference to the Vault")
+
+    return vaultRef.balance
+}`
+
+  useEffect(() => {
+    if (typeof result === "undefined") return
+
+    const fetchBalance = async (addr: string) => {
+      try {
+        setIsFetchingBalance(true);
+        const balance = await sendScript({
+          script: balanceScript,
+          args: [fcl.arg(addr, t.Address)],
+        });
+        console.log("Balance:", balance);
+        setBalance(balance)
+      } catch (error) {
+        console.error("Failed to fetch balance:", error);
+      } finally {
+        setIsFetchingBalance(false);
+      }
+    };
+
+    fetchBalance(result.address)
+  }, [result])
+
   return (
     <>
       <Box mb={4} mt={4}>
@@ -70,10 +126,14 @@ export default function FundAccountSubmitted({
                     View Account
                   </Link>
                 ) : (
-                  <>
-                    <label>Balance</label>
-                    <div>1000.00</div>
-                  </>
+                    <>
+                      <label>Balance</label>
+                      {isFetchingBalance ? (
+                          <div>Fetching...</div>
+                      ) : (
+                          <div>{balance}</div>
+                      )}
+                    </>
                 )}
               </Flex>
             </Box>
