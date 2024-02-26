@@ -36,6 +36,7 @@ export default function FundAccountSubmitted({
 }) {
   const [isFetchingBalance, setIsFetchingBalance] = useState(false)
   const [balance, setBalance] = useState("")
+  const [error, setError] = useState("")
 
   const balanceScript =
     publicConfig.network === "previewnet"
@@ -97,7 +98,13 @@ access(all) fun main(account: Address): UFix64 {
         })
         setBalance(balance)
       } catch (error) {
-        setBalance("error")
+        setBalance("--")
+
+        if (error instanceof Error) {
+          setError(error.message)
+        } else {
+          setError("An unknown error occurred")
+        }
       } finally {
         setIsFetchingBalance(false)
       }
@@ -109,7 +116,7 @@ access(all) fun main(account: Address): UFix64 {
   return (
     <>
       <Box mb={4} mt={4}>
-        <Themed.h3 sx={{mb: 0}}>Funding account</Themed.h3>
+        <Themed.h3 sx={{mb: 0}}>Funding Account</Themed.h3>
         <Themed.p>Great! Your request has been submitted.</Themed.p>
       </Box>
       <Box mb={6} sx={styles.resultsContainer}>
@@ -154,7 +161,10 @@ access(all) fun main(account: Address): UFix64 {
                   {isFetchingBalance ? (
                     <div>Fetching...</div>
                   ) : (
-                    <div>{balance}</div>
+                    <>
+                      <div>{balance}</div>
+                      {error && error.length > 0 && <div>{error}</div>}
+                    </>
                   )}
                 </>
               )}
