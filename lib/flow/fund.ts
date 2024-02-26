@@ -120,9 +120,10 @@ export async function fundAccount(
           {
             fields: [{name: "bytes", value: addressBytes}],
           },
-          t.Struct(`A.${fcl.sansPrefix(publicConfig.contractEVM)}.EVM.EVMAddress`, [
-            {value: t.Array(t.UInt8)},
-          ])
+          t.Struct(
+            `A.${fcl.sansPrefix(publicConfig.contractEVM)}.EVM.EVMAddress`,
+            [{value: t.Array(t.UInt8)}]
+          )
         ),
         fcl.arg(amount, t.UFix64),
         fcl.arg("60000", t.UInt64),
