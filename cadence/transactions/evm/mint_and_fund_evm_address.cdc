@@ -26,12 +26,15 @@ transaction(to: EVM.EVMAddress, amount: UFix64, gasLimit: UInt64) {
         let mintedVault <- minter.mintTokens(amount: amount)
         destroy minter
 
+        let balance = EVM.Balance(attoflow: 0)
+        balance.setFLOW(flow: amount)
+
         self.coa.deposit(from: <-mintedVault)
         self.coa.call(
             to: to,
             data: [],
             gasLimit: gasLimit,
-            value: EVM.Balance(attoflow: 0).setFLOW(flow: amount),
+            value: balance,
         )
     }
 }
