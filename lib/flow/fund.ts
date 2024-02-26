@@ -105,7 +105,11 @@ export async function fundAccount(
   const {tx, amount} = tokens[addressType]
 
   if (addressType === "FLOWEVM") {
-    const addressBytes = Array.from(Buffer.from(address, "hex")).map(b =>
+    const withoutPrefix = fcl.sansPrefix(address)
+    if (!withoutPrefix) {
+      throw new Error("Invalid address")
+    }
+    const addressBytes = Array.from(Buffer.from(withoutPrefix, "hex")).map(b =>
       b.toString()
     )
 
@@ -116,9 +120,10 @@ export async function fundAccount(
           {
             fields: [{name: "bytes", value: addressBytes}],
           },
-          t.Struct(`A.${publicConfig.contractEVM}.EVM.EVMAddress`, [
-            {value: t.Array(t.UInt8)},
-          ])
+          t.Struct(
+            `A.${fcl.sansPrefix(publicConfig.contractEVM)}.EVM.EVMAddress`,
+            [{value: t.Array(t.UInt8)}]
+          )
         ),
         fcl.arg(amount, t.UFix64),
         fcl.arg("60000", t.UInt64),
