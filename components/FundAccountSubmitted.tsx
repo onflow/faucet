@@ -60,20 +60,20 @@ export default function FundAccountSubmitted({
                     result.token
                   } tokens`}
                 </div>
-                {publicConfig.network !== 'testnet' ? (
-                    <Link
-                        href={`https://${publicConfig.network}.flowdiver.io/account/${result.address}`}
-                        target="_blank"
-                        variant="secondary"
-                        sx={{fontSize: 1}}
-                    >
-                      View Account
-                    </Link>
+                {publicConfig.network !== "testnet" ? (
+                  <Link
+                    href={`https://${publicConfig.network}.flowdiver.io/account/${result.address}`}
+                    target="_blank"
+                    variant="secondary"
+                    sx={{fontSize: 1}}
+                  >
+                    View Account
+                  </Link>
                 ) : (
-                    <>
-                      <label>Balance</label>
-                      <div>1000.00</div>
-                    </>
+                  <>
+                    <label>Balance</label>
+                    <div>1000.00</div>
+                  </>
                 )}
               </Flex>
             </Box>
