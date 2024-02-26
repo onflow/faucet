@@ -1,0 +1,7 @@
+{
+    "functions": {
+        "api/fund.ts": {
+            "maxDuration": 30
+        }
+    }
+}
