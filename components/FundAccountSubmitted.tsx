@@ -129,7 +129,7 @@ access(all) fun main(account: Address): UFix64 {
               </Flex>
               {publicConfig.network === "previewnet" && (
                 <>
-                  <label>Balance</label>
+                  <Label>Balance</Label>
                   {isFetchingBalance ? (
                     <div>Fetching...</div>
                   ) : (
