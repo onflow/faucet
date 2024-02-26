@@ -116,7 +116,7 @@ access(all) fun main(account: Address): UFix64 {
                     result.token
                   } tokens`}
                 </div>
-                {publicConfig.network === "testnet" &&
+                {publicConfig.network === "testnet" && (
                   <Link
                     href={`https://${publicConfig.network}.flowdiver.io/account/${result.address}`}
                     target="_blank"
@@ -125,18 +125,18 @@ access(all) fun main(account: Address): UFix64 {
                   >
                     View Account
                   </Link>
-                }
+                )}
               </Flex>
-              {publicConfig.network === "previewnet" &&
-                  <>
-                    <label>Balance</label>
-                    {isFetchingBalance ? (
-                        <div>Fetching...</div>
-                    ) : (
-                        <div>{balance}</div>
-                    )}
-                  </>
-              }
+              {publicConfig.network === "previewnet" && (
+                <>
+                  <label>Balance</label>
+                  {isFetchingBalance ? (
+                    <div>Fetching...</div>
+                  ) : (
+                    <div>{balance}</div>
+                  )}
+                </>
+              )}
             </Box>
           </>
         )}
