@@ -73,7 +73,7 @@ access(all) fun main(account: Address): UFix64 {
         setIsFetchingBalance(true)
 
         const addressArgType =
-          publicConfig.network === "previewnet" &&
+          publicConfig.network === "testnet" ||
           getAddressType(result.address) === "FLOW"
             ? t.Address
             : t.String
