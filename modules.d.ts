@@ -102,5 +102,4 @@ declare module "*.cdc" {
   export default content
 }
 
-declare module "@onflow/util-encode-key"
 declare module "@onflow/types"
