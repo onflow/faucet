@@ -36,7 +36,7 @@ export default function FundAccountSubmitted({
 }) {
   const [isFetchingBalance, setIsFetchingBalance] = useState(false)
   const [balance, setBalance] = useState("")
-  const [error, setError] = useState("")
+  const [balanceError, setBalanceError] = useState("")
 
   useEffect(() => {
     if (typeof result === "undefined") return
@@ -101,9 +101,9 @@ access(all) fun main(account: Address): UFix64 {
         setBalance("--")
 
         if (error instanceof Error) {
-          setError(error.message)
+          setBalanceError(error.message)
         } else {
-          setError("An unknown error occurred")
+          setBalanceError("An unknown error occurred")
         }
       } finally {
         setIsFetchingBalance(false)
@@ -163,7 +163,9 @@ access(all) fun main(account: Address): UFix64 {
                   ) : (
                     <>
                       <div>{balance}</div>
-                      {error && error.length > 0 && <div>{error}</div>}
+                      {balanceError && balanceError.length > 0 && (
+                        <div>{balanceError}</div>
+                      )}
                     </>
                   )}
                 </>
