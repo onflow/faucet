@@ -38,34 +38,6 @@ export default function FundAccountSubmitted({
   const [balance, setBalance] = useState("")
   const [error, setError] = useState("")
 
-  const balanceScript =
-    publicConfig.network === "previewnet"
-      ? `import EVM from ${publicConfig.contractEVM}
-
-      /// Returns the Flow balance of a given EVM address in FlowEVM
-      ///
-      access(all) fun main(address: String): UFix64 {
-        let bytes = address.decodeHex()
-        let addressBytes: [UInt8; 20] = [
-          bytes[0], bytes[1], bytes[2], bytes[3], bytes[4],
-          bytes[5], bytes[6], bytes[7], bytes[8], bytes[9],
-          bytes[10], bytes[11], bytes[12], bytes[13], bytes[14],
-          bytes[15], bytes[16], bytes[17], bytes[18], bytes[19]
-        ]
-        return EVM.EVMAddress(bytes: addressBytes).balance().inFLOW()
-      }`
-      : `import FungibleToken from ${publicConfig.contractFungibleToken}
-import FlowToken from ${publicConfig.contractFlowToken}
-
-access(all) fun main(account: Address): UFix64 {
-
-    let vaultRef = getAccount(account)
-        .capabilities.borrow<&{FungibleToken.Balance}>(/public/flowTokenBalance)
-        ?? panic("Could not borrow Balance reference to the Vault")
-
-    return vaultRef.balance
-}`
-
   useEffect(() => {
     if (typeof result === "undefined") return
 
@@ -91,6 +63,34 @@ access(all) fun main(account: Address): UFix64 {
         } else {
           addressArg = addr
         }
+
+        const balanceScript =
+            publicConfig.network === "previewnet" && addressType === "FLOWEVM"
+                ? `import EVM from ${publicConfig.contractEVM}
+
+      /// Returns the Flow balance of a given EVM address in FlowEVM
+      ///
+      access(all) fun main(address: String): UFix64 {
+        let bytes = address.decodeHex()
+        let addressBytes: [UInt8; 20] = [
+          bytes[0], bytes[1], bytes[2], bytes[3], bytes[4],
+          bytes[5], bytes[6], bytes[7], bytes[8], bytes[9],
+          bytes[10], bytes[11], bytes[12], bytes[13], bytes[14],
+          bytes[15], bytes[16], bytes[17], bytes[18], bytes[19]
+        ]
+        return EVM.EVMAddress(bytes: addressBytes).balance().inFLOW()
+      }`
+                : `import FungibleToken from ${publicConfig.contractFungibleToken}
+import FlowToken from ${publicConfig.contractFlowToken}
+
+access(all) fun main(account: Address): UFix64 {
+
+    let vaultRef = getAccount(account)
+        .capabilities.borrow<&{FungibleToken.Balance}>(/public/flowTokenBalance)
+        ?? panic("Could not borrow Balance reference to the Vault")
+
+    return vaultRef.balance
+}`
 
         const balance = await sendScript({
           script: balanceScript,
