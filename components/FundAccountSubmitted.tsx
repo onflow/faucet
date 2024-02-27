@@ -99,12 +99,7 @@ access(all) fun main(account: Address): UFix64 {
         setBalance(balance)
       } catch (error) {
         setBalance("--")
-
-        if (error instanceof Error) {
-          setBalanceError((error as Error).message)
-        } else {
-          setBalanceError("An error occurred")
-        }
+        setBalanceError("An error occurred")
       } finally {
         setIsFetchingBalance(false)
       }
