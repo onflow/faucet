@@ -11,7 +11,6 @@ export const ACCOUNTS_KEYS_DOCS_URL =
   "https://developers.flow.com/concepts/start-here/accounts-and-keys"
 export const H_CAPTCHA_URL = "https://www.hcaptcha.com/"
 export const FAUCET_GITHUB_URL = "https://www.github.com/onflow/faucet/issues"
-export const TANOOKI_LABS_URL = "https://tanookilabs.com/"
 export const DISCORD_URL = "https://discord.gg/flow"
 
 export const PUBLIC_KEY_FORMAT_ERROR =
