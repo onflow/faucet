@@ -32,5 +32,5 @@ export async function sendScript({
   script: string
   args: fcl.TransactionArg[]
 }) {
-  return await fcl.send([fcl.script(script), fcl.args(args)])
+  return fcl.send([fcl.script(script), fcl.args(args)]).then(fcl.decode)
 }

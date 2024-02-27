@@ -92,11 +92,11 @@ access(all) fun main(account: Address): UFix64 {
     return vaultRef.balance
 }`
 
-        const balance = await sendScript({
+        const res = await sendScript({
           script: balanceScript,
           args: [fcl.arg(addressArg, addressArgType)],
         })
-        setBalance(balance)
+        setBalance(res)
       } catch (error) {
         setBalance("--")
         setBalanceError("An error occurred")
