@@ -101,9 +101,9 @@ access(all) fun main(account: Address): UFix64 {
         setBalance("--")
 
         if (error instanceof Error) {
-          setBalanceError(error.message)
+          setBalanceError((error as Error).message)
         } else {
-          setBalanceError("An unknown error occurred")
+          setBalanceError("An error occurred")
         }
       } finally {
         setIsFetchingBalance(false)
