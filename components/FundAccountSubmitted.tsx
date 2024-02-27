@@ -65,8 +65,8 @@ export default function FundAccountSubmitted({
         }
 
         const balanceScript =
-            publicConfig.network === "previewnet" && addressType === "FLOWEVM"
-                ? `import EVM from ${publicConfig.contractEVM}
+          publicConfig.network === "previewnet" && addressType === "FLOWEVM"
+            ? `import EVM from ${publicConfig.contractEVM}
 
       /// Returns the Flow balance of a given EVM address in FlowEVM
       ///
@@ -80,7 +80,7 @@ export default function FundAccountSubmitted({
         ]
         return EVM.EVMAddress(bytes: addressBytes).balance().inFLOW()
       }`
-                : `import FungibleToken from ${publicConfig.contractFungibleToken}
+            : `import FungibleToken from ${publicConfig.contractFungibleToken}
 import FlowToken from ${publicConfig.contractFlowToken}
 
 access(all) fun main(account: Address): UFix64 {
@@ -111,7 +111,7 @@ access(all) fun main(account: Address): UFix64 {
     }
 
     fetchBalance(result.address)
-  }, [result, balanceScript])
+  }, [result])
 
   return (
     <>
