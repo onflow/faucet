@@ -45,7 +45,7 @@ export default function FundAccountFields({
       </Box>
       <Field
         component={CustomInputComponent}
-        inputLabel="Paste Your Account Address"
+        inputLabel="Paste Your Account Address (Flow or Flow EVM)"
         name="address"
         placeholder="Your Account Address"
         autoComplete="off"
