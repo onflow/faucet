@@ -37,10 +37,12 @@ export default function FundAccountFields({
   return (
     <>
       <Box mb={4} mt={4}>
-        <Themed.h3 sx={{mb: 0}}>Fund your FLOW account</Themed.h3>
+        <Themed.h3 sx={{mb: 0}}>Fund your Flow or Flow EVM account</Themed.h3>
         <Themed.p>
           Once you have created an account, you can incrementally add additional
-          funds to it. Your address should be a 16 character hexadecimal string.
+          funds to it. Your address should be a valid Flow account (16 character
+          hexadecimal string) or a valid EVM address (42 character hexadecimal
+          including the `0x` prefix).
         </Themed.p>
       </Box>
       <Field
