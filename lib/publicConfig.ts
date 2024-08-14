@@ -63,7 +63,6 @@ const publicConfig: PublicConfig = {
 
 export const TOKEN_FUNDING_AMOUNTS: Record<TokenTypes, string> = {
   FLOW: publicConfig.tokenAmountFlow,
-  FUSD: publicConfig.tokenAmountFusd,
 }
 
 export default publicConfig
