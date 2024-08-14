@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 
 import TabNav, {TabNavLink} from "components/TabNav"
-import {TEST_NET, PREVIEW_NET} from "lib/constants"
+import {TEST_NET} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import publicConfig from "lib/publicConfig"
 

@@ -2,7 +2,6 @@ export type Networks = "testnet" | "previewnet"
 export type TokenTypes = typeof FLOW_TYPE
 
 export const TEST_NET = "testnet"
-export const PREVIEW_NET = "previewnet"
 export const FLOW_TYPE = "FLOW"
 export const NETWORK_STATUS_URL = "https://status.onflow.org/"
 export const GENERATE_KEYS_DOCS_URL =
