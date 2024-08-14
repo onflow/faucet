@@ -40,21 +40,6 @@ export default function NetworkLinks() {
           />
           Testnet
         </TabNavLink>
-        <TabNavLink
-          href={publicConfig.previewnetUrl}
-          active={publicConfig.network === PREVIEW_NET}
-        >
-          <img
-            src={
-              publicConfig.network === PREVIEW_NET
-                ? "previewnet-faucet-icon.svg"
-                : "gray-faucet-icon.svg"
-            }
-            alt={`${NETWORK_DISPLAY_NAME} Faucet`}
-            sx={{mr: 2}}
-          />
-          Previewnet
-        </TabNavLink>
       </TabNav>
     </div>
   )

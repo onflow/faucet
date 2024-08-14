@@ -6,9 +6,6 @@ if (!network) throw "Missing NEXT_PUBLIC_NETWORK"
 const testNetUrl = process.env.NEXT_PUBLIC_TEST_NET_URL
 if (!testNetUrl) throw "Missing NEXT_PUBLIC_TEST_NET_URL"
 
-const previewnetUrl = process.env.NEXT_PUBLIC_PREVIEWNET_URL
-if (!previewnetUrl) throw "Missing NEXT_PUBLIC_PREVIEWNET_URL"
-
 const tokenAmountFlow = process.env.NEXT_PUBLIC_TOKEN_AMOUNT_FLOW
 if (!tokenAmountFlow) throw "Missing NEXT_PUBLIC_TOKEN_AMOUNT_FLOW"
 
@@ -24,9 +21,6 @@ if (!contractFungibleToken) throw "Missing NEXT_PUBLIC_CONTRACT_FUNGIBLE_TOKEN"
 const contractFlowToken = process.env.NEXT_PUBLIC_CONTRACT_FLOW_TOKEN
 if (!contractFlowToken) throw "Missing NEXT_PUBLIC_CONTRACT_FLOW_TOKEN"
 
-const contractFUSD = process.env.NEXT_PUBLIC_CONTRACT_FUSD
-if (!contractFUSD) throw "Missing NEXT_PUBLIC_CONTRACT_FUSD"
-
 const contractEVM = process.env.NEXT_PUBLIC_CONTRACT_EVM
 if (!contractEVM) throw "Missing NEXT_PUBLIC_CONTRACT_EVM"
 
@@ -37,14 +31,12 @@ const walletDiscovery = process.env.NEXT_PUBLIC_WALLET_DISCOVERY
 export type PublicConfig = {
   network: Networks
   testNetUrl: string
-  previewnetUrl: string
   tokenAmountFlow: string
   tokenAmountFusd: string
   hcaptchaSiteKey: string
   signerAddress: string
   contractFungibleToken: string
   contractFlowToken: string
-  contractFUSD: string
   contractEVM: string
   accessAPIHost: string
   isLocal: boolean
@@ -54,7 +46,6 @@ export type PublicConfig = {
 const publicConfig: PublicConfig = {
   network,
   testNetUrl,
-  previewnetUrl: previewnetUrl,
   tokenAmountFlow,
   tokenAmountFusd,
   hcaptchaSiteKey:
@@ -63,7 +54,6 @@ const publicConfig: PublicConfig = {
   signerAddress,
   contractFungibleToken,
   contractFlowToken,
-  contractFUSD,
   contractEVM,
   accessAPIHost:
     process.env.NEXT_PUBLIC_ACCESS_API_HOST || "http://localhost:8888",
