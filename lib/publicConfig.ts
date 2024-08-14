@@ -9,9 +9,6 @@ if (!testNetUrl) throw "Missing NEXT_PUBLIC_TEST_NET_URL"
 const tokenAmountFlow = process.env.NEXT_PUBLIC_TOKEN_AMOUNT_FLOW
 if (!tokenAmountFlow) throw "Missing NEXT_PUBLIC_TOKEN_AMOUNT_FLOW"
 
-const tokenAmountFusd = process.env.NEXT_PUBLIC_TOKEN_AMOUNT_FUSD
-if (!tokenAmountFusd) throw "Missing NEXT_PUBLIC_TOKEN_AMOUNT_FUSD"
-
 const signerAddress = process.env.NEXT_PUBLIC_SIGNER_ADDRESS
 if (!signerAddress) throw "Missing NEXT_PUBLIC_SIGNER_ADDRESS"
 
@@ -32,7 +29,6 @@ export type PublicConfig = {
   network: Networks
   testNetUrl: string
   tokenAmountFlow: string
-  tokenAmountFusd: string
   hcaptchaSiteKey: string
   signerAddress: string
   contractFungibleToken: string
@@ -47,7 +43,6 @@ const publicConfig: PublicConfig = {
   network,
   testNetUrl,
   tokenAmountFlow,
-  tokenAmountFusd,
   hcaptchaSiteKey:
     process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY ||
     "10000000-ffff-ffff-ffff-000000000001",

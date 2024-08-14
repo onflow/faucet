@@ -56,12 +56,6 @@ npm run db-seed
 npm run dev-deploy-contracts
 ```
 
-### Run initial transactions to initialize the FUSD minter
-
-```sh
-npm run initial-transactions
-```
-
 ### Run the Next.js app
 
 ```sh
