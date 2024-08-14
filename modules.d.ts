@@ -70,7 +70,7 @@ declare module "@onflow/fcl" {
   export function script(script: string): unknown
   export function decode(): unknown
   export function authz(): Authorization
-  export function arg(encodedPublicKey: string, type: string): TransactionArg
+  export function arg(value: any, type: string): TransactionArg
   export function args(args: TransactionArg[]): unknown
   export function authorizations(authorizations: Authorization[]): unknown
   export function proposer(proposer: Authorization): unknown
@@ -102,5 +102,4 @@ declare module "*.cdc" {
   export default content
 }
 
-declare module "@onflow/util-encode-key"
 declare module "@onflow/types"

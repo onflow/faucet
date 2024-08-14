@@ -29,13 +29,17 @@ export default async function fund(req: NextApiRequest, res: NextApiResponse) {
     const address = fcl.withPrefix(req.body.address) || ""
     const token = req.body.token
 
-    // Validate address
-    if (!isValidNetworkAddress(address, publicConfig.network)) {
+    // Validate Flow Address
+    if (
+      address.length <= 18 &&
+      !isValidNetworkAddress(address, publicConfig.network)
+    ) {
       res
         .status(400)
         .json({errors: [INVALID_NETWORK_ADDRESS_ERROR(publicConfig.network)]})
       return
     }
+
     if (apiKey) {
       if (!verifyAPIKey(apiKey, config.apiKeys)) {
         res.status(401).json({errors: ["Invalid API key"]})

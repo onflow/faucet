@@ -16,3 +16,11 @@ export function verifyAPIKey(req: string, keys: string[]): boolean {
   }
   return false
 }
+
+export const getAddressType = function (address: string): "FLOW" | "FLOWEVM" {
+  if (address.length <= 18) {
+    return "FLOW"
+  } else {
+    return "FLOWEVM"
+  }
+}

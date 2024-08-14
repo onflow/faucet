@@ -1,6 +1,5 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
-import {encodeKey} from "@onflow/util-encode-key"
 import publicConfig from "../publicConfig"
 import {sendTransaction} from "./send"
 
@@ -10,23 +9,33 @@ const txCreateAccount = `
 import FlowToken from ${publicConfig.contractFlowToken}
 import FungibleToken from ${publicConfig.contractFungibleToken}
 
-transaction(publicKey: String, flowTokenAmount: UFix64) {
-  let tokenAdmin: &FlowToken.Administrator
-  let tokenReceiver: &{FungibleToken.Receiver}
+transaction(publicKey: String, flowTokenAmount: UFix64, sigAlgorithm: UInt8, hashAlgorithm: UInt8) {
+	let tokenAdmin: &FlowToken.Administrator
+	let tokenReceiver: &{FungibleToken.Receiver}
 
-  prepare(signer: AuthAccount) {
-    let account = AuthAccount(payer: signer)
+	prepare(signer: auth(BorrowValue) &Account) {
+		let account = Account(payer: signer)
 
-    account.addPublicKey(publicKey.decodeHex())
+		let signatureAlgorithm = SignatureAlgorithm(sigAlgorithm)
+			?? panic("Invalid SignatureAlgorithm")
+		let hashAlgorithm = HashAlgorithm(hashAlgorithm)
+			?? panic("Invalid HashAlgorithm")
 
-		self.tokenAdmin = signer
-		  .borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
-		  ?? panic("Signer is not the token admin")
+		let key = PublicKey(
+			publicKey: publicKey.decodeHex(),
+			signatureAlgorithm: signatureAlgorithm
+		)
+		account.keys.add(
+			publicKey: key,
+			hashAlgorithm: hashAlgorithm,
+			weight: 1000.0
+		)
 
-		self.tokenReceiver = account
-		  .getCapability(/public/flowTokenReceiver)!
-		  .borrow<&{FungibleToken.Receiver}>()
-		  ?? panic("Unable to borrow receiver reference")
+		self.tokenAdmin = signer.storage.borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
+			?? panic("Signer is not the token admin")
+
+		self.tokenReceiver = account.capabilities.borrow<&{FungibleToken.Receiver}>(/public/flowTokenReceiver)
+			?? panic("Unable to borrow receiver reference")
 	}
 
 	execute {
@@ -46,12 +55,13 @@ export async function createAccount(
   hashAlgo: number,
   authorization: fcl.Authorization
 ) {
-  const encodedPublicKey = encodeKey(publicKey, sigAlgo, hashAlgo, 1000)
   const result = await sendTransaction({
     transaction: txCreateAccount,
     args: [
-      fcl.arg(encodedPublicKey, t.String),
+      fcl.arg(publicKey, t.String),
       fcl.arg(publicConfig.tokenAmountFlow, t.UFix64),
+      fcl.arg(sigAlgo.toString(), t.UInt8),
+      fcl.arg(hashAlgo.toString(), t.UInt8),
     ],
     authorizations: [authorization],
     payer: authorization,

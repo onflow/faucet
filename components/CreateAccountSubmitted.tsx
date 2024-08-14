@@ -82,7 +82,7 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
                   ).toLocaleString()} FLOW tokens`}
                 </div>
                 <Link
-                  href={`https://flow-view-source.com/testnet/account/${address}`}
+                  href={`https://testnet.flowdiver.io/account/${address}`}
                   target="_blank"
                   variant="secondary"
                   sx={{fontSize: 1}}

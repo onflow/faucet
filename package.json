@@ -22,7 +22,6 @@
     "@hcaptcha/react-hcaptcha": "^0.3.4",
     "@onflow/fcl": "1.9.0",
     "@onflow/types": "1.2.1",
-    "@onflow/util-encode-key": "1.2.1",
     "@prisma/client": "^4.2.1",
     "@theme-ui/match-media": "^0.9.1",
     "clipboard-copy": "^4.0.1",
