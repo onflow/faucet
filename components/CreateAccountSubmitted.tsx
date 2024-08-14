@@ -8,7 +8,7 @@ import {Field} from "formik"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import publicConfig from "lib/publicConfig"
 import {useRef, useState} from "react"
-import {Box, Flex, Themed, ThemeUICSSObject} from "theme-ui"
+import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
 import {CustomInputComponent} from "./inputs"
 
 const styles: Record<string, ThemeUICSSObject> = {
@@ -81,14 +81,14 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
                     publicConfig.tokenAmountFlow
                   ).toLocaleString()} FLOW tokens`}
                 </div>
-                {/*<Link*/}
-                {/*  href={`https://flow-view-source.com/testnet/account/${address}`}*/}
-                {/*  target="_blank"*/}
-                {/*  variant="secondary"*/}
-                {/*  sx={{fontSize: 1}}*/}
-                {/*>*/}
-                {/*  View Account*/}
-                {/*</Link>*/}
+                <Link
+                  href={`https://testnet.flowdiver.io/account/${address}`}
+                  target="_blank"
+                  variant="secondary"
+                  sx={{fontSize: 1}}
+                >
+                  View Account
+                </Link>
               </Flex>
             </Box>
           </>
