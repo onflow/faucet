@@ -26,6 +26,7 @@ export default function Header({fund}: {fund?: boolean}) {
   }
 
   return (
+    // eslint-disable-next-line react/no-unknown-property
     <header sx={styles.header} data-test="header">
       <Link href={paths.root} sx={styles.logo}>
         <img

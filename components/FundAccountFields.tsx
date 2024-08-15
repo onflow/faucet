@@ -8,7 +8,6 @@ import {Box, Link} from "theme-ui"
 import {Themed} from "@theme-ui/mdx"
 import {CustomInputComponent} from "./inputs"
 
-
 export const TOKEN_OPTIONS = [
   {value: FLOW_TYPE, label: `${NETWORK_DISPLAY_NAME} FLOW`},
 ]
