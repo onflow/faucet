@@ -5,7 +5,8 @@ import FormErrors from "components/FormErrors"
 import {Field, useFormikContext} from "formik"
 import {GENERATE_KEYS_DOCS_URL, paths} from "lib/constants"
 import {HashAlgos, SigAlgos} from "lib/crypto"
-import {Box, Grid, Link, Text, Themed} from "theme-ui"
+import {Box, Grid, Link, Text} from "theme-ui"
+import {Themed} from "@theme-ui/mdx"
 import {CustomSelectComponent, CustomTextareaComponent} from "./inputs"
 
 const styles = {
