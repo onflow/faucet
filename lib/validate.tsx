@@ -3,6 +3,7 @@ import {
   ACCOUNTS_KEYS_DOCS_URL,
   ADDRESS_FORMAT_ERROR,
   ADDRESS_MISSING_ERROR,
+  ADDRESS_REGEXP,
   GENERATE_KEYS_DOCS_URL,
   PUBLIC_KEY_FORMAT_ERROR,
   PUBLIC_KEY_MISSING_ERROR,
@@ -53,7 +54,7 @@ export const createAccountSchemaServer = yup
 const fundAccountSchemaClientShape = {
   address: yup
     .string()
-    .matches(/^(0x)?([0-9a-f]{16})$/i, () => (
+    .matches(ADDRESS_REGEXP, () => (
       <>
         {ADDRESS_FORMAT_ERROR}{" "}
         <Link href={ACCOUNTS_KEYS_DOCS_URL} target="_blank" variant="underline">

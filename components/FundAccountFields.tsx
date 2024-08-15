@@ -1,33 +1,21 @@
 /** @jsxImportSource theme-ui */
 import Button from "components/Button"
 import Captcha from "components/Captcha"
-import FormErrors from "components/FormErrors"
 import {Field, useFormikContext} from "formik"
-import {
-  FLOW_TYPE,
-  FUSD_TYPE,
-  MISSING_FUSD_VAULT_ERROR,
-  paths,
-} from "lib/constants"
+import {FLOW_TYPE, paths} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import {Box, Link} from "theme-ui"
 import {Themed} from "@theme-ui/mdx"
-import {CustomInputComponent, CustomSelectComponent} from "./inputs"
+import {CustomInputComponent} from "./inputs"
 
-const FUSD_VAULT_DOCS_LINK = {
-  url: "https://docs.onflow.org/fusd/#how-do-i-get-an-fusd-enabled-wallet",
-  name: "How do I get an FUSD-enabled wallet?",
-}
 
 export const TOKEN_OPTIONS = [
   {value: FLOW_TYPE, label: `${NETWORK_DISPLAY_NAME} FLOW`},
-  {value: FUSD_TYPE, label: `${NETWORK_DISPLAY_NAME} FUSD`},
 ]
 
 export default function FundAccountFields({
   captchaToken,
   setCaptchaToken,
-  errors,
 }: {
   captchaToken: string
   setCaptchaToken: React.Dispatch<React.SetStateAction<string>>
@@ -38,15 +26,17 @@ export default function FundAccountFields({
   return (
     <>
       <Box mb={4} mt={4}>
-        <Themed.h3 sx={{mb: 0}}>Fund your FLOW account</Themed.h3>
+        <Themed.h3 sx={{mb: 0}}>Fund your Flow or Flow EVM account</Themed.h3>
         <Themed.p>
           Once you have created an account, you can incrementally add additional
-          funds to it. Your address should be a 16 character hexadecimal string.
+          funds to it. Your address should be a valid Flow account (16 character
+          hexadecimal string) or a valid EVM address (42 character hexadecimal
+          including the `0x` prefix).
         </Themed.p>
       </Box>
       <Field
         component={CustomInputComponent}
-        inputLabel="Paste Your Account Address"
+        inputLabel="Paste Your Account Address (Flow or Flow EVM)"
         name="address"
         placeholder="Your Account Address"
         autoComplete="off"
@@ -54,18 +44,18 @@ export default function FundAccountFields({
         max={128}
         sx={{fontFamily: "monospace"}}
       />
+      {/*<Box mb={3} mt={4}>*/}
+      {/*  <Themed.h3 sx={{mb: 0}}>Token</Themed.h3>*/}
+      {/*</Box>*/}
+      {/*<Box mb={4}>*/}
+      {/*  <Field*/}
+      {/*    component={CustomSelectComponent}*/}
+      {/*    name="token"*/}
+      {/*    inputLabel="Token"*/}
+      {/*    options={TOKEN_OPTIONS}*/}
+      {/*  />*/}
+      {/*</Box>*/}
       <Box mb={3} mt={4}>
-        <Themed.h3 sx={{mb: 0}}>Token</Themed.h3>
-      </Box>
-      <Box mb={4}>
-        <Field
-          component={CustomSelectComponent}
-          name="token"
-          inputLabel="Token"
-          options={TOKEN_OPTIONS}
-        />
-      </Box>
-      <Box mb={3}>
         <Captcha onVerify={setCaptchaToken} />
       </Box>
       <Box mb={3}>
@@ -78,16 +68,6 @@ export default function FundAccountFields({
         >
           Fund Your Account
         </Button>
-        {errors.length > 0 && (
-          <FormErrors
-            errors={errors}
-            link={
-              errors.some(e => e === MISSING_FUSD_VAULT_ERROR)
-                ? FUSD_VAULT_DOCS_LINK
-                : undefined
-            }
-          />
-        )}
       </Box>
       <Box mb={5}>
         <Themed.p sx={{textAlign: "center"}}>

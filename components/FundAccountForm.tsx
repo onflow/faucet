@@ -14,7 +14,7 @@ import {ClientFundAccountResult} from "./FundAccountPanel"
 import FundAccountSubmitted from "./FundAccountSubmitted"
 import publicConfig from "../lib/publicConfig"
 
-export default function FundAccountForm() {
+export default function FundAccountForm({address}: {address: string}) {
   const [errors, setErrors] = useState<string[]>([])
   const [captchaToken, setCaptchaToken] = useState("")
   const {mixpanel} = useMixpanel()
@@ -26,9 +26,10 @@ export default function FundAccountForm() {
     <FormContainer>
       <Formik
         initialValues={{
-          address: "",
+          address: address,
           token: FLOW_TYPE,
         }}
+        enableReinitialize
         validationSchema={fundAccountSchemaClient}
         onSubmit={async ({address, token}, {setSubmitting}) => {
           setErrors([])

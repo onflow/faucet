@@ -33,9 +33,6 @@
     "node_modules"
   ],
   "ts-node": {
-    "include": [
-      "lib/initialTransactions.ts"
-    ],
     "transpileOnly": true,
     "compilerOptions": {
       "module": "commonjs",

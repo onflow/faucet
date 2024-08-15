@@ -1,5 +1,5 @@
 import TabNav, {TabNavLink} from "components/TabNav"
-import {TEST_NET, SANDBOX_NET} from "lib/constants"
+import {TEST_NET} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
 import publicConfig from "lib/publicConfig"
 import {Box, Image} from "theme-ui"
@@ -38,21 +38,6 @@ export default function NetworkLinks() {
             sx={{mr: 2}}
           />
           Testnet
-        </TabNavLink>
-        <TabNavLink
-          href={publicConfig.sandboxNetUrl}
-          active={publicConfig.network === SANDBOX_NET}
-        >
-          <Image
-            src={
-              publicConfig.network === SANDBOX_NET
-                ? "sandboxnet-faucet-icon.svg"
-                : "gray-faucet-icon.svg"
-            }
-            alt="Sandboxnet Faucet"
-            sx={{mr: 2}}
-          />
-          Sandboxnet
         </TabNavLink>
       </TabNav>
     </Box>

@@ -1,9 +1,3 @@
-import {
-  ECDSA_P256,
-  ECDSA_secp256k1,
-  SHA2_256,
-  SHA3_256,
-} from "@onflow/util-encode-key"
 import {createHash} from "crypto"
 import {ec as EC} from "elliptic"
 import {SHA3} from "sha3"
@@ -12,13 +6,13 @@ export type SigAlgoTypes = "ECDSA_P256" | "ECDSA_secp256k1"
 export type HashAlgoTypes = "SHA2_256" | "SHA3_256"
 
 export const SigAlgos: Record<SigAlgoTypes, number> = {
-  ECDSA_P256: ECDSA_P256,
-  ECDSA_secp256k1: ECDSA_secp256k1,
+  ECDSA_P256: 1,
+  ECDSA_secp256k1: 2,
 }
 
 export const HashAlgos: Record<HashAlgoTypes, number> = {
-  SHA2_256: SHA2_256,
-  SHA3_256: SHA3_256,
+  SHA2_256: 1,
+  SHA3_256: 3,
 }
 
 const hashSHA2 = (msg: string) => {
