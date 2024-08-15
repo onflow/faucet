@@ -27,5 +27,6 @@
         "@typescript-eslint/no-explicit-any": "off"
       }
     }
-  ]
+  ],
+  "ignorePatterns": ["babel.config.js"]
 }
