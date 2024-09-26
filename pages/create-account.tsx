@@ -4,7 +4,7 @@ import Header from "components/Header"
 import PageTitle from "components/PageTitle"
 import {CreateAccountURLParams} from "lib/client"
 
-export default function Home(props: CreateAccountURLParams) {
+export default function CreateAccount(props: CreateAccountURLParams) {
   return (
     <AppContainer>
       <PageTitle>Create Account</PageTitle>
@@ -14,7 +14,7 @@ export default function Home(props: CreateAccountURLParams) {
   )
 }
 
-Home.getInitialProps = async (context: any) => {
+CreateAccount.getInitialProps = async (context: any) => {
   const key: string = context.query.key || ""
   const source: string = context.query.source || ""
   const sigAlgo: string = context.query["sig-algo"] || "ECDSA_P256"
