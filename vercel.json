@@ -3,5 +3,12 @@
         "pages/api/**/*.ts": {
             "maxDuration": 60
         }
-    }
+    },
+    "redirects": [
+        {
+            "source": "/",
+            "destination": "/fund-account",
+            "permanent": true
+        }
+    ]
 }

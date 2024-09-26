@@ -26,6 +26,7 @@ export const INVALID_NETWORK_ADDRESS_ERROR = (network: Networks) =>
 export const paths = {
   root: "/",
   fundAccount: "/fund-account",
+  createAccount: "/create-account",
 }
 
 export const ADDRESS_REGEXP = /^(0x)?([0-9a-fA-F]{16}|[0-9a-fA-F]{40})$/
