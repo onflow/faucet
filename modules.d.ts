@@ -103,3 +103,12 @@ declare module "*.cdc" {
 }
 
 declare module "@onflow/types"
+
+import {} from "react"
+import {ThemeUIStyleObject} from "theme-ui"
+
+declare module "react" {
+  interface Attributes {
+    sx?: ThemeUIStyleObject
+  }
+}
