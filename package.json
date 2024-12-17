@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "debug": "NODE_OPTIONS='--inspect' next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "db-migrate-dev": "prisma migrate dev --preview-feature",
     "db-migrate-deploy": "prisma migrate deploy --preview-feature",
