@@ -136,7 +136,7 @@ access(all) fun main(account: Address): UFix64 {
                   {`${parseFloat(result.amount).toLocaleString()} ${
                     result.token
                   } tokens`}
-                </div>
+                </Box>
                 <Link
                   href={accountExplorerUrl}
                   target="_blank"
