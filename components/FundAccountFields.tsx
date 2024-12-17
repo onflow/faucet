@@ -72,7 +72,7 @@ export default function FundAccountFields({
         <Themed.p sx={{textAlign: "center"}}>
           Don&apos;t have an account?{" "}
           <Link
-            href={paths.root}
+            href={paths.createAccount}
             variant="underline"
             data-test="fund-account-create-link"
           >

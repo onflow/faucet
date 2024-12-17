@@ -41,7 +41,7 @@ export default function Header({fund}: {fund?: boolean}) {
           {fund ? "Already have an account?" : "Don't have an account?"}
         </Text>
         <Button
-          href={fund ? paths.fundAccount : paths.root}
+          href={fund ? paths.fundAccount : paths.createAccount}
           data-test={`header-${fund ? "fund" : "create"}-link`}
           variant="secondary"
         >

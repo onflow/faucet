@@ -1,4 +1,4 @@
-export type Networks = "testnet" | "previewnet"
+export type Networks = "testnet"
 export type TokenTypes = typeof FLOW_TYPE
 
 export const TEST_NET = "testnet"
@@ -10,7 +10,7 @@ export const ACCOUNTS_KEYS_DOCS_URL =
   "https://developers.flow.com/concepts/start-here/accounts-and-keys"
 export const H_CAPTCHA_URL = "https://www.hcaptcha.com/"
 export const FAUCET_GITHUB_URL = "https://www.github.com/onflow/faucet/issues"
-export const DISCORD_URL = "https://discord.gg/flowblockchain"
+export const DISCORD_URL = "https://discord.gg/flow"
 
 export const PUBLIC_KEY_FORMAT_ERROR =
   "Public key must be a hexadecimal string with no spaces."
@@ -26,11 +26,11 @@ export const INVALID_NETWORK_ADDRESS_ERROR = (network: Networks) =>
 export const paths = {
   root: "/",
   fundAccount: "/fund-account",
+  createAccount: "/create-account",
 }
 
 export const ADDRESS_REGEXP = /^(0x)?([0-9a-fA-F]{16}|[0-9a-fA-F]{40})$/
 
 export const NETWORK_CODEWORDS = {
   testnet: "0x6834ba37b3980209",
-  previewnet: "0x5211829E88528817",
 }
