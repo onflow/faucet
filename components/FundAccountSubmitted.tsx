@@ -36,8 +36,11 @@ export default function FundAccountSubmitted({
 }: {
   result?: ClientFundAccountResult
 }) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_isFetchingBalance, setIsFetchingBalance] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_balance, setBalance] = useState("")
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_balanceError, setBalanceError] = useState("")
 
   useEffect(() => {
