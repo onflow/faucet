@@ -53,14 +53,20 @@ export default function FundAccountForm({address}: {address: string}) {
           setSubmitting(false)
         }}
       >
-        {({values, isSubmitting}) => (
+        {({
+          values,
+          isSubmitting,
+        }: {
+          values: {token: TokenTypes; address: string}
+          isSubmitting: boolean
+        }) => (
           <Form data-test="fund-account-form">
             <Box mt={4} mb={3}>
               <Themed.h1>Fund Account</Themed.h1>
             </Box>
             <TokenFundingInfo
               description="when you fund your account"
-              token={values.token as TokenTypes}
+              token={values.token}
             />
             {isSubmitting || typeof result !== "undefined" ? (
               <FundAccountSubmitted result={result} />
