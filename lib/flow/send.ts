@@ -1,4 +1,5 @@
 import * as fcl from "@onflow/fcl"
+import * as sdk from "@onflow/sdk"
 
 export async function sendTransaction({
   transaction,
@@ -8,10 +9,10 @@ export async function sendTransaction({
   payer,
 }: {
   transaction: string
-  args: fcl.TransactionArg[]
-  proposer: fcl.Authorization
-  authorizations: fcl.Authorization[]
-  payer: fcl.Authorization
+  args: sdk.CadenceArgument<any>[]
+  proposer: typeof fcl.authorization
+  authorizations: (typeof fcl.authorization)[]
+  payer: typeof fcl.authorization
 }) {
   const response = await fcl.send([
     fcl.transaction(transaction),
@@ -30,7 +31,7 @@ export async function sendScript({
   args,
 }: {
   script: string
-  args: fcl.TransactionArg[]
+  args: sdk.CadenceArgument<any>[]
 }) {
   return fcl.send([fcl.script(script), fcl.args(args)]).then(fcl.decode)
 }

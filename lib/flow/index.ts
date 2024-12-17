@@ -5,8 +5,8 @@ import publicConfig from "../publicConfig"
 
 fcl.config().put("accessNode.api", publicConfig.accessAPIHost)
 
-export const getAuthorization = (keyIndex: number): fcl.Authorization => {
-  return async (account = {}) => {
+export const getAuthorization = (keyIndex: number) => {
+  return async (account: {addr?: string} = {}) => {
     return {
       ...account,
       tempId: `${account.addr}-${keyIndex}`,

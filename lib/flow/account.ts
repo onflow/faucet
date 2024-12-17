@@ -53,7 +53,7 @@ export async function createAccount(
   publicKey: string,
   sigAlgo: number,
   hashAlgo: number,
-  authorization: fcl.Authorization
+  authorization: typeof fcl.authorization
 ) {
   const result = await sendTransaction({
     transaction: txCreateAccount,
@@ -69,7 +69,7 @@ export async function createAccount(
   })
 
   const accountCreatedEvent = result.events.find(
-    (event: fcl.Event) => event.type === accountCreatedEventType
+    event => event.type === accountCreatedEventType
   )
 
   if (!accountCreatedEvent) {
