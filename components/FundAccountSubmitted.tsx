@@ -35,9 +35,9 @@ export default function FundAccountSubmitted({
 }: {
   result?: ClientFundAccountResult
 }) {
-  const [isFetchingBalance, setIsFetchingBalance] = useState(false)
-  const [balance, setBalance] = useState("")
-  const [balanceError, setBalanceError] = useState("")
+  const [_isFetchingBalance, setIsFetchingBalance] = useState(false)
+  const [_balance, setBalance] = useState("")
+  const [_balanceError, setBalanceError] = useState("")
 
   useEffect(() => {
     if (typeof result === "undefined") return
