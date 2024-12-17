@@ -50,7 +50,7 @@ export default function FundAccountSubmitted({
       try {
         setIsFetchingBalance(true)
 
-        const addressType = getAddressType(result.address)
+        const addressType = getAddressType(addr)
         let addressArg
 
         const addressArgType =
@@ -59,7 +59,7 @@ export default function FundAccountSubmitted({
             : t.String
 
         if (addressType === "FLOWEVM") {
-          const withoutPrefix = fcl.sansPrefix(result.address)
+          const withoutPrefix = fcl.sansPrefix(addr)
           if (!withoutPrefix) {
             throw new Error("Invalid address")
           }

@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.8.1",
-    "@onflow/fcl": "^1.11.0",
-    "@onflow/types": "1.2.1",
+    "@onflow/fcl": "^1.13.3",
+    "@onflow/types": "^1.4.1",
     "@prisma/client": "^5.2.0",
     "@theme-ui/match-media": "^0.16.2",
     "@theme-ui/mdx": "^0.16.1",
