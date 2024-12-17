@@ -46,6 +46,7 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.26.3",
     "@types/elliptic": "^6.4.14",
     "@types/hcaptcha__react-hcaptcha": "^0.1.5",
     "@types/mixpanel-browser": "^2.47.1",

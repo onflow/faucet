@@ -4,7 +4,7 @@ module.exports = function (api) {
   const removeDataTestAttributes =
     api.env("production") && !process.env.PRESERVE_DATA_TEST_ATTRIBUTES
 
-  const presets = [
+  const presets = [[
     "next/babel",
     {
       "preset-react": {
@@ -13,7 +13,7 @@ module.exports = function (api) {
         throwIfNamespace: false,
       },
     },
-  ]
+  ]]
   const plugins = removeDataTestAttributes
     ? [["react-remove-properties", {properties: ["data-test"]}]]
     : []
