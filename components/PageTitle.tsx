@@ -1,10 +1,6 @@
-import {TEST_NET} from "lib/constants"
-import publicConfig from "lib/publicConfig"
 import Head from "next/head"
 
-export const BASE_HTML_TITLE = `Flow ${
-  publicConfig.network === TEST_NET ? "Testnet" : "Previewnet"
-} Faucet`
+export const BASE_HTML_TITLE = "Flow Testnet Faucet"
 
 export default function PageTitle({children}: {children?: string}) {
   const title = [children, BASE_HTML_TITLE].filter(Boolean).join(" - ")

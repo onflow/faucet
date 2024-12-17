@@ -9,6 +9,7 @@ import {sendScript} from "../lib/flow/send"
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import {getAddressType} from "../lib/common"
+import {getAccountExplorerUrl} from "lib/address"
 
 const styles: Record<string, ThemeUICSSObject> = {
   resultsContainer: {
@@ -34,9 +35,9 @@ export default function FundAccountSubmitted({
 }: {
   result?: ClientFundAccountResult
 }) {
-  const [isFetchingBalance, setIsFetchingBalance] = useState(false)
-  const [balance, setBalance] = useState("")
-  const [balanceError, setBalanceError] = useState("")
+  const [_isFetchingBalance, setIsFetchingBalance] = useState(false)
+  const [_balance, setBalance] = useState("")
+  const [_balanceError, setBalanceError] = useState("")
 
   useEffect(() => {
     if (typeof result === "undefined") return
@@ -65,7 +66,7 @@ export default function FundAccountSubmitted({
         }
 
         const balanceScript =
-          publicConfig.network === "previewnet" && addressType === "FLOWEVM"
+          addressType === "FLOWEVM"
             ? `import EVM from ${publicConfig.contractEVM}
 
       /// Returns the Flow balance of a given EVM address in FlowEVM
@@ -102,6 +103,8 @@ access(all) fun main(account: Address): UFix64 {
     fetchBalance(result.address)
   }, [result])
 
+  const accountExplorerUrl = getAccountExplorerUrl(result?.address ?? "")
+
   return (
     <>
       <Box mb={4} mt={4}>
@@ -133,32 +136,15 @@ access(all) fun main(account: Address): UFix64 {
                     result.token
                   } tokens`}
                 </div>
-                {publicConfig.network === "testnet" && (
-                  <Link
-                    href={`https://${publicConfig.network}.flowdiver.io/account/${result.address}`}
-                    target="_blank"
-                    variant="secondary"
-                    sx={{fontSize: 1}}
-                  >
-                    View Account
-                  </Link>
-                )}
+                <Link
+                  href={accountExplorerUrl}
+                  target="_blank"
+                  variant="secondary"
+                  sx={{fontSize: 1}}
+                >
+                  View Account
+                </Link>
               </Flex>
-              {publicConfig.network === "previewnet" && (
-                <>
-                  <Label>Balance</Label>
-                  {isFetchingBalance ? (
-                    <div>Fetching...</div>
-                  ) : (
-                    <>
-                      <div>{balance}</div>
-                      {balanceError && balanceError.length > 0 && (
-                        <div>{balanceError}</div>
-                      )}
-                    </>
-                  )}
-                </>
-              )}
             </Box>
           </>
         )}

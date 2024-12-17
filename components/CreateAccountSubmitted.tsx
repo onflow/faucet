@@ -10,6 +10,7 @@ import publicConfig from "lib/publicConfig"
 import {useRef, useState} from "react"
 import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
 import {CustomInputComponent} from "./inputs"
+import {getAccountExplorerUrl} from "lib/address"
 
 const styles: Record<string, ThemeUICSSObject> = {
   addressContainer: {
@@ -40,6 +41,8 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
     setCopied(true)
     setTimeout(() => setCopied(false), 3000)
   }
+
+  const accountExplorerUrl = getAccountExplorerUrl(address)
 
   return (
     <>
@@ -82,7 +85,7 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
                   ).toLocaleString()} FLOW tokens`}
                 </div>
                 <Link
-                  href={`https://testnet.flowdiver.io/account/${address}`}
+                  href={accountExplorerUrl}
                   target="_blank"
                   variant="secondary"
                   sx={{fontSize: 1}}

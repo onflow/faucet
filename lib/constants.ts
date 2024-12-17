@@ -1,4 +1,4 @@
-export type Networks = "testnet" | "previewnet"
+export type Networks = "testnet"
 export type TokenTypes = typeof FLOW_TYPE
 
 export const TEST_NET = "testnet"
@@ -33,5 +33,4 @@ export const ADDRESS_REGEXP = /^(0x)?([0-9a-fA-F]{16}|[0-9a-fA-F]{40})$/
 
 export const NETWORK_CODEWORDS = {
   testnet: "0x6834ba37b3980209",
-  previewnet: "0x5211829E88528817",
 }
