@@ -1,7 +1,8 @@
 /** @jsxImportSource theme-ui */
 import Label from "components/Label"
 import LoadingFeedback from "components/LoadingFeedback"
-import {Box, Flex, Link, Themed, ThemeUICSSObject} from "theme-ui"
+import {Box, Flex, Link, ThemeUICSSObject} from "theme-ui"
+import {Themed} from "@theme-ui/mdx"
 import {ClientFundAccountResult} from "./FundAccountPanel"
 import publicConfig from "lib/publicConfig"
 import {useEffect, useState} from "react"
@@ -35,8 +36,11 @@ export default function FundAccountSubmitted({
 }: {
   result?: ClientFundAccountResult
 }) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_isFetchingBalance, setIsFetchingBalance] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_balance, setBalance] = useState("")
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_balanceError, setBalanceError] = useState("")
 
   useEffect(() => {
@@ -46,7 +50,7 @@ export default function FundAccountSubmitted({
       try {
         setIsFetchingBalance(true)
 
-        const addressType = getAddressType(result.address)
+        const addressType = getAddressType(addr)
         let addressArg
 
         const addressArgType =
@@ -55,7 +59,7 @@ export default function FundAccountSubmitted({
             : t.String
 
         if (addressType === "FLOWEVM") {
-          const withoutPrefix = fcl.sansPrefix(result.address)
+          const withoutPrefix = fcl.sansPrefix(addr)
           if (!withoutPrefix) {
             throw new Error("Invalid address")
           }
@@ -131,11 +135,11 @@ access(all) fun main(account: Address): UFix64 {
               <Flex
                 sx={{alignItems: "center", justifyContent: "space-between"}}
               >
-                <div sx={styles.walletAmount}>
+                <Box sx={styles.walletAmount}>
                   {`${parseFloat(result.amount).toLocaleString()} ${
                     result.token
                   } tokens`}
-                </div>
+                </Box>
                 <Link
                   href={accountExplorerUrl}
                   target="_blank"

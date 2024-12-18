@@ -90,7 +90,7 @@ export const tokens: Tokens = {
 export async function fundAccount(
   address: string,
   token: TokenType,
-  authorization: fcl.Authorization
+  authorization: typeof fcl.authorization
 ) {
   const addressType = getAddressType(address)
 
