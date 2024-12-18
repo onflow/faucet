@@ -33,4 +33,5 @@ export const ADDRESS_REGEXP = /^(0x)?([0-9a-fA-F]{16}|[0-9a-fA-F]{40})$/
 
 export const NETWORK_CODEWORDS = {
   testnet: "0x6834ba37b3980209",
+  local: "0x1cb159857af02018",
 }

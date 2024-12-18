@@ -11,6 +11,8 @@ import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import {getAddressType} from "../lib/common"
 import {getAccountExplorerUrl} from "lib/address"
+import GetEVMBalance from "../cadence/scripts/get_evm_balance.cdc"
+import GetFTBalance from "../cadence/scripts/get_ft_balance.cdc"
 
 const styles: Record<string, ThemeUICSSObject> = {
   resultsContainer: {
@@ -70,26 +72,7 @@ export default function FundAccountSubmitted({
         }
 
         const balanceScript =
-          addressType === "FLOWEVM"
-            ? `import EVM from ${publicConfig.contractEVM}
-
-      /// Returns the Flow balance of a given EVM address in FlowEVM
-      ///
-      access(all) fun main(address: String): UFix64 {
-        let bytes = address.decodeHex().toConstantSized<[UInt8; 20]>()!
-        return EVM.EVMAddress(bytes: bytes).balance().inFLOW()
-      }`
-            : `import FungibleToken from ${publicConfig.contractFungibleToken}
-import FlowToken from ${publicConfig.contractFlowToken}
-
-access(all) fun main(account: Address): UFix64 {
-
-    let vaultRef = getAccount(account)
-        .capabilities.borrow<&{FungibleToken.Balance}>(/public/flowTokenBalance)
-        ?? panic("Could not borrow Balance reference to the Vault")
-
-    return vaultRef.balance
-}`
+          addressType === "FLOWEVM" ? GetEVMBalance : GetFTBalance
 
         const res = await sendScript({
           script: balanceScript,

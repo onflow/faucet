@@ -4,77 +4,8 @@ import {FLOW_TYPE} from "../constants"
 import publicConfig, {TOKEN_FUNDING_AMOUNTS} from "../publicConfig"
 import {sendTransaction} from "./send"
 import {getAddressType} from "../common"
-
-const txFundAccountFLOW = `
-import FlowToken from ${publicConfig.contractFlowToken}
-import FungibleToken from ${publicConfig.contractFungibleToken}
-
-transaction(address: Address, amount: UFix64) {
-	let tokenAdmin: &FlowToken.Administrator
-	let tokenReceiver: &{FungibleToken.Receiver}
-
-	prepare(signer: auth(BorrowValue) &Account) {
-		self.tokenAdmin = signer.storage.borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
-			?? panic("Signer is not the token admin")
-
-		self.tokenReceiver = getAccount(address).capabilities.borrow<&{FungibleToken.Receiver}>(
-				/public/flowTokenReceiver
-			) ?? panic("Could not borrow receiver reference to the recipient's Vault")
-	}
-
-	execute {
-		let minter <- self.tokenAdmin.createNewMinter(allowedAmount: amount)
-		let mintedVault <- minter.mintTokens(amount: amount)
-
-		self.tokenReceiver.deposit(from: <-mintedVault)
-
-		destroy minter
-	}
-}
-`
-
-const txFundAccountFlowEVM = `
-import FungibleToken from ${publicConfig.contractFungibleToken}
-import FlowToken from ${publicConfig.contractFlowToken}
-
-import EVM from ${publicConfig.contractEVM}
-
-/// Mints Flow and transfers it to the given EVM address via the signer's CadenceOwnedAccount.
-///
-transaction(to: EVM.EVMAddress, amount: UFix64, gasLimit: UInt64) {
-
-    let tokenAdmin: &FlowToken.Administrator
-    let coa: auth(EVM.Call) &EVM.CadenceOwnedAccount
-
-    prepare(signer: auth(Storage) &Account) {
-        self.tokenAdmin = signer.storage.borrow<&FlowToken.Administrator>(from: /storage/flowTokenAdmin)
-            ?? panic("Signer is not the token admin")
-
-        if signer.storage.borrow<&EVM.CadenceOwnedAccount>(from: /storage/evm) == nil {
-            signer.storage.save(<-EVM.createCadenceOwnedAccount(), to: /storage/evm)
-        }
-        self.coa = signer.storage.borrow<auth(EVM.Call) &EVM.CadenceOwnedAccount>(from: /storage/evm)
-            ?? panic("Could not borrow reference to the signer's COA!")
-    }
-
-    execute {
-        let minter <- self.tokenAdmin.createNewMinter(allowedAmount: amount)
-        let mintedVault <- minter.mintTokens(amount: amount)
-        destroy minter
-
-        let balance = EVM.Balance(attoflow: 0)
-        balance.setFLOW(flow: amount)
-
-        self.coa.deposit(from: <-mintedVault)
-        self.coa.call(
-            to: to,
-            data: [],
-            gasLimit: gasLimit,
-            value: balance,
-        )
-    }
-}
-`
+import TxFundAccount from "../../cadence/transactions/fund_account.cdc"
+import TxFundEVMAccount from "../../cadence/transactions/fund_evm_account.cdc"
 
 type TokenType = "FLOW" | "FLOWEVM"
 type Token = {
@@ -84,8 +15,8 @@ type Token = {
 type Tokens = Record<TokenType, Token>
 
 export const tokens: Tokens = {
-  FLOW: {tx: txFundAccountFLOW, amount: TOKEN_FUNDING_AMOUNTS[FLOW_TYPE]},
-  FLOWEVM: {tx: txFundAccountFlowEVM, amount: TOKEN_FUNDING_AMOUNTS[FLOW_TYPE]},
+  FLOW: {tx: TxFundAccount, amount: TOKEN_FUNDING_AMOUNTS[FLOW_TYPE]},
+  FLOWEVM: {tx: TxFundEVMAccount, amount: TOKEN_FUNDING_AMOUNTS[FLOW_TYPE]},
 }
 export async function fundAccount(
   address: string,
