@@ -1,4 +1,5 @@
 import * as fcl from "@onflow/fcl"
+import "lib/fclConfig"
 import {verify} from "hcaptcha"
 import {INVALID_NETWORK_ADDRESS_ERROR} from "lib/constants"
 import publicConfig from "lib/publicConfig"

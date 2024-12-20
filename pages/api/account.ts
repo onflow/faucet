@@ -1,4 +1,5 @@
 import {verify} from "hcaptcha"
+import "lib/fclConfig"
 import {NextApiRequest, NextApiResponse} from "next"
 import config from "../../lib/config"
 import {
