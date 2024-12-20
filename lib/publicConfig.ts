@@ -40,7 +40,7 @@ const publicConfig: PublicConfig = {
   signerAddress,
   contractEVM,
   accessAPIHost:
-    process.env.NEXT_PUBLIC_ACCESS_API_HOST || "https://rest-testnet.onflow.org",
+    process.env.NEXT_PUBLIC_ACCESS_API_HOST || "http://localhost:8888",
   walletDiscovery,
 }
 
