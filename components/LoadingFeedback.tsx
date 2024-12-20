@@ -1,4 +1,5 @@
 import {Box, ThemeUICSSObject} from "theme-ui"
+import Image from "next/image"
 
 const styles: Record<string, ThemeUICSSObject> = {
   loading: {
@@ -21,7 +22,7 @@ export default function LoadingFeedback({
 }) {
   return (
     <Box sx={styles.loading}>
-      <img src="loading.svg" />
+      <Image src="loading.svg" alt="loading" />
       <br />
       {children}
     </Box>

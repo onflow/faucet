@@ -2,6 +2,7 @@
 import Button from "components/Button"
 import {paths, TEST_NET} from "lib/constants"
 import publicConfig from "lib/publicConfig"
+import Image from "next/image"
 import {Link, Text, ThemeUICSSObject} from "theme-ui"
 
 export default function Header({fund}: {fund?: boolean}) {
@@ -29,7 +30,7 @@ export default function Header({fund}: {fund?: boolean}) {
     // eslint-disable-next-line react/no-unknown-property
     <header sx={styles.header} data-test="header">
       <Link href={paths.root} sx={styles.logo}>
-        <img
+        <Image
           style={{width: "100%"}}
           src={`/flow-faucet-logo-${publicConfig.network}.svg`}
           alt="Flow"
