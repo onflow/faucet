@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import CreateAccountFields from "components/CreateAccountFields"
 import CreateAccountSubmitted from "components/CreateAccountSubmitted"
 import FormContainer from "components/FormContainer"
@@ -9,7 +8,8 @@ import {FLOW_TYPE} from "lib/constants"
 import {useMixpanel} from "lib/mixpanel"
 import {createAccountSchemaClient} from "lib/validate"
 import {useState} from "react"
-import {Box, Themed} from "theme-ui"
+import {Box} from "theme-ui"
+import {Themed} from "@theme-ui/mdx"
 import {accountCreated} from "../lib/metrics"
 import publicConfig from "../lib/publicConfig"
 

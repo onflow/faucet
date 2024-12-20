@@ -4,6 +4,7 @@ import {useTextField} from "@react-aria/textfield"
 import {FieldProps} from "formik"
 import {useRef} from "react"
 import {
+  Box,
   Input,
   InputProps,
   Select,
@@ -56,7 +57,7 @@ export const FieldError = ({children}: {children: React.ReactNode}) => {
     },
   }
 
-  return <div sx={style}>{children}</div>
+  return <Box sx={style}>{children}</Box>
 }
 
 export const CustomInputComponent = ({

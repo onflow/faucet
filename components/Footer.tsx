@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 
-import {Container, Flex, ThemeUICSSObject} from "theme-ui"
+import {Box, Container, Flex, ThemeUICSSObject} from "theme-ui"
 
 export default function Footer() {
   const styles: Record<string, ThemeUICSSObject> = {
@@ -26,7 +26,7 @@ export default function Footer() {
   }
 
   return (
-    <div sx={styles.footer}>
+    <Box sx={styles.footer}>
       <Container>
         <Flex sx={styles.innerContainer}>
           <Flex mr={[0, "auto"]} mb={[2, 0]}>
@@ -34,6 +34,6 @@ export default function Footer() {
           </Flex>
         </Flex>
       </Container>
-    </div>
+    </Box>
   )
 }

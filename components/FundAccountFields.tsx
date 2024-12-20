@@ -4,7 +4,8 @@ import Captcha from "components/Captcha"
 import {Field, useFormikContext} from "formik"
 import {FLOW_TYPE, paths} from "lib/constants"
 import {NETWORK_DISPLAY_NAME} from "lib/network"
-import {Box, Link, Themed} from "theme-ui"
+import {Box, Link} from "theme-ui"
+import {Themed} from "@theme-ui/mdx"
 import {CustomInputComponent} from "./inputs"
 
 export const TOKEN_OPTIONS = [

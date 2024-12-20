@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import {Label as ThemeUILabel, LabelProps} from "theme-ui"
+import {Label as ThemeUILabel, LabelProps, Box} from "theme-ui"
 
 type Props = {
   required?: boolean
@@ -17,7 +17,7 @@ const Label = ({required = false, children, ...props}: Props) => {
   return (
     <ThemeUILabel {...props}>
       {children}
-      {required && <div sx={styles.required}>*</div>}
+      {required && <Box sx={styles.required}>*</Box>}
     </ThemeUILabel>
   )
 }

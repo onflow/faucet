@@ -8,7 +8,8 @@ import {FLOW_TYPE, TokenTypes} from "lib/constants"
 import {useMixpanel} from "lib/mixpanel"
 import {fundAccountSchemaClient} from "lib/validate"
 import {useState} from "react"
-import {Box, Themed} from "theme-ui"
+import {Box} from "theme-ui"
+import {Themed} from "@theme-ui/mdx"
 import {ClientFundAccountResult} from "./FundAccountPanel"
 import FundAccountSubmitted from "./FundAccountSubmitted"
 import publicConfig from "../lib/publicConfig"
@@ -52,14 +53,20 @@ export default function FundAccountForm({address}: {address: string}) {
           setSubmitting(false)
         }}
       >
-        {({values, isSubmitting}) => (
+        {({
+          values,
+          isSubmitting,
+        }: {
+          values: {token: TokenTypes; address: string}
+          isSubmitting: boolean
+        }) => (
           <Form data-test="fund-account-form">
             <Box mt={4} mb={3}>
               <Themed.h1>Fund Account</Themed.h1>
             </Box>
             <TokenFundingInfo
               description="when you fund your account"
-              token={values.token as TokenTypes}
+              token={values.token}
             />
             {isSubmitting || typeof result !== "undefined" ? (
               <FundAccountSubmitted result={result} />

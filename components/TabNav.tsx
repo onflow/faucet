@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 
 import React from "react"
-import {Link, ThemeUICSSObject} from "theme-ui"
+import {Box, Link, ThemeUICSSObject} from "theme-ui"
 
 export function TabNavLink({
   active,
@@ -50,5 +50,5 @@ export default function TabNav({children}: {children: React.ReactNode}) {
     paddingRight: 18,
   }
 
-  return <div sx={style}>{children}</div>
+  return <Box sx={style}>{children}</Box>
 }
