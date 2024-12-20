@@ -129,10 +129,10 @@ export default function CreateAccountSubmitted({address}: {address: string}) {
             variant="ghost"
             size="sm"
             block
-            href="https://www.onflow.org"
+            href="https://www.flow.com"
             target="_blank"
           >
-            Join the Flow alpha community
+            Join the Flow community
           </Button>
         </Box>
       </Box>
