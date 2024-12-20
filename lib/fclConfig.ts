@@ -3,6 +3,8 @@ import {BASE_HTML_TITLE} from "components/PageTitle"
 import publicConfig from "./publicConfig"
 import flowJSON from "../flow.json"
 
+console.log(flowJSON)
+
 config()
   .put("flow.network", publicConfig.network)
   .put("app.detail.title", BASE_HTML_TITLE)
