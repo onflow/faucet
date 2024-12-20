@@ -34,6 +34,8 @@ export default function Header({fund}: {fund?: boolean}) {
           style={{width: "100%"}}
           src={`/flow-faucet-logo-${publicConfig.network}.svg`}
           alt="Flow"
+          width={350}
+          height={85}
         />
       </Link>
 

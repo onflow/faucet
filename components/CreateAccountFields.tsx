@@ -56,7 +56,7 @@ export default function CreateAccountFields({
             setFieldValue("publicKey", e.target.value.slice(0, 128))
           }
           sx={styles.publicKeyInputField}
-          spellcheck={false}
+          spellCheck={false}
           rows="4"
         />
       </Box>

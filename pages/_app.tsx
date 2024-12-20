@@ -1,8 +1,7 @@
-import {SSRProvider} from "@react-aria/ssr"
 import "lib/fclConfig"
 import theme from "lib/theme"
 import {AppProps} from "next/app"
-import {ThemeProvider} from "theme-ui"
+import {ThemeUIProvider} from "theme-ui"
 import {GoogleAnalytics, event} from "nextjs-google-analytics"
 import "./fonts.css"
 
@@ -27,12 +26,10 @@ export function reportWebVitals({
 
 function App({Component, pageProps}: AppProps): JSX.Element {
   return (
-    <SSRProvider>
-      <ThemeProvider theme={theme}>
-        <GoogleAnalytics />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </SSRProvider>
+    <ThemeUIProvider theme={theme}>
+      <GoogleAnalytics />
+      <Component {...pageProps} />
+    </ThemeUIProvider>
   )
 }
 

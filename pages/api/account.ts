@@ -1,4 +1,5 @@
 import {verify} from "hcaptcha"
+import "lib/fclConfig"
 import {NextApiRequest, NextApiResponse} from "next"
 import config from "../../lib/config"
 import {
@@ -13,7 +14,10 @@ import {createAccountSchemaServer} from "../../lib/validate"
 import {verifyAPIKey} from "../../lib/common"
 import {ValidationError} from "yup"
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function account(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === "POST") {
     const apiKey = req.headers["authorization"]
 
