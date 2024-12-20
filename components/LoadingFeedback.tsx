@@ -22,7 +22,7 @@ export default function LoadingFeedback({
 }) {
   return (
     <Box sx={styles.loading}>
-      <Image src="loading.svg" alt="loading" />
+      <Image src="loading.svg" alt="loading" height={74} width={74} />
       <br />
       {children}
     </Box>

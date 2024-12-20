@@ -36,6 +36,8 @@ export default function NetworkLinks() {
             }
             alt={`${NETWORK_DISPLAY_NAME} Faucet`}
             sx={{mr: 2}}
+            width={30}
+            height={30}
           />
           Testnet
         </TabNavLink>

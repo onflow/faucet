@@ -141,9 +141,9 @@ const AccordionOption = ({
       >
         {data.title}
         {isOpen ? (
-          <Image src="caret-up.svg" alt="up" />
+          <Image src="caret-up.svg" alt="up" width={10} height={7} />
         ) : (
-          <Image src="caret-down.svg" alt="down" />
+          <Image src="caret-down.svg" alt="down" width={10} height={7} />
         )}
       </Button>
       {isOpen && (
