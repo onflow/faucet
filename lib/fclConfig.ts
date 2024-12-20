@@ -6,7 +6,6 @@ import flowJSON from "../flow.json"
 config()
   .put("flow.network", publicConfig.network)
   .put("app.detail.title", BASE_HTML_TITLE)
-  .put("env", publicConfig.isLocal ? "local" : publicConfig.network)
   .put("accessNode.api", publicConfig.accessAPIHost)
   // TODO: Implement FCL wallets
   // .put("challenge.handshake", publicConfig.walletDiscovery)
