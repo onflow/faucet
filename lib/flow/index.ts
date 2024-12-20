@@ -9,7 +9,7 @@ export const getAuthorization = (keyIndex: number) => {
   return (account: {addr?: string} = {}) => {
     return {
       ...account,
-      sequenceNum: 0,
+      sequenceNum: null,
       tempId: `${account.addr}-${keyIndex}`,
       addr: fcl.sansPrefix(publicConfig.signerAddress) || "",
       keyId: keyIndex,
