@@ -1,4 +1,3 @@
-version: "3"
 services:
   db:
     image: postgres
@@ -6,10 +5,10 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_DB=faucet
-      - POSTGRES_USER=faucet
-      - POSTGRES_PASSWORD=faucet
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
   emulator:
-    image: gcr.io/flow-container-registry/emulator:0.59.0
+    image: gcr.io/flow-container-registry/emulator:latest
     ports:
       - "8888:8888"
       - "3569:3569"
