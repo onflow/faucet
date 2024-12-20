@@ -6,6 +6,7 @@ import {useState} from "react"
 import {Box, Button, Link, ThemeUICSSObject} from "theme-ui"
 import {Themed} from "@theme-ui/mdx"
 import publicConfig from "../lib/publicConfig"
+import Image from "next/image"
 
 type AccordionOption = {
   title: string
@@ -139,7 +140,11 @@ const AccordionOption = ({
         }}
       >
         {data.title}
-        <img src={`caret-${isOpen ? "up" : "down"}.svg`} />
+        {isOpen ? (
+          <Image src="caret-up.svg" alt="up" />
+        ) : (
+          <Image src="caret-down.svg" alt="down" />
+        )}
       </Button>
       {isOpen && (
         <Box sx={styles.content} {...contentProps}>
