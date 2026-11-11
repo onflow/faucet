@@ -2,11 +2,17 @@ import * as fcl from "@onflow/fcl"
 import config from "../config"
 import {signWithKey} from "../crypto"
 import publicConfig from "../publicConfig"
+import type {Authorization} from "./send"
+
+// The account FCL passes to an authorization function.
+type AuthorizationAccount = Parameters<
+  Extract<Authorization, (...args: any[]) => any>
+>[0]
 
 fcl.config().put("accessNode.api", publicConfig.accessAPIHost)
 
 export const getAuthorization = (keyIndex: number) => {
-  return (account: {addr?: string} = {}) => {
+  return (account: AuthorizationAccount) => {
     return {
       ...account,
       sequenceNum: null,

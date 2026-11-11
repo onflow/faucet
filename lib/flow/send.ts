@@ -1,6 +1,8 @@
 import * as fcl from "@onflow/fcl"
 import * as sdk from "@onflow/sdk"
 
+export type Authorization = Parameters<typeof fcl.proposer>[0]
+
 export async function sendTransaction({
   transaction,
   args,
@@ -10,16 +12,16 @@ export async function sendTransaction({
 }: {
   transaction: string
   args: sdk.CadenceArgument<any>[]
-  proposer: typeof fcl.authorization
-  authorizations: (typeof fcl.authorization)[]
-  payer: typeof fcl.authorization
+  proposer: Authorization
+  authorizations: Authorization[]
+  payer: Authorization
 }) {
   const response = await fcl.send([
     fcl.transaction(transaction),
     fcl.args(args),
     fcl.proposer(proposer),
     fcl.authorizations(authorizations),
-    fcl.payer(payer),
+    fcl.payer([payer]),
     fcl.limit(9999),
   ])
 
