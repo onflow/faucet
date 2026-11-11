@@ -16,16 +16,18 @@ export async function sendTransaction({
   authorizations: Authorization[]
   payer: Authorization
 }) {
-  const response = await fcl.send([
-    fcl.transaction(transaction),
-    fcl.args(args),
-    fcl.proposer(proposer),
-    fcl.authorizations(authorizations),
-    fcl.payer([payer]),
-    fcl.limit(9999),
-  ])
+  const txId: string = await fcl
+    .send([
+      fcl.transaction(transaction),
+      fcl.args(args),
+      fcl.proposer(proposer),
+      fcl.authorizations(authorizations),
+      fcl.payer([payer]),
+      fcl.limit(9999),
+    ])
+    .then(fcl.decode)
 
-  return fcl.tx(response).onceSealed()
+  return fcl.tx(txId).onceSealed()
 }
 
 export async function sendScript({
