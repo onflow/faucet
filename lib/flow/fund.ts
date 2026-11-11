@@ -2,7 +2,7 @@ import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import {FLOW_TYPE} from "../constants"
 import publicConfig, {TOKEN_FUNDING_AMOUNTS} from "../publicConfig"
-import {sendTransaction} from "./send"
+import {Authorization, sendTransaction} from "./send"
 import {getAddressType} from "../common"
 import TxFundAccount from "../../cadence/transactions/fund_account.cdc"
 import TxFundEVMAccount from "../../cadence/transactions/fund_evm_account.cdc"
@@ -21,7 +21,7 @@ export const tokens: Tokens = {
 export async function fundAccount(
   address: string,
   token: TokenType,
-  authorization: typeof fcl.authorization
+  authorization: Authorization
 ) {
   const addressType = getAddressType(address)
 
